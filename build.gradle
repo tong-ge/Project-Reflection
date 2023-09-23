@@ -92,6 +92,9 @@ repositories {
             includeGroup 'curse.maven'
         }
     }
+    maven{
+        url "https://maven.covers1624.net"
+    }
     mavenLocal() // Must be last for caching to work
 }
 
@@ -104,7 +107,9 @@ dependencies {
     }
 
     // Example of deobfuscating a dependency
-    // implementation rfg.deobf('curse.maven:had-enough-items-557549:4543375')
+    implementation rfg.deobf('curse.maven:codechickenlib-242818:2779848')
+    implementation rfg.deobf('curse.maven:had-enough-items-557549:4571247')
+    implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:4701483")
 
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:

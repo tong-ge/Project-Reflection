@@ -2,7 +2,7 @@
 {
   "modid": "projectreflection",
   "name": "Project Reflection",
-  "description": "A mod aiming to bypass KeqingSoCute520's monopoly.",
+  "description": "Core mod for GregTech-DingJen.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

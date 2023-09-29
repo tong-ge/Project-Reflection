@@ -16,6 +16,7 @@ import net.minecraft.util.ResourceLocation;
 
 public final class PRMetaTileEntityHandler {
     private static final SimpleGeneratorMetaTileEntity[] HYDRAULIC_GENERATORS=new SimpleGeneratorMetaTileEntity[3];
+    public static final MetaTileEntity[] AURA_GENERATORS=new MetaTileEntity[3];
     private static int getAvailableMTEID()
     {
         for (int id=1;id<=32767;id++)
@@ -51,7 +52,12 @@ public final class PRMetaTileEntityHandler {
                     Textures.STEAM_TURBINE_OVERLAY,
                     i+1,
                     tier->16000 * (1 << tier - 1));
+            AURA_GENERATORS[i]=new MetaTileEntityAuraGenerator(new ResourceLocation(PRConstants.modid,
+                    String.format("vis.%s", PRConstants.V[i+1])
+            ),i+1);
+
             register(HYDRAULIC_GENERATORS[i]);
+            register(AURA_GENERATORS[i]);
         }
         register(new MetaTileEntityLargeTurbine(
                 new ResourceLocation(PRConstants.modid,"large_turbine.hydraulic"),

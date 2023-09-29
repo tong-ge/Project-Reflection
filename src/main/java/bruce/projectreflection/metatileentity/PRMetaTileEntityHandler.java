@@ -1,11 +1,11 @@
 package bruce.projectreflection.metatileentity;
 
+import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.ProjectReflection;
-import gregtech.api.GTValues;
+import bruce.projectreflection.PRRecipeMaps;
 import gregtech.api.GregTechAPI;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
-import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -13,8 +13,6 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import net.minecraft.util.ResourceLocation;
 
-import java.lang.reflect.Array;
-//import gregtech.common.metatileentities.MetaTileEntities;
 
 public final class PRMetaTileEntityHandler {
     private static final SimpleGeneratorMetaTileEntity[] HYDRAULIC_GENERATORS=new SimpleGeneratorMetaTileEntity[3];
@@ -39,25 +37,25 @@ public final class PRMetaTileEntityHandler {
             throw new ArrayIndexOutOfBoundsException("no mte id available");
         }
         MetaTileEntities.registerMetaTileEntity(id,sample);
-        ProjectReflection.logger.info("mte {} registered as {}");
+        ProjectReflection.logger.info("mte {} registered as {}",sample.metaTileEntityId,id);
     }
     public static void main(String[] args)
     {
         for (int i=0;i<3;i++)
         {
             HYDRAULIC_GENERATORS[i]=new SimpleGeneratorMetaTileEntity(
-                    new ResourceLocation(ProjectReflection.modid,
-                            String.format("hydraulic.%s", ProjectReflection.V[i+1])
+                    new ResourceLocation(PRConstants.modid,
+                            String.format("hydraulic.%s", PRConstants.V[i+1])
                     ),
-                    ProjectReflection.HYDRAULIC_GENERATOR,
+                    PRRecipeMaps.HYDRAULIC_GENERATOR,
                     Textures.STEAM_TURBINE_OVERLAY,
                     i+1,
                     tier->16000 * (1 << tier - 1));
             register(HYDRAULIC_GENERATORS[i]);
         }
         register(new MetaTileEntityLargeTurbine(
-                new ResourceLocation(ProjectReflection.modid,"large_turbine.hydraulic"),
-                ProjectReflection.HYDRAULIC_GENERATOR,
+                new ResourceLocation(PRConstants.modid,"large_turbine.hydraulic"),
+                PRRecipeMaps.HYDRAULIC_GENERATOR,
                 3,
                 MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_TURBINE_CASING),
                 MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX),

@@ -1,4 +1,4 @@
-package bruce.projectreflection;
+package bruce.projectreflection.init;
 
 import zone.rong.mixinbooter.ILateMixinLoader;
 

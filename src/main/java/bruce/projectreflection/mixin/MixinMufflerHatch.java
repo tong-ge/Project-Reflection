@@ -42,7 +42,7 @@ public abstract class MixinMufflerHatch extends MetaTileEntityMultiblockPart {
         }
         float pollution=(100.0f - (float)recoveryChance)/100.0f*(float)stacksize;
         AuraHelper.polluteAura(getWorld(),getPos(),pollution,false);
-        ProjectReflection.logger.info("Added pollution {} on {}",pollution,getWorld().getWorldTime());
+        //ProjectReflection.logger.info("Added pollution {} on {}",pollution,getWorld().getWorldTime());
     }
     @ModifyArg(method = "recoverItemsTable",
             at=@At(

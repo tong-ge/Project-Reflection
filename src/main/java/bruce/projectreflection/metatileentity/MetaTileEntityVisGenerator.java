@@ -9,15 +9,15 @@ import net.minecraft.util.ResourceLocation;
 import thaumcraft.api.aura.AuraHelper;
 import thaumcraft.common.world.aura.AuraHandler;
 
-public class MetaTileEntityAuraGenerator extends TieredMetaTileEntity {
+public class MetaTileEntityVisGenerator extends TieredMetaTileEntity {
     static final float euPerVis=250.0f;
-    public MetaTileEntityAuraGenerator(ResourceLocation metaTileEntityId, int tier) {
+    public MetaTileEntityVisGenerator(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityAuraGenerator(metaTileEntityId,getTier());
+        return new MetaTileEntityVisGenerator(metaTileEntityId,getTier());
     }
 
     @Override

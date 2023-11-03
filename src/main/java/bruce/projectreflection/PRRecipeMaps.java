@@ -4,6 +4,10 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.builders.FuelRecipeBuilder;
 
 public class PRRecipeMaps {
-    public static final RecipeMap<FuelRecipeBuilder> MODULAR_FISSION =new RecipeMap<>("modular_fission",
-            1,1,1,2,new FuelRecipeBuilder(),false);
+    /*public static RecipeMap<FuelRecipeBuilder> HYDRAULIC_GENERATOR=new RecipeMap<>("hydraulic_generator",
+            0,0,1,0,new FuelRecipeBuilder(),false)
+            .allowEmptyOutput();*/
+    public static void init() {
+
+    }
 }

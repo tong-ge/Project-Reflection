@@ -24,7 +24,10 @@ public class PRRecipeMaps {
             "petrotheum_macerator",
             1, 3, 1, 0,
             new SimpleRecipeBuilder(), false);
-
+    public static RecipeMap<SimpleRecipeBuilder> AEROTHEUM_CENTRIFUGE = new RecipeMap<>(
+            "aerotheum_centrifuge",
+            1, 6, 1, 0,
+            new SimpleRecipeBuilder(), false);
     public static void init() {
         OreProcessingHandler.init();
     }

@@ -3,6 +3,7 @@ package bruce.projectreflection.init;
 import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.ProjectReflection;
 import bruce.projectreflection.metatileentity.MetaTileEntityVisGenerator;
+import bruce.projectreflection.metatileentity.multis.MetaTileEntityLargeSteamCompressor;
 import gregtech.api.GregTechAPI;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
@@ -68,5 +69,6 @@ public final class PRMetaTileEntityHandler {
                 Textures.LARGE_STEAM_TURBINE_OVERLAY)
         );
          */
+        register(new MetaTileEntityLargeSteamCompressor(new ResourceLocation(PRConstants.modid, "large_steam_compressor")));
     }
 }

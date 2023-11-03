@@ -2,17 +2,13 @@ package bruce.projectreflection.init;
 
 import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.ProjectReflection;
-import bruce.projectreflection.PRRecipeMaps;
-import bruce.projectreflection.metatileentity.MetaTileEntityAuraGenerator;
+import bruce.projectreflection.metatileentity.MetaTileEntityVisGenerator;
 import gregtech.api.GregTechAPI;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockTurbineCasing;
-import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
-import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import net.minecraft.util.ResourceLocation;
 
 
@@ -53,7 +49,7 @@ public final class PRMetaTileEntityHandler {
                     Textures.COMBUSTION_GENERATOR_OVERLAY,
                     i+1,
                     tier->16000 * (1 << tier - 1));
-            AURA_GENERATORS[i]=new MetaTileEntityAuraGenerator(new ResourceLocation(PRConstants.modid,
+            AURA_GENERATORS[i] = new MetaTileEntityVisGenerator(new ResourceLocation(PRConstants.modid,
                     String.format("vis.%s", PRConstants.V[i+1])
             ),i+1);
 

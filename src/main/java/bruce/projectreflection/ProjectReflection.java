@@ -21,12 +21,6 @@ public class ProjectReflection {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        /*PRRecipeMaps.HYDRAULIC_GENERATOR.recipeBuilder()
-                .fluidInputs(Materials.Water.getFluid(5000))
-                .EUt(32)
-                .duration(10)
-                .buildAndRegister();*/
-        PRRecipeMaps.init();
     }
 
 }

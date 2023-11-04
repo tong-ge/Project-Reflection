@@ -1,0 +1,8 @@
+recipemap.petrotheum_macerator.name=Petrotheum Macerator
+projectreflection.machine.large_steam_compressor.name=Large Steam Compressor
+projectreflection.machine.semifluid.lv.name=Basic Semifluid Generator
+projectreflection.machine.semifluid.mv.name=Advanced Semifluid Generator
+projectreflection.machine.semifluid.hv.name=Turbo Semifluid Generator
+projectreflection.machine.vis.lv.name=Basic Aura Generator
+projectreflection.machine.vis.mv.name=Advanced Aura Generator
+projectreflection.machine.vis.hv.name=Turbo Aura Generator

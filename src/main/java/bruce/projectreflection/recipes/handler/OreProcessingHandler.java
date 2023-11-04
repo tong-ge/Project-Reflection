@@ -19,6 +19,7 @@ public class OreProcessingHandler {
         OrePrefix.ore.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processOre);
         OrePrefix.oreNetherrack.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processOre);
         OrePrefix.oreEndstone.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processOre);
+        OrePrefix.crushedCentrifuged.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processCrushedCentrifuged);
     }
 
     public static void processOre(OrePrefix orePrefix, Material material, OreProperty property) {
@@ -45,11 +46,23 @@ public class OreProcessingHandler {
             PRRecipeMaps.PETROTHEUM_MACERATOR.recipeBuilder()
                     .input(orePrefix, material)
                     .fluidInputs(ThermalMaterials.PETROTHEUM.getFluid(144))
-                    .outputs(itemStackList.toArray(new ItemStack[itemStackList.size()]))
+                    .outputs(itemStackList.toArray(new ItemStack[0]))
                     .duration(50)
                     .EUt(30)
                     .buildAndRegister();
         }
+
+    }
+
+    public static void processCrushedCentrifuged(OrePrefix centrifugedPrefix, Material material, OreProperty property) {
+        ItemStack dustStack = OreDictUnifier.get(OrePrefix.dust, material);
+        ItemStack byproductStack = OreDictUnifier.get(OrePrefix.dust, property.getOreByProduct(2, material), 1);
+        PRRecipeMaps.PETROTHEUM_MACERATOR.recipeBuilder()
+                .input(centrifugedPrefix, material, 2)
+                .outputs(GTUtility.copy(3, dustStack), byproductStack)
+                .duration(10)
+                .EUt(30)
+                .buildAndRegister();
 
     }
 }

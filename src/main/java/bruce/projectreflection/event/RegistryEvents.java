@@ -7,6 +7,7 @@ import gregtech.api.unification.material.event.MaterialEvent;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid = PRConstants.modid)
@@ -16,7 +17,7 @@ public class RegistryEvents {
         PRMaterials.init();
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOW)
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         PRRecipeMaps.init();
     }

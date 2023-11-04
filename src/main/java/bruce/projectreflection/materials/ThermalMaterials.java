@@ -13,25 +13,25 @@ public class ThermalMaterials {
 
     public static void init() {
 
-        PYROTHEUM = PRMaterials.dynamicBuilder("thermalfoundation", "pyrotheum")
+        PYROTHEUM = PRMaterials.dynamicBuilder("pyrotheum")
                 .dust()
                 .fluid()
                 .color(0xff9a3c)
                 .fluidTemp(4000)
                 .build();
-        CRYOTHEUM = PRMaterials.dynamicBuilder("thermalfoundation", "cryotheum")
+        CRYOTHEUM = PRMaterials.dynamicBuilder("cryotheum")
                 .dust()
                 .fluid()
                 .color(0x01f3f6)
                 .fluidTemp(50)
                 .build();
-        PETROTHEUM = PRMaterials.dynamicBuilder("thermalfoundation", "petrotheum")
+        PETROTHEUM = PRMaterials.dynamicBuilder("petrotheum")
                 .dust()
                 .fluid()
                 .fluidTemp(350)
                 .color(0x6b585b)
                 .build();
-        AEROTHEUM = PRMaterials.dynamicBuilder("thermalfoundation", "aerotheum")
+        AEROTHEUM = PRMaterials.dynamicBuilder("aerotheum")
                 .dust()
                 .fluid(FluidType.getByName("gas"))
                 .color(0xd6ff68)

@@ -6,6 +6,8 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinMufflerHatch",
-    "MixinCircuitRecipeBuilder"
+    "MixinCircuitRecipeBuilder",
+    "MixinCrate",
+    "MixinThaumatorium"
   ]
 }

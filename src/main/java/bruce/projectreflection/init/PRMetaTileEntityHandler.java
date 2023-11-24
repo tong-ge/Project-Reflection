@@ -7,6 +7,8 @@ import bruce.projectreflection.metatileentity.multis.MetaTileEntityLargeSteamCom
 import gregtech.api.GregTechAPI;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
+import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
+import gregtech.api.metatileentity.TieredMetaTileEntity;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.MetaTileEntities;
@@ -15,7 +17,9 @@ import net.minecraft.util.ResourceLocation;
 
 public final class PRMetaTileEntityHandler {
     private static final SimpleGeneratorMetaTileEntity[] SEMIFLUID_GENERATORS = new SimpleGeneratorMetaTileEntity[3];
-    public static final MetaTileEntity[] AURA_GENERATORS=new MetaTileEntity[3];
+    public static final SimpleMachineMetaTileEntity[] MASS_FABRICATORS = new SimpleMachineMetaTileEntity[3];
+    public static final TieredMetaTileEntity[] AURA_GENERATORS = new TieredMetaTileEntity[3];
+
     private static int id = 1;
     private static int getAvailableMTEID()
     {
@@ -53,22 +57,15 @@ public final class PRMetaTileEntityHandler {
             AURA_GENERATORS[i] = new MetaTileEntityVisGenerator(new ResourceLocation(PRConstants.modid,
                     String.format("vis.%s", PRConstants.V[i+1])
             ),i+1);
+            MASS_FABRICATORS[i] = new SimpleMachineMetaTileEntity(new ResourceLocation(PRConstants.modid,
+                    String.format("mass_fabricator.%s", PRConstants.V[i + 3])),
+                    RecipeMaps.MASS_FABRICATOR_RECIPES,
+                    Textures.MULTIBLOCK_WORKABLE_OVERLAY, i + 3, true);
 
             register(SEMIFLUID_GENERATORS[i]);
             register(AURA_GENERATORS[i]);
+            register(MASS_FABRICATORS[i]);
         }
-        /*
-        register(new MetaTileEntityLargeTurbine(
-                new ResourceLocation(PRConstants.modid,"large_turbine.hydraulic"),
-                PRRecipeMaps.HYDRAULIC_GENERATOR,
-                3,
-                MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_TURBINE_CASING),
-                MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX),
-                Textures.SOLID_STEEL_CASING,
-                false,
-                Textures.LARGE_STEAM_TURBINE_OVERLAY)
-        );
-         */
         register(new MetaTileEntityLargeSteamCompressor(new ResourceLocation(PRConstants.modid, "large_steam_compressor")));
     }
 }

@@ -34,12 +34,13 @@ public class PRMaterials {
     }
 
     public static void init() {
-
         ThermalMaterials.init();
+        ThaumcraftMaterials.init();
         orePrefix();
     }
 
     private static void orePrefix() {
         ThermalMaterials.orePrefix();
+        ThaumcraftMaterials.orePrefix();
     }
 }

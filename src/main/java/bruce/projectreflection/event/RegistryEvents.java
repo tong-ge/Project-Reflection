@@ -1,6 +1,7 @@
 package bruce.projectreflection.event;
 
 import bruce.projectreflection.PRConstants;
+import bruce.projectreflection.recipes.MachineRecipes;
 import bruce.projectreflection.recipes.PRRecipeMaps;
 import bruce.projectreflection.materials.PRMaterials;
 import gregtech.api.unification.material.event.MaterialEvent;
@@ -20,5 +21,6 @@ public class RegistryEvents {
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         PRRecipeMaps.init();
+        MachineRecipes.register();
     }
 }

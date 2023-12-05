@@ -5,7 +5,6 @@ import gregtech.loaders.recipe.CraftingComponent;
 import gregtech.loaders.recipe.MetaTileEntityLoader;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.blocks.BlocksTC;
-import thaumcraft.api.items.ItemsTC;
 
 public class MachineRecipes {
     public static void register() {

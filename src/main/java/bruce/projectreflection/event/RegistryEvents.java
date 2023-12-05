@@ -1,9 +1,8 @@
 package bruce.projectreflection.event;
 
 import bruce.projectreflection.PRConstants;
-import bruce.projectreflection.recipes.MachineRecipes;
-import bruce.projectreflection.recipes.PRRecipeMaps;
-import bruce.projectreflection.materials.PRMaterials;
+import bruce.projectreflection.recipes.RecipeManager;
+import bruce.projectreflection.materials.MaterialHelper;
 import gregtech.api.unification.material.event.MaterialEvent;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
@@ -15,12 +14,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class RegistryEvents {
     @SubscribeEvent
     public static void onMaterial(MaterialEvent event) {
-        PRMaterials.init();
+        MaterialHelper.init();
     }
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-        PRRecipeMaps.init();
-        MachineRecipes.register();
+        RecipeManager.init();
     }
 }

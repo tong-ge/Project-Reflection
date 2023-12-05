@@ -2,14 +2,11 @@ package bruce.projectreflection.materials;
 
 import bruce.projectreflection.PRConstants;
 import gregtech.api.GregTechAPI;
-import gregtech.api.fluids.fluidType.FluidType;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.registry.MaterialRegistry;
-import gregtech.api.unification.ore.OrePrefix;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.Loader;
 
-public class PRMaterials {
+public class MaterialHelper {
 
     private static int id = 1;
 
@@ -34,13 +31,16 @@ public class PRMaterials {
     }
 
     public static void init() {
-        ThermalMaterials.init();
-        ThaumcraftMaterials.init();
+        FirstTierMaterials.init();
+        SecondTierMaterials.init();
+        ThirdTierMaterials.init();
+        GTMaterials.init();
         orePrefix();
     }
 
     private static void orePrefix() {
-        ThermalMaterials.orePrefix();
-        ThaumcraftMaterials.orePrefix();
+        FirstTierMaterials.orePrefix();
+        SecondTierMaterials.orePrefix();
+        ThirdTierMaterials.orePrefix();
     }
 }

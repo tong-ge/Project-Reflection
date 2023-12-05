@@ -3,16 +3,19 @@ package bruce.projectreflection.materials;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
+import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import net.minecraftforge.fml.common.Loader;
 
-public class ThaumcraftMaterials {
+public class SecondTierMaterials {
+
     public static Material THAUMIUM;
-    public static Material VOID_METAL;
+    public static Material ALLOY_IRIDIUM;
 
     public static void init() {
-        THAUMIUM = PRMaterials.dynamicBuilder("thaumium")
+
+        THAUMIUM = MaterialHelper.dynamicBuilder("thaumium")
                 .ingot(3)
                 .fluid()
                 .color(0x51437c)
@@ -22,30 +25,29 @@ public class ThaumcraftMaterials {
                         MaterialFlags.GENERATE_ROD,
                         MaterialFlags.GENERATE_FRAME,
                         MaterialFlags.GENERATE_GEAR,
-                        MaterialFlags.GENERATE_DENSE
+                        MaterialFlags.GENERATE_DOUBLE_PLATE
                 )
-                .components(new MaterialStack(Materials.Iron, 1), new MaterialStack(ThermalMaterials.MANA, 1))
+                .components(new MaterialStack(Materials.Iron, 1), new MaterialStack(FirstTierMaterials.MANA, 1))
                 .build();
-        VOID_METAL = PRMaterials.dynamicBuilder("void")
-                .ingot(4)
-                .fluid()
-                .color(0x63186f)
+        ALLOY_IRIDIUM = MaterialHelper.dynamicBuilder("alloy_iridium")
+                .ingot()
+                .components(
+                        new MaterialStack(Materials.Iridium, 4),
+                        new MaterialStack(FirstTierMaterials.ALLOY_ADVANCED, 4),
+                        new MaterialStack(Materials.Diamond, 1)
+                )
                 .flags(
+                        MaterialFlags.NO_SMELTING,
                         MaterialFlags.DISABLE_DECOMPOSITION,
                         MaterialFlags.GENERATE_PLATE,
-                        MaterialFlags.GENERATE_ROD,
-                        MaterialFlags.GENERATE_FRAME,
-                        MaterialFlags.GENERATE_GEAR,
-                        MaterialFlags.GENERATE_DENSE
+                        MaterialFlags.NO_SMASHING
                 )
                 .build();
     }
 
     public static void orePrefix() {
         if (Loader.isModLoaded("thaumcraft")) {
-            OrePrefix.ingot.setIgnored(THAUMIUM);
-            OrePrefix.ingot.setIgnored(VOID_METAL);
-            OrePrefix.ingot.setIgnored(Materials.Brass);
+            OrePrefix.ingot.setIgnored(SecondTierMaterials.THAUMIUM);
         }
     }
 }

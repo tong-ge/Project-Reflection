@@ -1,7 +1,6 @@
 package bruce.projectreflection.recipes.handler;
 
-import bruce.projectreflection.materials.ThermalMaterials;
-import bruce.projectreflection.recipes.PRRecipeMaps;
+import bruce.projectreflection.materials.FirstTierMaterials;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.OreProperty;
@@ -45,7 +44,7 @@ public class OreProcessingHandler {
         if (!itemStackList.isEmpty()) {
             PRRecipeMaps.PETROTHEUM_MACERATOR.recipeBuilder()
                     .input(orePrefix, material)
-                    .fluidInputs(ThermalMaterials.PETROTHEUM.getFluid(144))
+                    .fluidInputs(FirstTierMaterials.PETROTHEUM.getFluid(144))
                     .outputs(itemStackList.toArray(new ItemStack[0]))
                     .duration(50)
                     .EUt(30)

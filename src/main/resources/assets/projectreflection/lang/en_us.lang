@@ -6,3 +6,17 @@ projectreflection.machine.semifluid.hv.name=Turbo Semifluid Generator
 projectreflection.machine.vis.lv.name=Basic Aura Generator
 projectreflection.machine.vis.mv.name=Advanced Aura Generator
 projectreflection.machine.vis.hv.name=Turbo Aura Generator
+
+projectreflection.material.pyrotheum=Pyrotheum
+projectreflection.material.cryotheum=Cryotheum
+projectreflection.material.petrotheum=Petrotheum
+projectreflection.material.aerotheum=Aerotheum
+projectreflection.material.mana=Mana
+projectreflection.material.void=Void Metal
+projectreflection.material.alloy_advanced=Advanced Alloy
+projectreflection.material.alloy_iridium=Iridium Alloy
+projectreflection.material.super_iridium_alloy=Super Iridium Alloy
+
+projectreflection.material.coralium=Coralium
+projectreflection.material.thaumium=Thaumium
+projectreflection.material.mithril=Mithril

@@ -1,8 +1,6 @@
 package bruce.projectreflection.mixin;
 
-import bruce.projectreflection.PRConstants;
-import bruce.projectreflection.ProjectReflection;
-import gregtech.api.util.GTTransferUtils;
+import gregtech.api.items.itemhandlers.GTItemStackHandler;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMufflerHatch;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import net.minecraft.item.ItemStack;
@@ -27,7 +25,7 @@ public abstract class MixinMufflerHatch extends MetaTileEntityMultiblockPart {
     private int recoveryChance;
     @Final
     @Shadow
-    private ItemStackHandler inventory;
+    private GTItemStackHandler inventory;
     private MixinMufflerHatch(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
     }
@@ -44,6 +42,8 @@ public abstract class MixinMufflerHatch extends MetaTileEntityMultiblockPart {
         AuraHelper.polluteAura(getWorld(),getPos(),pollution,false);
         //ProjectReflection.logger.info("Added pollution {} on {}",pollution,getWorld().getWorldTime());
     }
+
+    /**
     @ModifyArg(method = "recoverItemsTable",
             at=@At(
                     value = "INVOKE",
@@ -54,6 +54,8 @@ public abstract class MixinMufflerHatch extends MetaTileEntityMultiblockPart {
     {
         return ash.copy();
     }
+
+     */
     @Inject(method = "checkFrontFaceFree",at=@At("HEAD"),cancellable = true)
     private void checkInventoryBlocked(CallbackInfoReturnable<Boolean> cir)
     {

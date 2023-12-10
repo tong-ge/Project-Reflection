@@ -6,4 +6,17 @@ projectreflection.machine.vis.lv.name=基础灵气发电机
 projectreflection.machine.vis.mv.name=进阶灵气发电机
 projectreflection.machine.vis.hv.name=涡轮灵气发电机
 
+projectreflection.material.pyrotheum=炽焱
+projectreflection.material.cryotheum=凛冰
+projectreflection.material.petrotheum=地岩
+projectreflection.material.aerotheum=清风
+projectreflection.material.mana=魔力
+projectreflection.material.void=虚空金属
+projectreflection.material.alloy_advanced=高级合金
+projectreflection.material.alloy_iridium=强化铱
+projectreflection.material.super_iridium_alloy=超级铱合金
+projectreflection.material.coralium=珊瑚
+projectreflection.material.thaumium=神秘
+projectreflection.material.mithril=秘银
+
 projectreflection.machine.large_steam_compressor.name=大型蒸汽压缩机

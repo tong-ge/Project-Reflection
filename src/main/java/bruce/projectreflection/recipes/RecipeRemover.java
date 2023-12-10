@@ -2,12 +2,14 @@ package bruce.projectreflection.recipes;
 
 import bruce.projectreflection.ProjectReflection;
 import com.google.common.collect.ImmutableList;
+import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import knightminer.ceramics.Ceramics;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -25,10 +27,8 @@ public class RecipeRemover {
         removedRecipes.add(OreDictUnifier.get(OrePrefix.dust, Materials.EnderPearl, 1));
         removedRecipes.add(OreDictUnifier.get(OrePrefix.dust, Materials.Blaze, 1));
     }
-
     public static void doRemove() {
         init();
-
         for (RecipeMap recipeMap : recipeMapList) {
             ImmutableList<Recipe> recipes = ImmutableList.copyOf(recipeMap.getRecipeList());
             for (Recipe recipe : recipes) {

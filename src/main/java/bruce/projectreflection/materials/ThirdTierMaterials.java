@@ -30,11 +30,12 @@ public class ThirdTierMaterials {
                 .ingot()
                 .components(new MaterialStack(Materials.NiobiumTitanium, 6), new MaterialStack(SecondTierMaterials.ALLOY_IRIDIUM, 3))
                 .flags(
-                        MaterialFlags.DISABLE_DECOMPOSITION,
                         MaterialFlags.GENERATE_PLATE,
                         MaterialFlags.GENERATE_DENSE,
-                        MaterialFlags.NO_SMELTING
+                        MaterialFlags.NO_UNIFICATION
                 )
+                .color(0xc2c1df)
+                .iconSet(MaterialIconSet.SHINY)
                 .build();
     }
 

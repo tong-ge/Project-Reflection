@@ -3,6 +3,7 @@ package bruce.projectreflection.init;
 import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.ProjectReflection;
 import bruce.projectreflection.metatileentity.MetaTileEntityVisGenerator;
+import bruce.projectreflection.metatileentity.multis.MetaTileEntityCeramicOven;
 import bruce.projectreflection.metatileentity.multis.MetaTileEntityLargeSteamCompressor;
 import gregtech.api.GregTechAPI;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -67,5 +68,6 @@ public final class PRMetaTileEntityHandler {
             register(MASS_FABRICATORS[i]);
         }
         register(new MetaTileEntityLargeSteamCompressor(new ResourceLocation(PRConstants.modid, "large_steam_compressor")));
+        register(new MetaTileEntityCeramicOven(new ResourceLocation(PRConstants.modid, "ceramic_oven")));
     }
 }

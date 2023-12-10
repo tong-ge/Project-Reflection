@@ -37,11 +37,11 @@ public class SecondTierMaterials {
                         new MaterialStack(Materials.Diamond, 1)
                 )
                 .flags(
-                        MaterialFlags.NO_SMELTING,
-                        MaterialFlags.DISABLE_DECOMPOSITION,
-                        MaterialFlags.GENERATE_PLATE,
-                        MaterialFlags.NO_SMASHING
+                        MaterialFlags.NO_UNIFICATION,
+                        MaterialFlags.GENERATE_PLATE
                 )
+                .color(0xc2c1df)
+                .iconSet(MaterialIconSet.METALLIC)
                 .build();
     }
 

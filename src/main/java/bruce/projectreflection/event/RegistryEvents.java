@@ -17,6 +17,11 @@ public class RegistryEvents {
         MaterialHelper.init();
     }
 
+    @SubscribeEvent
+    public static void preRegisterRecipes(RegistryEvent.Register<IRecipe> event) {
+        RecipeManager.preInit();
+    }
+
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         RecipeManager.init();

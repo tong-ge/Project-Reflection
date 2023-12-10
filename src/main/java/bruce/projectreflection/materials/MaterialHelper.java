@@ -2,9 +2,16 @@ package bruce.projectreflection.materials;
 
 import bruce.projectreflection.PRConstants;
 import gregtech.api.GregTechAPI;
+import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.FluidState;
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.registry.MaterialRegistry;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+
+import javax.annotation.Nullable;
 
 public class MaterialHelper {
 
@@ -22,12 +29,39 @@ public class MaterialHelper {
         throw new ArrayIndexOutOfBoundsException();
     }
 
-    public static Material.Builder dynamicBuilder(String modid, String name) {
-        return new Material.Builder(getNextAvailableId(modid), new ResourceLocation(modid, name));
+    public static Material.Builder dynamicBuilder(String modid, String name, boolean autoFluid, @Nullable FluidBuilder fallback, boolean gaseous) {
+
+        Material.Builder builder = new Material.Builder(getNextAvailableId(modid), new ResourceLocation(modid, name));
+        Fluid fluid = FluidRegistry.getFluid(name);
+        if (autoFluid) {
+            if (fluid != null) {
+                builder.fluid(fluid,
+                        fluid.isGaseous() ? FluidStorageKeys.GAS : FluidStorageKeys.LIQUID,
+                        fluid.isGaseous() ? FluidState.GAS : FluidState.LIQUID);
+            } else if (fallback != null) {
+                builder.fluid(gaseous ? FluidStorageKeys.GAS : FluidStorageKeys.LIQUID, fallback);
+            }
+        }
+        return builder;
     }
 
+    public static Material.Builder dynamicBuilder(String name, boolean autoFluid, @Nullable FluidBuilder fallback, boolean gaseous) {
+        return dynamicBuilder(PRConstants.modid, name, autoFluid, fallback, gaseous);
+    }
+
+    public static Material.Builder dynamicBuilder(String name, boolean autoFluid, int temperature, boolean gaseous) {
+        return dynamicBuilder(PRConstants.modid, name, autoFluid,
+                new FluidBuilder().temperature(temperature).state(gaseous ? FluidState.GAS : FluidState.LIQUID),
+                gaseous);
+    }
+
+    public static Material.Builder dynamicBuilder(String name, boolean autoFluid, boolean gaseous) {
+        return dynamicBuilder(PRConstants.modid, name, autoFluid,
+                new FluidBuilder().state(gaseous ? FluidState.GAS : FluidState.LIQUID),
+                gaseous);
+    }
     public static Material.Builder dynamicBuilder(String name) {
-        return dynamicBuilder(PRConstants.modid, name);
+        return dynamicBuilder(name, false, false);
     }
 
     public static void init() {

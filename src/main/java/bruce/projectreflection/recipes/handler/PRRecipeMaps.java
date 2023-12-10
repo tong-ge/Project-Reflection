@@ -1,6 +1,7 @@
 package bruce.projectreflection.recipes.handler;
 
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.builders.PrimitiveRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 
 public class PRRecipeMaps {
@@ -15,4 +16,7 @@ public class PRRecipeMaps {
             "aerotheum_centrifuge",
             1, 6, 1, 0,
             new SimpleRecipeBuilder(), false);
+    public static RecipeMap<PrimitiveRecipeBuilder> CERAMIC_OVEN = new RecipeMap<>(
+            "ceramic_oven",
+            3, 2, 0, 0, new PrimitiveRecipeBuilder(), false);
 }

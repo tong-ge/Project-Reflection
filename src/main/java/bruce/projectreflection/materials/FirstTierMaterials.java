@@ -22,12 +22,9 @@ public class FirstTierMaterials {
     public static Material MANA;
     public static Material VOID_METAL;
     public static Material ALLOY_ADVANCED;
+    public static Material PHENOLIC_RESIN;
 
     public static void init() {
-        Fluid cryotheum = FluidRegistry.getFluid("cryotheum");
-        Fluid petrotheum = FluidRegistry.getFluid("petrotheum");
-        Fluid aerotheum = FluidRegistry.getFluid("aerotheum");
-        Fluid mana = FluidRegistry.getFluid("mana");
         PYROTHEUM = MaterialHelper.dynamicBuilder("pyrotheum",
                         true, 4000, false)
                 .dust()
@@ -50,9 +47,8 @@ public class FirstTierMaterials {
                 .color(0x5e48ff)
                 .element(Elements.Ma)
                 .build();
-        VOID_METAL = MaterialHelper.dynamicBuilder("void")
+        VOID_METAL = MaterialHelper.dynamicBuilder("void", true, false)
                 .ingot(4)
-                .fluid()
                 .color(0x63186f)
                 .flags(
                         MaterialFlags.DISABLE_DECOMPOSITION,
@@ -82,6 +78,14 @@ public class FirstTierMaterials {
                 .ore()
                 .flags(MaterialFlags.HIGH_SIFTER_OUTPUT)
                 .color(0x169265)
+                .build();
+        PHENOLIC_RESIN = MaterialHelper.dynamicBuilder("phenolic_resin", true, false)
+                .polymer()
+                .color(0x897054)
+                .components(new MaterialStack(Materials.Carbon, 7),
+                        new MaterialStack(Materials.Hydrogen, 8),
+                        new MaterialStack(Materials.Oxygen, 2))
+                .flags(MaterialFlags.DISABLE_DECOMPOSITION)
                 .build();
 
     }

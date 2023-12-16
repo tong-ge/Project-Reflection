@@ -8,6 +8,9 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import scala.Int;
 
 public class RecipeManager {
     public static void preInit() {
@@ -85,6 +88,15 @@ public class RecipeManager {
                 .explosivesAmount(36)
                 .EUt(120)
                 .duration(90)
+                .buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(new ItemStack(Items.GLASS_BOTTLE, 3),
+                        new ItemStack(Items.NETHER_WART),
+                        new ItemStack(Items.RABBIT_FOOT)
+                )
+                .outputs(new ItemStack(Items.EXPERIENCE_BOTTLE, 3))
+                .EUt(512)
+                .duration(Integer.MAX_VALUE)
                 .buildAndRegister();
     }
 }

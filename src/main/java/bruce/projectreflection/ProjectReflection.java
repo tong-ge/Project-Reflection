@@ -10,7 +10,15 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
 
-@Mod(modid = PRConstants.modid,dependencies = "required-after:gregtech",useMetadata = true)
+@Mod(modid = PRConstants.modid, dependencies = "required-after:gregtech;" +
+        "required-after:ceramics;" +
+        "required-after:gcym;" +
+        "required-after:thaumcraft;" +
+        "after:thermalfoundation;" +
+        "after:abyssalcraft;" +
+        "after:twilightforest;" +
+        "after:draconicevolution;" +
+        "after:gregtechfoodoption", useMetadata = true)
 public class ProjectReflection {
 
     public static Logger logger;

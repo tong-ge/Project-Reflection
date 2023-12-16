@@ -5,6 +5,9 @@ import bruce.projectreflection.ProjectReflection;
 import bruce.projectreflection.metatileentity.MetaTileEntityVisGenerator;
 import bruce.projectreflection.metatileentity.multis.MetaTileEntityCeramicOven;
 import bruce.projectreflection.metatileentity.multis.MetaTileEntityLargeSteamCompressor;
+import bruce.projectreflection.metatileentity.multis.MetaTileEntitySteamAssline;
+import bruce.projectreflection.metatileentity.multis.multiblockpart.MetaTileEntityFluxMuffler;
+import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
@@ -13,6 +16,7 @@ import gregtech.api.metatileentity.TieredMetaTileEntity;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.MetaTileEntities;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import net.minecraft.util.ResourceLocation;
 
 
@@ -20,6 +24,7 @@ public final class PRMetaTileEntityHandler {
     private static final SimpleGeneratorMetaTileEntity[] SEMIFLUID_GENERATORS = new SimpleGeneratorMetaTileEntity[3];
     public static final SimpleMachineMetaTileEntity[] MASS_FABRICATORS = new SimpleMachineMetaTileEntity[3];
     public static final TieredMetaTileEntity[] AURA_GENERATORS = new TieredMetaTileEntity[3];
+    public static final MetaTileEntityMultiblockPart[] FLUX_MUFFLERS = new MetaTileEntityMultiblockPart[9];
 
     private static int id = 1;
     private static int getAvailableMTEID()
@@ -67,7 +72,17 @@ public final class PRMetaTileEntityHandler {
             register(AURA_GENERATORS[i]);
             register(MASS_FABRICATORS[i]);
         }
+        for (int i = GTValues.LV; i <= GTValues.UHV; i++) {
+            FLUX_MUFFLERS[i - GTValues.LV] = new MetaTileEntityFluxMuffler(
+                    new ResourceLocation(
+                            PRConstants.modid,
+                            String.format("muffler.%s", PRConstants.V[i])),
+                    i);
+            register(FLUX_MUFFLERS[i - GTValues.LV]);
+
+        }
         register(new MetaTileEntityLargeSteamCompressor(new ResourceLocation(PRConstants.modid, "large_steam_compressor")));
         register(new MetaTileEntityCeramicOven(new ResourceLocation(PRConstants.modid, "ceramic_oven")));
+        register(new MetaTileEntitySteamAssline(new ResourceLocation(PRConstants.modid, "steam_assline")));
     }
 }

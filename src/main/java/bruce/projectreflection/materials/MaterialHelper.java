@@ -45,10 +45,6 @@ public class MaterialHelper {
         return builder;
     }
 
-    public static Material.Builder dynamicBuilder(String name, boolean autoFluid, @Nullable FluidBuilder fallback, boolean gaseous) {
-        return dynamicBuilder(PRConstants.modid, name, autoFluid, fallback, gaseous);
-    }
-
     public static Material.Builder dynamicBuilder(String name, boolean autoFluid, int temperature, boolean gaseous) {
         return dynamicBuilder(PRConstants.modid, name, autoFluid,
                 new FluidBuilder().temperature(temperature).state(gaseous ? FluidState.GAS : FluidState.LIQUID),

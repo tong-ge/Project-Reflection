@@ -23,6 +23,7 @@ public class FirstTierMaterials {
     public static Material VOID_METAL;
     public static Material ALLOY_ADVANCED;
     public static Material PHENOLIC_RESIN;
+    public static Material FORMALDEHYDE;
 
     public static void init() {
         PYROTHEUM = MaterialHelper.dynamicBuilder("pyrotheum",
@@ -79,15 +80,26 @@ public class FirstTierMaterials {
                 .flags(MaterialFlags.HIGH_SIFTER_OUTPUT)
                 .color(0x169265)
                 .build();
-        PHENOLIC_RESIN = MaterialHelper.dynamicBuilder("phenolic_resin", true, false)
+        PHENOLIC_RESIN = MaterialHelper.dynamicBuilder("phenolic_resin", false, false)
                 .polymer()
                 .color(0x897054)
                 .components(new MaterialStack(Materials.Carbon, 7),
                         new MaterialStack(Materials.Hydrogen, 8),
                         new MaterialStack(Materials.Oxygen, 2))
-                .flags(MaterialFlags.DISABLE_DECOMPOSITION)
+                .flags(MaterialFlags.DISABLE_DECOMPOSITION,
+                        MaterialFlags.GENERATE_PLATE,
+                        MaterialFlags.GENERATE_FOIL,
+                        MaterialFlags.GENERATE_ROD
+                )
                 .build();
-
+        FORMALDEHYDE = MaterialHelper.dynamicBuilder("formaldehyde", true, true)
+                .color(0x95a13a)
+                .flags(MaterialFlags.DISABLE_DECOMPOSITION)
+                .components(new MaterialStack(Materials.Carbon, 1),
+                        new MaterialStack(Materials.Hydrogen, 2),
+                        new MaterialStack(Materials.Oxygen, 1)
+                )
+                .build();
     }
 
     public static void orePrefix() {

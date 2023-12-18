@@ -100,6 +100,19 @@ public class CircuitRoutine {
                 )
                 .buildAndRegister();
         //切板，启动！
+        //MV->LV->ULV
+        RecipeMaps.CUTTER_RECIPES.recipeBuilder()
+                .outputs(INTEGRATED_CIRCUIT_LV.getStackForm(2))
+                .inputs(INTEGRATED_CIRCUIT_MV.getStackForm(1))
+                .EUt(16)
+                .duration(200)
+                .buildAndRegister();
+        RecipeMaps.CUTTER_RECIPES.recipeBuilder()
+                .outputs(NAND_CHIP_ULV.getStackForm(1))
+                .inputs(INTEGRATED_CIRCUIT_LV.getStackForm(1))
+                .EUt(120)
+                .duration(300)
+                .buildAndRegister();
         //HV->MV->LV
         RecipeMaps.CUTTER_RECIPES.recipeBuilder()
                 .outputs(MetaItems.PROCESSOR_MV.getStackForm(2))
@@ -173,5 +186,6 @@ public class CircuitRoutine {
                 .duration(200)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
+
     }
 }

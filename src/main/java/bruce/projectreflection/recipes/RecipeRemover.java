@@ -36,6 +36,9 @@ public class RecipeRemover {
         removedRecipes.add(MetaItems.CRYSTAL_COMPUTER_ZPM.getStackForm());
         removedRecipes.add(MetaItems.WETWARE_SUPER_COMPUTER_UV.getStackForm());
         //切割降级的电路板
+        //MV->LV->ULV
+        removedRecipes.add(MetaItems.INTEGRATED_CIRCUIT_LV.getStackForm());
+        removedRecipes.add(MetaItems.NAND_CHIP_ULV.getStackForm());
         //HV->MV->LV
         removedRecipes.add(MetaItems.PROCESSOR_MV.getStackForm());
         removedRecipes.add(MetaItems.MICROPROCESSOR_LV.getStackForm());

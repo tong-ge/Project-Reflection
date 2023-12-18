@@ -1,6 +1,7 @@
 package bruce.projectreflection.recipes.routines;
 
 import bruce.projectreflection.materials.FirstTierMaterials;
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
@@ -32,7 +33,7 @@ public final class PhenolicResinRoutine {
                 .fluidInputs(Materials.Methanol.getFluid(2000),
                         Materials.Oxygen.getFluid(1000))
                 .notConsumable(OreDictUnifier.get(OrePrefix.dust, Materials.Silver))
-                .fluidOutputs(FirstTierMaterials.FORMALDEHYDE.getFluid(2000), Materials.Water.getFluid(2000))
+                .fluidOutputs(FirstTierMaterials.FORMALDEHYDE.getFluid(FluidStorageKeys.GAS, 2000), Materials.Water.getFluid(2000))
                 .EUt(30)
                 .duration(800)
                 .buildAndRegister();

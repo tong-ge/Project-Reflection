@@ -1,6 +1,7 @@
 package bruce.projectreflection.materials;
 
 import bruce.projectreflection.PRConstants;
+import bruce.projectreflection.ProjectReflection;
 import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.FluidState;
@@ -35,10 +36,12 @@ public class MaterialHelper {
         Fluid fluid = FluidRegistry.getFluid(name);
         if (autoFluid) {
             if (fluid != null) {
+                System.out.println("Registering material for existing fluid:" + name);
                 builder.fluid(fluid,
                         fluid.isGaseous() ? FluidStorageKeys.GAS : FluidStorageKeys.LIQUID,
                         fluid.isGaseous() ? FluidState.GAS : FluidState.LIQUID);
             } else if (fallback != null) {
+                System.out.println("Registering material with new fluid:" + name);
                 builder.fluid(gaseous ? FluidStorageKeys.GAS : FluidStorageKeys.LIQUID, fallback);
             }
         }
@@ -61,6 +64,7 @@ public class MaterialHelper {
     }
 
     public static void init() {
+        ElementMaterials.init();
         FirstTierMaterials.init();
         SecondTierMaterials.init();
         ThirdTierMaterials.init();
@@ -69,6 +73,7 @@ public class MaterialHelper {
     }
 
     private static void orePrefix() {
+        ElementMaterials.orePrefix();
         FirstTierMaterials.orePrefix();
         SecondTierMaterials.orePrefix();
         ThirdTierMaterials.orePrefix();

@@ -122,7 +122,7 @@ dependencies {
     implementation "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.684"
     implementation rfg.deobf('curse.maven:codechickenlib-242818:2779848')
     implementation rfg.deobf('curse.maven:had-enough-items-557549:4571247')
-    implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:4924179")
+    implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:4951281")
     implementation rfg.deobf("com.azanor.baubles:Baubles:1.12-1.5.2")
     implementation rfg.deobf("curse.maven:thaumcraft-223628:2629023")
     implementation rfg.deobf("curse.maven:gcym-564858:4910674")

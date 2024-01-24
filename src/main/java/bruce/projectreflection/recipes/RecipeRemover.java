@@ -10,6 +10,8 @@ import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.items.MetaItems;
+import gregtech.common.metatileentities.MetaTileEntities;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMufflerHatch;
 import knightminer.ceramics.Ceramics;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -26,6 +28,7 @@ public class RecipeRemover {
         recipeMapList.add(RecipeMaps.CHEMICAL_RECIPES);
         recipeMapList.add(RecipeMaps.LARGE_CHEMICAL_RECIPES);
         recipeMapList.add(RecipeMaps.CIRCUIT_ASSEMBLER_RECIPES);
+        recipeMapList.add(RecipeMaps.ASSEMBLY_LINE_RECIPES);
         removedRecipes.add(OreDictUnifier.get(OrePrefix.dust, Materials.EnderPearl, 1));
         removedRecipes.add(OreDictUnifier.get(OrePrefix.dust, Materials.Blaze, 1));
         //同级升级的电路板
@@ -55,6 +58,9 @@ public class RecipeRemover {
         removedRecipes.add(MetaItems.WETWARE_PROCESSOR_ASSEMBLY_ZPM.getStackForm());
         removedRecipes.add(MetaItems.WETWARE_PROCESSOR_LUV.getStackForm());
 
+        for (MetaTileEntityMufflerHatch mte : MetaTileEntities.MUFFLER_HATCH) {
+            ModHandler.removeRecipeByOutput(mte.getStackForm());
+        }
     }
     public static void doRemove() {
         init();

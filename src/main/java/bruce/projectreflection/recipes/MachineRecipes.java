@@ -14,12 +14,18 @@ public class MachineRecipes {
                 'Q', CraftingComponent.CABLE_QUAD,
                 'C', CraftingComponent.BETTER_CIRCUIT,
                 'F', CraftingComponent.FIELD_GENERATOR);
-        MetaTileEntityLoader.registerMachineRecipe(PRMetaTileEntityHandler.AURA_GENERATORS,
+        MetaTileEntityLoader.registerMachineRecipe(PRMetaTileEntityHandler.AURA_COLLECTORS,
                 "MGM", "MHM", "CWC",
                 'M', CraftingComponent.MOTOR,
                 'H', CraftingComponent.HULL,
                 'C', CraftingComponent.CIRCUIT,
                 'W', CraftingComponent.CABLE,
                 'G', new ItemStack(BlocksTC.visGenerator));
+        MetaTileEntityLoader.registerMachineRecipe(PRMetaTileEntityHandler.FLUX_MUFFLERS,
+                "PBP", "BHB", "PRP",
+                'P', CraftingComponent.PLATE,
+                'B', new ItemStack(BlocksTC.bellows),
+                'H', CraftingComponent.HULL,
+                'R', CraftingComponent.ROTOR);
     }
 }

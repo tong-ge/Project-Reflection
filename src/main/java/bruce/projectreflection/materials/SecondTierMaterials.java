@@ -10,26 +10,27 @@ import net.minecraftforge.fml.common.Loader;
 
 public class SecondTierMaterials {
 
-    public static Material THAUMIUM;
+
     public static Material ALLOY_IRIDIUM;
     public static Material SODIUM_ABYSSALNITE;
     public static Material CALCIUM_ABYSSALNITE;
+    public static Material MITHRIL;
+    public static Material VINTEUM;
 
     public static void init() {
-
-        THAUMIUM = MaterialHelper.dynamicBuilder("thaumium")
-                .ingot(3)
+        MITHRIL = MaterialHelper.dynamicBuilder("mithril")
+                .ingot()
                 .fluid()
-                .color(0x51437c)
-                .flags(
-                        MaterialFlags.DISABLE_DECOMPOSITION,
-                        MaterialFlags.GENERATE_PLATE,
-                        MaterialFlags.GENERATE_ROD,
-                        MaterialFlags.GENERATE_FRAME,
-                        MaterialFlags.GENERATE_GEAR,
-                        MaterialFlags.GENERATE_DOUBLE_PLATE
-                )
-                .components(new MaterialStack(Materials.Iron, 1), new MaterialStack(ElementMaterials.MANA, 1))
+                .blast(5000)
+                .color(0x428fdb)
+                .iconSet(MaterialIconSet.DULL)
+                .flags(MaterialFlags.GENERATE_PLATE,
+                        MaterialFlags.GENERATE_DOUBLE_PLATE,
+                        MaterialFlags.GENERATE_FOIL,
+                        MaterialFlags.GENERATE_FINE_WIRE,
+                        MaterialFlags.GENERATE_SMALL_GEAR,
+                        MaterialFlags.GENERATE_FRAME)
+                .components(new MaterialStack(Materials.PlatinumGroupSludge, 4), new MaterialStack(FirstTierMaterials.THAUMIUM, 1))
                 .build();
         ALLOY_IRIDIUM = MaterialHelper.dynamicBuilder("alloy_iridium")
                 .ingot()
@@ -47,6 +48,7 @@ public class SecondTierMaterials {
                 .build();
         SODIUM_ABYSSALNITE = MaterialHelper.dynamicBuilder("sodium_abyssalnite")
                 .gem()
+                .ore()
                 .color(0x4a1c89)
                 .iconSet(MaterialIconSet.LAPIS)
                 .flags(MaterialFlags.DISABLE_DECOMPOSITION, MaterialFlags.CRYSTALLIZABLE)
@@ -57,19 +59,31 @@ public class SecondTierMaterials {
                 .build();
         CALCIUM_ABYSSALNITE = MaterialHelper.dynamicBuilder("calcium_abyssalnite")
                 .gem()
+                .ore()
                 .color(0x4a1c89)
-                .iconSet(MaterialIconSet.ROUGH)
+                .iconSet(MaterialIconSet.EMERALD)
                 .flags(MaterialFlags.DISABLE_DECOMPOSITION)
                 .components(
                         new MaterialStack(Materials.Calcium, 1),
                         new MaterialStack(FirstTierMaterials.ABYSSALNATE, 1)
                 )
                 .build();
+
+        VINTEUM = MaterialHelper.dynamicBuilder("vinteum")
+                .ingot()
+                .ore()
+                .color(0x64c8ff)
+                .iconSet(MaterialIconSet.METALLIC)
+                .components(
+                        new MaterialStack(FirstTierMaterials.THAUMIUM, 1)
+                )
+                .flags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_DOUBLE_PLATE)
+                .build();
     }
 
     public static void orePrefix() {
-        if (Loader.isModLoaded("thaumcraft")) {
-            OrePrefix.ingot.setIgnored(SecondTierMaterials.THAUMIUM);
+        if (Loader.isModLoaded("thermalfoundation")) {
+            OrePrefix.ingot.setIgnored(MITHRIL);
         }
     }
 }

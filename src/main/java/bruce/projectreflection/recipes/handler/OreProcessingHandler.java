@@ -2,6 +2,7 @@ package bruce.projectreflection.recipes.handler;
 
 import bruce.projectreflection.ProjectReflection;
 import bruce.projectreflection.materials.FirstTierMaterials;
+import bruce.projectreflection.materials.PROrePrefixes;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
@@ -23,6 +24,11 @@ public class OreProcessingHandler {
         OrePrefix.ore.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processOre);
         OrePrefix.oreNetherrack.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processOre);
         OrePrefix.oreEndstone.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processOre);
+        PROrePrefixes.oreDark.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processOre);
+        PROrePrefixes.oreAbyssal.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processOre);
+        PROrePrefixes.oreDread.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processOre);
+        PROrePrefixes.orePurifiedDread.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processOre);
+        PROrePrefixes.oreOmothol.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processOre);
         OrePrefix.crushedCentrifuged.addProcessingHandler(PropertyKey.ORE, OreProcessingHandler::processCrushedCentrifuged);
     }
 

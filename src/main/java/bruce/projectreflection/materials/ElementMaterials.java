@@ -20,6 +20,7 @@ public class ElementMaterials {
     public static Material ABYSSALNIUM;
     public static Material ETHAXIUM;
 
+
     public static void init() {
         MANA = MaterialHelper.dynamicBuilder("mana", true, false)
                 .dust()
@@ -61,6 +62,15 @@ public class ElementMaterials {
                 .flags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD)
                 .element(PRElements.An)
                 .build();
+        ETHAXIUM = MaterialHelper.dynamicBuilder("ethaxium")
+                .ingot()
+                .color(0x969e8a)
+                .iconSet(MaterialIconSet.METALLIC)
+                .flags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_DOUBLE_PLATE)
+                .element(PRElements.Et)
+                .blast(5000)
+                .build();
+
     }
 
     public static void orePrefix() {
@@ -73,7 +83,11 @@ public class ElementMaterials {
         }
         if (Loader.isModLoaded("abyssalcraft")) {
             OrePrefix.gem.setIgnored(ElementMaterials.CORALIUM);
+            OrePrefix.ingot.setIgnored(ElementMaterials.DREADIUM);
+            OrePrefix.ingot.setIgnored(ElementMaterials.ETHAXIUM);
             OrePrefix.block.setIgnored(ElementMaterials.CORALIUM);
+            OrePrefix.block.setIgnored(ElementMaterials.DREADIUM);
+            OrePrefix.block.setIgnored(ElementMaterials.ETHAXIUM);
         }
     }
 }

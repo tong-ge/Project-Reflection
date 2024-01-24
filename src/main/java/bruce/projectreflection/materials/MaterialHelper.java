@@ -1,7 +1,6 @@
 package bruce.projectreflection.materials;
 
 import bruce.projectreflection.PRConstants;
-import bruce.projectreflection.ProjectReflection;
 import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.FluidState;
@@ -64,13 +63,16 @@ public class MaterialHelper {
     }
 
     public static void init() {
+        PROrePrefixes.crystal.toString();
         ElementMaterials.init();
         FirstTierMaterials.init();
         SecondTierMaterials.init();
         ThirdTierMaterials.init();
+        EssenceMaterials.init();
         GTMaterials.init();
         orePrefix();
     }
+
 
     private static void orePrefix() {
         ElementMaterials.orePrefix();

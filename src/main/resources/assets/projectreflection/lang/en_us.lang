@@ -20,3 +20,33 @@ projectreflection.material.super_iridium_alloy=Super Iridium Alloy
 projectreflection.material.coralium=Coralium
 projectreflection.material.thaumium=Thaumium
 projectreflection.material.mithril=Mithril
+
+projectreflection.material.dreadium=Dreadium
+projectreflection.material.abyssalnium=Abyssalnium
+projectreflection.material.ethaxium=Ethaxium
+projectreflection.material.phenolic_resin=Phenolic Resin
+projectreflection.material.abyssalnite=Abyssalnite
+projectreflection.material.sodium_abyssalnite=Sodium Abyssalnite
+projectreflection.material.calcium_abyssalnite=Calcium Abyssalnite
+projectreflection.material.abyssalnate=Abyssalnate
+projectreflection.material.liquified_coralium=Liquified Coralium
+projectreflection.material.dark_stone=Dark Stone
+projectreflection.material.abyssal_stone=Abyssal Stone
+projectreflection.material.dread_stone=Dread Stone
+projectreflection.material.abyssalnite_stone=Abyssalnite Stone
+projectreflection.material.omothol_stone=Omothol Stone
+
+projectreflection.machine.muffler_hatch.tooltip1=Allows machine to release pollution
+projectreflection.muffler.pollution_tooltip=Pollution:%d%%
+
+projectreflection.machine.muffler.lv.name=LV Muffler Hatch
+projectreflection.machine.muffler.mv.name=MV Muffler Hatch
+projectreflection.machine.muffler.hv.name=HV Muffler Hatch
+projectreflection.machine.muffler.ev.name=EV Muffler Hatch
+projectreflection.machine.muffler.iv.name=IV Muffler Hatch
+projectreflection.machine.muffler.luv.name=LuV Muffler Hatch
+projectreflection.machine.muffler.zpm.name=ZPM Muffler Hatch
+projectreflection.machine.muffler.uv.name=UV Muffler Hatch
+projectreflection.machine.muffler.uhv.name=UHV Muffler Hatch
+
+projectreflection.recipe.aura=Vis consumption:%s vis/run, Extended:%s

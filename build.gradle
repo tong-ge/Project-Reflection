@@ -128,6 +128,8 @@ dependencies {
     implementation rfg.deobf("curse.maven:gcym-564858:4910674")
     implementation rfg.deobf("curse.maven:ceramics-250617:3158763")
     implementation rfg.deobf("curse.maven:groovyscript-687577:4905039")
+    implementation rfg.deobf("curse.maven:abyssalcraft-53686:4856547")
+    implementation rfg.deobf("curse.maven:acintegration-234851:3425537")
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:
         String mixin = modUtils.enableMixins('org.spongepowered:mixin:0.8.3', "mixins.${project.archives_base_name}.refmap.json")

@@ -20,7 +20,7 @@ public class PRElements {
     public static Element Kn = Elements.add(141, 126, -1, null, "Knightmetal", "Kn", false);
     //Marvel
     public static Element Vb = Elements.add(156, 226, -1, null, "Vibranium", "Vb", false);
-    public static Element Ad = Elements.add(222, 580, -1, null, "Admantium", "Ad", false);
+    public static Element Ad = Elements.add(222, 580, -1, null, "Adamantium", "Ad", false);
     //DraconicEvocution
     public static Element Dc = Elements.add(230, 126, -1, "", "Draconium", "Dc", false);
     public static Element Dc1 = Elements.add(230, 128, -1, "", "DraconiumAwakened", "Dc+", true);

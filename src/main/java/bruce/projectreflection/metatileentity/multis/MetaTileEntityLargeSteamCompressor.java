@@ -11,6 +11,7 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
+import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import net.minecraft.block.state.IBlockState;
@@ -43,7 +44,7 @@ public class MetaTileEntityLargeSteamCompressor extends RecipeMapSteamMultiblock
                 .where('S', this.selfPredicate())
                 .where('X', states(this.getCasingState()).setMinGlobalLimited(14)
                         .or(this.autoAbilities()))
-                .where('#', air()).build();
+                .where('#', states(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.BRONZE_PIPE))).build();
     }
 
     private IBlockState getCasingState() {

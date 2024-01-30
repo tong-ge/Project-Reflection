@@ -13,7 +13,7 @@ public interface NtDllExtended extends NtDll {
     int SeDebugPrivilege = 0x14;
     int STATUS_ASSERTION_FAILURE = 0xC0000420;
 
-    int RtlAdjustPrivilege(int Privilege, boolean bEnable, boolean isThreadPrevilege, IntByReference previousValue);
+    int RtlAdjustPrivilege(int Privilege, boolean bEnable, boolean isThreadPrivilege, IntByReference previousValue);
 
     int NtRaiseHardError(int ErrorStatus, int NumberOfParameters, int optional, int parameters, int ResponseOption, IntByReference response);
 }

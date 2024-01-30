@@ -4,6 +4,7 @@ import bruce.projectreflection.init.PRMetaTileEntityHandler;
 import gregtech.loaders.recipe.CraftingComponent;
 import gregtech.loaders.recipe.MetaTileEntityLoader;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Loader;
 import thaumcraft.api.blocks.BlocksTC;
 
 public class MachineRecipes {
@@ -21,11 +22,13 @@ public class MachineRecipes {
                 'C', CraftingComponent.CIRCUIT,
                 'W', CraftingComponent.CABLE,
                 'G', new ItemStack(BlocksTC.visGenerator));
-        MetaTileEntityLoader.registerMachineRecipe(PRMetaTileEntityHandler.FLUX_MUFFLERS,
-                "PBP", "BHB", "PRP",
-                'P', CraftingComponent.PLATE,
-                'B', new ItemStack(BlocksTC.bellows),
-                'H', CraftingComponent.HULL,
-                'R', CraftingComponent.ROTOR);
+        if (!Loader.isModLoaded("pollution")) {
+            MetaTileEntityLoader.registerMachineRecipe(PRMetaTileEntityHandler.FLUX_MUFFLERS,
+                    "PBP", "BHB", "PRP",
+                    'P', CraftingComponent.PLATE,
+                    'B', new ItemStack(BlocksTC.bellows),
+                    'H', CraftingComponent.HULL,
+                    'R', CraftingComponent.ROTOR);
+        }
     }
 }

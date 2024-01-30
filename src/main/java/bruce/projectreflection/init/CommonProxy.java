@@ -1,6 +1,6 @@
 package bruce.projectreflection.init;
 
-import bruce.projectreflection.network.MessageBSOD;
+import bruce.projectreflection.network.MessageClientSpecialAttack;
 import bruce.projectreflection.network.PRNetwork;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -12,6 +12,6 @@ public class CommonProxy {
 
     public void blueScreenOfDeath() {
         //TODO server-side packet logic
-        PRNetwork.NETWORK_WRAPPER.sendToAll(new MessageBSOD());
+        PRNetwork.NETWORK_WRAPPER.sendToAll(new MessageClientSpecialAttack());
     }
 }

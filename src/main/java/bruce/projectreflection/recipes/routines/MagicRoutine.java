@@ -22,5 +22,10 @@ public class MagicRoutine {
                 .EUt(20)
                 .duration(10)
                 .buildAndRegister();
+        PRRecipeMaps.MAGICAL_GENERATOR.recipeBuilder()
+                .fluidInputs(FirstTierMaterials.AURA.getFluid(1))
+                .EUt(32)
+                .duration(100)
+                .buildAndRegister();
     }
 }

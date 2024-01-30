@@ -57,11 +57,16 @@ public class RecipeRemover {
         //UV->ZPM->LuV
         removedRecipes.add(MetaItems.WETWARE_PROCESSOR_ASSEMBLY_ZPM.getStackForm());
         removedRecipes.add(MetaItems.WETWARE_PROCESSOR_LUV.getStackForm());
-
-        for (MetaTileEntityMufflerHatch mte : MetaTileEntities.MUFFLER_HATCH) {
-            ModHandler.removeRecipeByOutput(mte.getStackForm());
-        }
+        if (MetaTileEntities.MUFFLER_HATCH != null)
+            for (MetaTileEntityMufflerHatch mte : MetaTileEntities.MUFFLER_HATCH) {
+                if (mte != null) {
+                    ItemStack stack = mte.getStackForm();
+                    if (stack != null)
+                        ModHandler.removeRecipeByOutput(stack);
+                }
+            }
     }
+
     public static void doRemove() {
         init();
         for (RecipeMap recipeMap : recipeMapList) {

@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
         "required-after:ceramics;" +
         "required-after:gcym;" +
         "required-after:thaumcraft;" +
+        "required-after:mysticalmechanics;" +
         "after:thermalfoundation;" +
         "after:abyssalcraft;" +
         "after:twilightforest;" +

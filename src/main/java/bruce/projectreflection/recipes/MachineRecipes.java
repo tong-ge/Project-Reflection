@@ -3,6 +3,7 @@ package bruce.projectreflection.recipes;
 import bruce.projectreflection.init.PRMetaTileEntityHandler;
 import gregtech.loaders.recipe.CraftingComponent;
 import gregtech.loaders.recipe.MetaTileEntityLoader;
+import mysticalmechanics.handler.RegistryHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 import thaumcraft.api.blocks.BlocksTC;
@@ -22,6 +23,16 @@ public class MachineRecipes {
                 'C', CraftingComponent.CIRCUIT,
                 'W', CraftingComponent.CABLE,
                 'G', new ItemStack(BlocksTC.visGenerator));
+        MetaTileEntityLoader.registerMachineRecipe(PRMetaTileEntityHandler.MECH_IMPORT_HATCHES,
+                " E ", "SHS", " E ",
+                'E', CraftingComponent.SPRING,
+                'S', new ItemStack(RegistryHandler.IRON_AXLE),
+                'H', CraftingComponent.HULL);
+        MetaTileEntityLoader.registerMachineRecipe(PRMetaTileEntityHandler.MECH_EXPORT_HATCHES,
+                " S ", "EHE", " S ",
+                'E', CraftingComponent.SPRING,
+                'S', new ItemStack(RegistryHandler.IRON_AXLE),
+                'H', CraftingComponent.HULL);
         if (!Loader.isModLoaded("pollution")) {
             MetaTileEntityLoader.registerMachineRecipe(PRMetaTileEntityHandler.FLUX_MUFFLERS,
                     "PBP", "BHB", "PRP",

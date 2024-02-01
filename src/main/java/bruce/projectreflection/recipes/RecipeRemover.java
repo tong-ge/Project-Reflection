@@ -1,14 +1,21 @@
 package bruce.projectreflection.recipes;
 
+import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.ProjectReflection;
 import com.google.common.collect.ImmutableList;
+import gregtech.api.GregTechAPI;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.material.info.MaterialFlags;
+import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.material.registry.MaterialRegistry;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMufflerHatch;
@@ -65,6 +72,18 @@ public class RecipeRemover {
                         ModHandler.removeRecipeByOutput(stack);
                 }
             }
+        MaterialRegistry registry = GregTechAPI.materialManager.getRegistry(PRConstants.modid);
+        /*
+        for(int i=0;i<OreDictionary.WILDCARD_VALUE;i++)
+        {
+            Material material=registry.getObjectById(i);
+            if(material != null && material.hasFlag(MaterialFlags.GENERATE_PLATE) && material.hasProperty(PropertyKey.WIRE))
+            {
+                ModHandler.removeRecipeByOutput(OreDictUnifier.get(OrePrefix.wireGtSingle, material));
+            }
+        }
+
+         */
     }
 
     public static void doRemove() {

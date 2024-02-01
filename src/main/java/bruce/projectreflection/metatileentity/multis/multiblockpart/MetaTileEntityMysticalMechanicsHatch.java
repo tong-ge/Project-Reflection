@@ -1,7 +1,6 @@
 package bruce.projectreflection.metatileentity.multis.multiblockpart;
 
 import bruce.projectreflection.PRAbility;
-import bruce.projectreflection.ProjectReflection;
 import bruce.projectreflection.api.IGTMechCapability;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -9,7 +8,6 @@ import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.metatileentity.IDataInfoProvider;
-import gregtech.api.metatileentity.ITieredMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
@@ -19,7 +17,6 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.PipelineUtil;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 import mysticalmechanics.api.DefaultMechCapability;
-import mysticalmechanics.api.IMechCapability;
 import mysticalmechanics.api.MysticalMechanicsAPI;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,7 +30,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -90,21 +86,13 @@ public class MetaTileEntityMysticalMechanicsHatch extends MetaTileEntityMultiblo
                     }
                 }
             }
-            if (this.getPower(getFront()) > this.getMaxPower()) {
+            if (this.getEffectiveEUt() > this.getMaxEU()) {
                 tileEntity.doExplosion((float) this.getPower(getFront()));
             }
         }
 
-        /*
-                @Override
-                public double getPower(EnumFacing from) {
-                    if(this.tileEntity.getController().isActive())
-                    return super.getPower(from);
-                    else return 0;
-                }
-        */
         @Override
-        public long getMaxPower() {
+        public long getMaxEU() {
             return GTValues.V[this.tier];
         }
     }

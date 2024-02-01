@@ -21,4 +21,5 @@ public class PRConstants {
         }
     };
     public static final Random rand=new Random();
+    public static final long EU_TO_R = 4L;
 }

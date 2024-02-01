@@ -5,8 +5,6 @@
   "package": "bruce.projectreflection.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinCircuitRecipeBuilder",
-    "MixinCrate",
-    "MixinThaumatorium"
+    "MixinCircuitRecipeBuilder"
   ]
 }

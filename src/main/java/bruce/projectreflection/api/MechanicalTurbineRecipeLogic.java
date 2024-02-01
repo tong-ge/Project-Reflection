@@ -38,8 +38,8 @@ public class MechanicalTurbineRecipeLogic extends MultiblockRecipeLogic {
     protected boolean drawEnergy(int recipeEUt, boolean simulate) {
         if (!simulate) {
             List<IGTMechCapability> mechCapability = ((MechanicalTurbineMultiblockController) this.metaTileEntity).mechCapability;
-            for (IMechCapability capability : mechCapability) {
-                capability.setPower((double) recipeEUt / mechCapability.size(), null);
+            for (IGTMechCapability capability : mechCapability) {
+                capability.setEU((double) recipeEUt / mechCapability.size());
             }
         }
         return true;
@@ -58,7 +58,7 @@ public class MechanicalTurbineRecipeLogic extends MultiblockRecipeLogic {
         long maxVoltage = 0;
         List<IGTMechCapability> mechCapability = ((MechanicalTurbineMultiblockController) this.metaTileEntity).mechCapability;
         for (IGTMechCapability capability : mechCapability) {
-            maxVoltage += capability.getMaxPower();
+            maxVoltage += capability.getMaxEU();
         }
         return maxVoltage;
     }

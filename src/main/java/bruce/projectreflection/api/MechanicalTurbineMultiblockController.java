@@ -1,9 +1,11 @@
 package bruce.projectreflection.api;
 
 import bruce.projectreflection.PRAbility;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.RecipeMap;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;

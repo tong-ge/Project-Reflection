@@ -35,6 +35,6 @@ public class MetaTileEntityMechanicalSteamTurbine extends MechanicalTurbineMulti
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityMechanicalGasTurbine(this.metaTileEntityId);
+        return new MetaTileEntityMechanicalSteamTurbine(this.metaTileEntityId);
     }
 }

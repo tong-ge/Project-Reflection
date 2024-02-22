@@ -6,7 +6,6 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.MaterialStack;
 import net.minecraftforge.fml.common.Loader;
 
 public class ElementMaterials {
@@ -17,9 +16,9 @@ public class ElementMaterials {
     //abyssalcraft
     public static Material CORALIUM;
     public static Material DREADIUM;
-    public static Material ABYSSALNIUM;
+    public static Material ABYSSALNITE;
     public static Material ETHAXIUM;
-
+    public static Material SCHRABIDIUM;
 
     public static void init() {
         MANA = MaterialHelper.dynamicBuilder("mana", true, false)
@@ -55,7 +54,7 @@ public class ElementMaterials {
                         MaterialFlags.GENERATE_ROD)
                 .element(PRElements.Dr1)
                 .build();
-        ABYSSALNIUM = MaterialHelper.dynamicBuilder("abyssalnium")
+        ABYSSALNITE = MaterialHelper.dynamicBuilder("abyssalnite")
                 .ingot()
                 .color(0x4a1c89)
                 .iconSet(MaterialIconSet.METALLIC)
@@ -69,6 +68,14 @@ public class ElementMaterials {
                 .flags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_DOUBLE_PLATE)
                 .element(PRElements.Et)
                 .blast(5000)
+                .build();
+        SCHRABIDIUM = MaterialHelper.dynamicBuilder("schrabidium")
+                .ingot()
+                .color(0x32FFFF)
+                .iconSet(MaterialIconSet.MAGNETIC)
+                .flags(MaterialFlags.IS_MAGNETIC)
+                .element(PRElements.Sa)
+
                 .build();
 
     }
@@ -88,6 +95,7 @@ public class ElementMaterials {
             OrePrefix.block.setIgnored(ElementMaterials.CORALIUM);
             OrePrefix.block.setIgnored(ElementMaterials.DREADIUM);
             OrePrefix.block.setIgnored(ElementMaterials.ETHAXIUM);
+            OrePrefix.ingot.setIgnored(ABYSSALNITE);
         }
     }
 }

@@ -43,4 +43,9 @@ public class MetaTileEntityMechanicalCompressor extends RecipeMapMechanicalMulti
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityMechanicalCompressor(this.metaTileEntityId);
     }
+
+    @Override
+    public boolean hasMaintenanceMechanics() {
+        return false;
+    }
 }

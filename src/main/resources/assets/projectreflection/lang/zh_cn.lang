@@ -49,3 +49,11 @@ projectreflection.machine.muffler.uv.name=UV 排污仓
 projectreflection.machine.muffler.uhv.name=UHV 排污仓
 
 projectreflection.recipe.aura=灵气消耗:%s vis/运行，扩展：%s
+
+item.material.oreprefix.oreAbyssal=深渊%s矿石
+item.material.oreprefix.oreDread=恐惧之地%s矿石
+item.material.oreprefix.orePurifiedDread=渊素石%s矿石
+item.material.oreprefix.oreOmothol=奥穆索%s矿石
+item.material.oreprefix.oreDark=黑暗之地%s矿石
+item.material.oreprefix.crystal=%s结晶体
+item.material.oreprefix.cluster=%s原矿簇

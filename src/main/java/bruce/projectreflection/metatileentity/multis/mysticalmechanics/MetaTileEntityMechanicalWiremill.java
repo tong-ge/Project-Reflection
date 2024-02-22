@@ -42,4 +42,9 @@ public class MetaTileEntityMechanicalWiremill extends RecipeMapMechanicalMultibl
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityMechanicalWiremill(metaTileEntityId);
     }
+
+    @Override
+    public boolean hasMaintenanceMechanics() {
+        return false;
+    }
 }

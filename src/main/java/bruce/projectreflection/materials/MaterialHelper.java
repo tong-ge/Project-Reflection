@@ -7,6 +7,7 @@ import gregtech.api.fluids.FluidState;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.registry.MaterialRegistry;
+import gregtech.common.items.MetaItems;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -70,14 +71,16 @@ public class MaterialHelper {
         ThirdTierMaterials.init();
         EssenceMaterials.init();
         GTMaterials.init();
-        orePrefix();
+        //orePrefix();
     }
 
 
-    private static void orePrefix() {
+    public static void orePrefix() {
         ElementMaterials.orePrefix();
         FirstTierMaterials.orePrefix();
         SecondTierMaterials.orePrefix();
         ThirdTierMaterials.orePrefix();
+        MetaItems.addOrePrefix(PROrePrefixes.cluster,
+                PROrePrefixes.crystal);
     }
 }

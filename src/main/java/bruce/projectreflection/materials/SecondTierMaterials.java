@@ -12,8 +12,6 @@ public class SecondTierMaterials {
 
 
     public static Material ALLOY_IRIDIUM;
-    public static Material SODIUM_ABYSSALNITE;
-    public static Material CALCIUM_ABYSSALNITE;
     public static Material MITHRIL;
     public static Material VINTEUM;
 
@@ -45,28 +43,6 @@ public class SecondTierMaterials {
                 )
                 .color(0xc2c1df)
                 .iconSet(MaterialIconSet.METALLIC)
-                .build();
-        SODIUM_ABYSSALNITE = MaterialHelper.dynamicBuilder("sodium_abyssalnite")
-                .gem()
-                .ore()
-                .color(0x4a1c89)
-                .iconSet(MaterialIconSet.LAPIS)
-                .flags(MaterialFlags.DISABLE_DECOMPOSITION, MaterialFlags.CRYSTALLIZABLE)
-                .components(
-                        new MaterialStack(Materials.Sodium, 2),
-                        new MaterialStack(FirstTierMaterials.ABYSSALNATE, 1)
-                )
-                .build();
-        CALCIUM_ABYSSALNITE = MaterialHelper.dynamicBuilder("calcium_abyssalnite")
-                .gem()
-                .ore()
-                .color(0x4a1c89)
-                .iconSet(MaterialIconSet.EMERALD)
-                .flags(MaterialFlags.DISABLE_DECOMPOSITION)
-                .components(
-                        new MaterialStack(Materials.Calcium, 1),
-                        new MaterialStack(FirstTierMaterials.ABYSSALNATE, 1)
-                )
                 .build();
 
         VINTEUM = MaterialHelper.dynamicBuilder("vinteum")

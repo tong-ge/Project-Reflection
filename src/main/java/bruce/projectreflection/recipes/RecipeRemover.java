@@ -73,7 +73,7 @@ public class RecipeRemover {
                 }
             }
         MaterialRegistry registry = GregTechAPI.materialManager.getRegistry(PRConstants.modid);
-        /*
+
         for(int i=0;i<OreDictionary.WILDCARD_VALUE;i++)
         {
             Material material=registry.getObjectById(i);
@@ -82,8 +82,6 @@ public class RecipeRemover {
                 ModHandler.removeRecipeByOutput(OreDictUnifier.get(OrePrefix.wireGtSingle, material));
             }
         }
-
-         */
     }
 
     public static void doRemove() {

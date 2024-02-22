@@ -1,5 +1,6 @@
 package bruce.projectreflection.recipes;
 
+import bruce.projectreflection.materials.PROrePrefixes;
 import bruce.projectreflection.recipes.handler.OreProcessingHandler;
 import bruce.projectreflection.recipes.handler.PRRecipeMaps;
 import bruce.projectreflection.recipes.routines.CircuitRoutine;
@@ -10,9 +11,11 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
+import gregtech.common.items.MetaItems;
 
 public class RecipeManager {
     public static void preInit() {
+
         OreProcessingHandler.init();
     }
     public static void init() {
@@ -22,7 +25,6 @@ public class RecipeManager {
         SuperIridiumAlloyRoutine.init();
         CircuitRoutine.init();
         MagicRoutine.init();
-        //MetaTileEntityAuraCollector.initRecipeMap();
         RecipeMaps.MASS_FABRICATOR_RECIPES.recipeBuilder()
                 .circuitMeta(1)
                 .EUt(256)

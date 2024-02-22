@@ -1,6 +1,12 @@
 package bruce.projectreflection.materials;
 
+import bruce.projectreflection.PRConstants;
+import bruce.projectreflection.ProjectReflection;
 import gregtech.api.GTValues;
+import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.FluidState;
+import gregtech.api.fluids.attribute.FluidAttribute;
+import gregtech.api.fluids.attribute.FluidAttributes;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
@@ -10,8 +16,9 @@ import gregtech.api.unification.stack.MaterialStack;
 import net.minecraftforge.fml.common.Loader;
 import thaumcraft.api.aspects.Aspect;
 
+import static bruce.projectreflection.materials.ElementMaterials.ABYSSALNITE;
+import static bruce.projectreflection.materials.ElementMaterials.SCHRABIDIUM;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
-import static gregtech.api.unification.material.info.MaterialIconSet.METALLIC;
 
 public class FirstTierMaterials {
     public static Material PYROTHEUM;
@@ -21,8 +28,6 @@ public class FirstTierMaterials {
     public static Material ALLOY_ADVANCED;
     public static Material PHENOLIC_RESIN;
     public static Material FORMALDEHYDE;
-    public static Material ABYSSALNITE;
-    public static Material ABYSSALNATE;
     public static Material LIQUIFIED_CORALIUM;
     public static Material ABYSSAL_STONE;
     public static Material DREAD_STONE;
@@ -30,9 +35,10 @@ public class FirstTierMaterials {
     public static Material DARK_STONE;
     public static Material OMOTHOL_STONE;
     public static Material THAUMIUM;
-    public static Material NEODYMIUM_MAGNET;
     public static Material JADE;
     public static Material AURA;
+    public static Material SAS3;
+    public static Material SCHRABIDIC;
     public static void init() {
         THAUMIUM = MaterialHelper.dynamicBuilder("thaumium")
                 .ingot(3)
@@ -98,28 +104,6 @@ public class FirstTierMaterials {
                         new MaterialStack(Materials.Oxygen, 1)
                 )
                 .build();
-        ABYSSALNITE = MaterialHelper.dynamicBuilder("abyssalnite")
-                .ore()
-                .ingot()
-                .color(0x4a1c89)
-                .iconSet(MaterialIconSet.DULL)
-                .flags(GENERATE_PLATE, GENERATE_ROD, DISABLE_DECOMPOSITION)
-                .components(
-                        new MaterialStack(ElementMaterials.ABYSSALNIUM, 1),
-                        new MaterialStack(Materials.Oxygen, 1)
-                )
-                .build();
-        ABYSSALNATE = MaterialHelper.dynamicBuilder("abyssalnate")
-                .ore()
-                .dust()
-                .color(0x4a1c89)
-                .iconSet(MaterialIconSet.SHINY)
-                .flags(GENERATE_PLATE, GENERATE_ROD, DISABLE_DECOMPOSITION)
-                .components(
-                        new MaterialStack(ElementMaterials.ABYSSALNIUM, 1),
-                        new MaterialStack(Materials.Oxygen, 2)
-                )
-                .build();
         LIQUIFIED_CORALIUM = MaterialHelper.dynamicBuilder("liquified_coralium", true, false)
                 .ingot()
                 .color(0x169265)
@@ -163,7 +147,7 @@ public class FirstTierMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .components(new MaterialStack(Materials.Magnesia, 1),
                         new MaterialStack(Materials.SiliconDioxide, 1),
-                        new MaterialStack(ElementMaterials.ABYSSALNIUM, 1)
+                        new MaterialStack(ABYSSALNITE, 1)
                 )
                 .build();
         OMOTHOL_STONE = MaterialHelper.dynamicBuilder("omothol_stone")
@@ -175,15 +159,6 @@ public class FirstTierMaterials {
                         new MaterialStack(Materials.SiliconDioxide, 1),
                         new MaterialStack(ElementMaterials.ETHAXIUM, 1)
                 )
-                .build();
-        NEODYMIUM_MAGNET = MaterialHelper.dynamicBuilder("neodymium_magnet")
-                .ingot()
-                .components(new MaterialStack(Materials.Neodymium, 2),
-                        new MaterialStack(Materials.Iron, 14),
-                        new MaterialStack(Materials.Boron, 1))
-                .color(0x646464).iconSet(METALLIC)
-                .flags(IS_MAGNETIC, GENERATE_ROD, GENERATE_BOLT_SCREW, DISABLE_DECOMPOSITION)
-                .blast(1700)
                 .build();
         JADE = MaterialHelper.dynamicBuilder("jade")
                 .gem(2)
@@ -200,6 +175,18 @@ public class FirstTierMaterials {
         AURA = MaterialHelper.dynamicBuilder("aura", true, true)
                 .color(Aspect.AURA.getColor())
                 .build();
+        SAS3 = MaterialHelper.dynamicBuilder("sas_3", true, false)
+                .color(0x4ffffc)
+                .components(new MaterialStack(SCHRABIDIUM, 1), new MaterialStack(Materials.Sulfur, 3))
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        SCHRABIDIC = MaterialHelper.dynamicBuilder(PRConstants.modid, "schrabidic", true, new FluidBuilder().state(FluidState.LIQUID).attribute(FluidAttributes.ACID), false)
+                .color(0x006B6B)
+                .components(
+                        new MaterialStack(Materials.Hydrogen, 2),
+                        new MaterialStack(SCHRABIDIUM, 1), new MaterialStack(Materials.Oxygen, 4))
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
 
     }
 
@@ -215,7 +202,7 @@ public class FirstTierMaterials {
             OrePrefix.ingot.setIgnored(THAUMIUM);
         }
         if (Loader.isModLoaded("abyssalcraft")) {
-            OrePrefix.ingot.setIgnored(ABYSSALNITE);
+
             OrePrefix.ingot.setIgnored(LIQUIFIED_CORALIUM);
 
             PROrePrefixes.oreDark.addSecondaryMaterial(new MaterialStack(DARK_STONE, GTValues.M));

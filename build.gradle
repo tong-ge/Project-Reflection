@@ -125,6 +125,7 @@ dependencies {
     implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5121638")
     implementation rfg.deobf("com.azanor.baubles:Baubles:1.12-1.5.2")
     implementation rfg.deobf("curse.maven:thaumcraft-223628:2629023")
+    implementation rfg.deobf("curse.maven:thaumic-periphery-293505:2766866")
     implementation rfg.deobf("curse.maven:gcym-564858:4910674")
     implementation rfg.deobf("curse.maven:ceramics-250617:3158763")
     implementation rfg.deobf("curse.maven:groovyscript-687577:4905039")
@@ -132,6 +133,7 @@ dependencies {
     implementation rfg.deobf("curse.maven:acintegration-234851:3425537")
     implementation rfg.deobf("curse.maven:mysticalmechanics-300742:3006392")
     implementation rfg.deobf("curse.maven:had-enough-items-557549:4810661")
+    implementation rfg.deobf("curse.maven:embers-extended-life-936489:5108323")
 
     //compileOnly("curse.maven:gregtech-ce-unofficial-557242:5121638")
     if (project.use_mixins.toBoolean()) {

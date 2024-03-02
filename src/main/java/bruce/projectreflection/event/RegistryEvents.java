@@ -3,19 +3,15 @@ package bruce.projectreflection.event;
 import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.ProjectReflection;
 import bruce.projectreflection.entity.EntityBlackhole;
-import bruce.projectreflection.items.ItemManifold;
-import bruce.projectreflection.materials.FirstTierMaterials;
-import bruce.projectreflection.materials.PROrePrefixes;
+import bruce.projectreflection.items.*;
+import bruce.projectreflection.items.codebook.ItemCodebook;
+import bruce.projectreflection.materials.MaterialHelper;
 import bruce.projectreflection.materials.PRStoneType;
 import bruce.projectreflection.recipes.RecipeManager;
-import bruce.projectreflection.materials.MaterialHelper;
 import gregtech.api.GregTechAPI;
 import gregtech.api.event.HighTierEvent;
 import gregtech.api.unification.material.event.MaterialEvent;
 import gregtech.api.unification.material.event.PostMaterialEvent;
-import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.UnificationEntry;
-import gregtech.common.items.MetaItems;
 import gregtech.loaders.recipe.CraftingComponent;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -26,9 +22,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
-
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Mod.EventBusSubscriber(modid = PRConstants.modid)
 public class RegistryEvents {
@@ -69,7 +62,8 @@ public class RegistryEvents {
     }
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(new ItemManifold());
+        event.getRegistry().registerAll(new ItemManifold(),
+                new ItemCodebook());
     }
 
     @SubscribeEvent

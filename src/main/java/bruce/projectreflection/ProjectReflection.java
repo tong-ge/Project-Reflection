@@ -21,7 +21,8 @@ import org.apache.logging.log4j.Logger;
         "after:abyssalcraft;" +
         "after:twilightforest;" +
         "after:draconicevolution;" +
-        "after:gregtechfoodoption", useMetadata = true)
+        "after:gregtechfoodoption;" +
+        "before:thaumicperiphery", useMetadata = true)
 public class ProjectReflection {
 
     public static Logger logger;

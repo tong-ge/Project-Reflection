@@ -39,6 +39,8 @@ public class FirstTierMaterials {
     public static Material AURA;
     public static Material SAS3;
     public static Material SCHRABIDIC;
+    public static Material UNSTABLE;
+    public static Material MOON;
     public static void init() {
         THAUMIUM = MaterialHelper.dynamicBuilder("thaumium")
                 .ingot(3)
@@ -187,7 +189,14 @@ public class FirstTierMaterials {
                         new MaterialStack(SCHRABIDIUM, 1), new MaterialStack(Materials.Oxygen, 4))
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
-
+        UNSTABLE = MaterialHelper.dynamicBuilder("unstable")
+                .color(0xFFFFFF)
+                .ingot()
+                .build();
+        MOON = MaterialHelper.dynamicBuilder("moon")
+                .gem(4)
+                .color(0x6f7c85)
+                .build();
     }
 
     public static void orePrefix() {
@@ -200,6 +209,10 @@ public class FirstTierMaterials {
         if (Loader.isModLoaded("thaumcraft")) {
             OrePrefix.ingot.setIgnored(Materials.Brass);
             OrePrefix.ingot.setIgnored(THAUMIUM);
+        }
+        if (Loader.isModLoaded("extrautils2")) {
+            OrePrefix.ingot.setIgnored(UNSTABLE);
+            OrePrefix.gem.setIgnored(MOON);
         }
         if (Loader.isModLoaded("abyssalcraft")) {
 

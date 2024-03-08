@@ -7,6 +7,7 @@ import mysticalmechanics.handler.RegistryHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 import thaumcraft.api.blocks.BlocksTC;
+import thaumcraft.api.items.ItemsTC;
 
 public class MachineRecipes {
     public static void register() {
@@ -22,7 +23,7 @@ public class MachineRecipes {
                 'H', CraftingComponent.HULL,
                 'C', CraftingComponent.CIRCUIT,
                 'W', CraftingComponent.CABLE,
-                'G', new ItemStack(BlocksTC.visGenerator));
+                'G', new ItemStack(ItemsTC.resonator));
         MetaTileEntityLoader.registerMachineRecipe(PRMetaTileEntityHandler.MECH_IMPORT_HATCHES,
                 " E ", "SHS", " E ",
                 'E', CraftingComponent.SPRING,

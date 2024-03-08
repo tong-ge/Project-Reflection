@@ -57,7 +57,7 @@ public class ItemCodebook extends Item implements ItemUIFactory {
                 .setValidator(StringUtils::isNaturalOrNull));
         //page
         builder.label(90, 6, "Page:", 0x000000);
-        builder.widget(new TextFieldWidget(150, 4, 60, 16, true,
+        builder.widget(new TextFieldWidget(100, 4, 60, 16, true,
                 () -> "" + getPage(stack),
                 text -> setPage(stack, StringUtils.parseIntOrZero(text)))
                 .setValidator(StringUtils::isNaturalOrNull));
@@ -88,9 +88,6 @@ public class ItemCodebook extends Item implements ItemUIFactory {
         NBTTagCompound tagCompound = stack.getTagCompound();
         if (tagCompound == null) {
             tagCompound = new NBTTagCompound();
-            for (int i = 0; i < MAX_PC; i++) {
-                tagCompound.setString("content" + i, "Hello, World!" + i);
-            }
             tagCompound.setInteger("pc", 0);
             stack.setTagCompound(tagCompound);
         }

@@ -4,6 +4,7 @@ import bruce.projectreflection.recipes.handler.PRRecipeMaps;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
@@ -23,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class MetaTileEntityIndustrialMobFarm extends RecipeMapMultiblockController {
     //private static final ICubeRenderer renderer = new SimpleOverlayRenderer("gregtech:stones/concrete_light/concrete_light_smooth");
+    private EntityPlayer caster;
 
     public MetaTileEntityIndustrialMobFarm(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, PRRecipeMaps.INDUSTRIAL_MOB_FARM);
@@ -31,13 +33,15 @@ public class MetaTileEntityIndustrialMobFarm extends RecipeMapMultiblockControll
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XGGGX", "XGGGX", "XGGGX", "XGGGX", "XXXXX")
+                .aisle("XXXXX", "XGGGX", "XGGGX", "XGGGX", "XXXXX")
                 .aisle("YOOOY", "OPPPO", "OPPPO", "OPPPO", "YOOOY")
                 .aisle("YOOOY", "OPPPO", "OPPPO", "OPPPO", "YOOOY")
                 .aisle("YOOOY", "OPPPO", "OPPPO", "OPPPO", "YOOOY")
                 .aisle("XX@XX", "XGGGX", "XGGGX", "XGGGX", "XXXXX")
-                .where('X', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID)).or(this.autoAbilities()))
-                .where('Y', states(MetaBlocks.FRAMES.get(Materials.Steel).getDefaultState()))
+                .where('X', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID))
+                        .or(this.autoAbilities(false, true, true, true, true, true, true))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY, MultiblockAbility.OUTPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3).setPreviewCount(2)))
+                .where('Y', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
                 .where('@', this.selfPredicate())
                 .where('O', states(Blocks.OBSIDIAN.getDefaultState()))
                 .where('P', states(Blocks.PORTAL.getDefaultState(), Blocks.FIRE.getDefaultState()))
@@ -59,11 +63,15 @@ public class MetaTileEntityIndustrialMobFarm extends RecipeMapMultiblockControll
     @Override
     public boolean checkRecipe(@NotNull Recipe recipe, boolean consumeIfSuccess) {
         BlockPos center = this.getPos().offset(this.frontFacing.getOpposite(), 2);
-        World world = this.getWorld();
-        double x = center.getX() + 0.5;
-        double y = center.getY();
-        double z = center.getZ() + 0.5;
-        EntityPlayer caster = world.getClosestPlayer(x, y, z, 16.0, false);
-        return caster != null;
+        if (caster == null) {
+            World world = this.getWorld();
+            double x = center.getX() + 0.5;
+            double y = center.getY();
+            double z = center.getZ() + 0.5;
+            caster = world.getClosestPlayer(x, y, z, 16.0, false);
+            return caster != null;
+        } else {
+            return caster.getDistanceSq(center) <= 256.0;
+        }
     }
 }

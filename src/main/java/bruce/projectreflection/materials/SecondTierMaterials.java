@@ -14,6 +14,7 @@ public class SecondTierMaterials {
     public static Material ALLOY_IRIDIUM;
     public static Material MITHRIL;
     public static Material VINTEUM;
+    public static Material BOOSTED_AURA;
 
     public static void init() {
         MITHRIL = MaterialHelper.dynamicBuilder("mithril")
@@ -54,6 +55,11 @@ public class SecondTierMaterials {
                         new MaterialStack(FirstTierMaterials.THAUMIUM, 1)
                 )
                 .flags(MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_DOUBLE_PLATE)
+                .build();
+        BOOSTED_AURA = MaterialHelper.dynamicBuilder("boosted_aura", true, true)
+                .color(0xccac1a)
+                .components(FirstTierMaterials.AURA, 4, FirstTierMaterials.FLUIDIED_MANA, 1)
+                .flags(MaterialFlags.DISABLE_DECOMPOSITION)
                 .build();
     }
 

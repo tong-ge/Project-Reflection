@@ -32,13 +32,6 @@ public class MetaTileEntityAuraCollector extends SimpleMachineMetaTileEntity {
                 String.format("aura_collector.%s", PRConstants.V[tier])
         ), PRRecipeMaps.AURA_COLLECTOR, Textures.MULTIBLOCK_WORKABLE_OVERLAY, tier, true);
     }
-
-    /*
-        public static void initRecipeMap() {
-            recipeMap.recipeBuilder().circuitMeta(1).fluidOutputs(FirstTierMaterials.AURA.getFluid(1)).EUt(20).duration(10).buildAndRegister();
-            recipeMap.recipeBuilder().notConsumable(new ItemStack(BlocksTC.arcaneWorkbenchCharger)).fluidOutputs(FirstTierMaterials.AURA.getFluid(1)).EUt(20).duration(10).buildAndRegister();
-        }
-    */
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityAuraCollector(this.getTier());

@@ -1,5 +1,6 @@
 package bruce.projectreflection.metatileentity.multis.multiblockpart;
 
+import bruce.projectreflection.api.IPollutionModifier;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
@@ -68,6 +69,10 @@ public class MetaTileEntityFluxMuffler extends MetaTileEntityMultiblockPart impl
             stacksize += stack.getCount();
         }
         float pollution = ((float) stacksize * pollutionMultiplier);
+        MultiblockControllerBase controller = getController();
+        if (controller instanceof IPollutionModifier) {
+            pollution *= ((IPollutionModifier) controller).getPollutionModifier();
+        }
         AuraHelper.polluteAura(getWorld(), getPos(), pollution, false);
     }
 

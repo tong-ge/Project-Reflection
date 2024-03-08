@@ -1,12 +1,13 @@
 package bruce.projectreflection.materials;
 
 import bruce.projectreflection.PRConstants;
-import bruce.projectreflection.ProjectReflection;
+import com.meteor.extrabotany.common.block.fluid.ModFluid;
 import gregtech.api.GTValues;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.FluidState;
-import gregtech.api.fluids.attribute.FluidAttribute;
 import gregtech.api.fluids.attribute.FluidAttributes;
+import gregtech.api.fluids.store.FluidStorageKey;
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
@@ -15,6 +16,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import net.minecraftforge.fml.common.Loader;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.common.config.ConfigBlocks;
 
 import static bruce.projectreflection.materials.ElementMaterials.ABYSSALNITE;
 import static bruce.projectreflection.materials.ElementMaterials.SCHRABIDIUM;
@@ -41,6 +43,8 @@ public class FirstTierMaterials {
     public static Material SCHRABIDIC;
     public static Material UNSTABLE;
     public static Material MOON;
+    public static Material LIQUID_DEATH;
+    public static Material FLUIDIED_MANA;
     public static void init() {
         THAUMIUM = MaterialHelper.dynamicBuilder("thaumium")
                 .ingot(3)
@@ -175,7 +179,7 @@ public class FirstTierMaterials {
                 )
                 .build();
         AURA = MaterialHelper.dynamicBuilder("aura", true, true)
-                .color(Aspect.AURA.getColor())
+                .color(0xffc0ff)
                 .build();
         SAS3 = MaterialHelper.dynamicBuilder("sas_3", true, false)
                 .color(0x4ffffc)
@@ -196,6 +200,17 @@ public class FirstTierMaterials {
         MOON = MaterialHelper.dynamicBuilder("moon")
                 .gem(4)
                 .color(0x6f7c85)
+                .build();
+        LIQUID_DEATH = MaterialHelper.dynamicBuilder("liquid_death")
+                .fluid(ConfigBlocks.FluidDeath.instance, FluidStorageKeys.LIQUID, FluidState.LIQUID)
+                .color(0x260056)
+                .build();
+
+        FLUIDIED_MANA = MaterialHelper.dynamicBuilder("fluidedmana")
+                .fluid(ModFluid.fluidMana, FluidStorageKeys.LIQUID, FluidState.LIQUID)
+                .color(0x005887)
+                .components(new MaterialStack(ElementMaterials.MANA, 1))
+                .flags(DISABLE_DECOMPOSITION)
                 .build();
     }
 

@@ -130,13 +130,15 @@ dependencies {
     implementation rfg.deobf("curse.maven:thaumic-periphery-293505:2766866")
     implementation rfg.deobf("curse.maven:gcym-564858:4910674")
     implementation rfg.deobf("curse.maven:ceramics-250617:3158763")
-    implementation rfg.deobf("curse.maven:groovyscript-687577:4905039")
+    implementation rfg.deobf("curse.maven:groovyscript-687577:5120928")
     implementation rfg.deobf("curse.maven:abyssalcraft-53686:4856547")
     implementation rfg.deobf("curse.maven:acintegration-234851:3425537")
     implementation rfg.deobf("curse.maven:mysticalmechanics-300742:3006392")
     implementation rfg.deobf("curse.maven:had-enough-items-557549:4810661")
     implementation rfg.deobf("curse.maven:embers-extended-life-936489:5124633")
+    implementation rfg.deobf("vazkii.botania:Botania:r1.10-364.5")
     //runtimeOnly rfg.deobf("curse.maven:vintagefix-871198:5010926")
+    implementation rfg.deobf("curse.maven:extrabotany-299086:3112313")
 
     //compileOnly("curse.maven:gregtech-ce-unofficial-557242:5121638")
     if (project.use_mixins.toBoolean()) {

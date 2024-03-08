@@ -1,6 +1,7 @@
 package bruce.projectreflection.materials;
 
 import bruce.projectreflection.PRConstants;
+import com.meteor.extrabotany.common.block.fluid.ModFluid;
 import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.FluidState;
@@ -65,6 +66,7 @@ public class MaterialHelper {
 
     public static void init() {
         PROrePrefixes.crystal.toString();
+        ModFluid.init();
         ElementMaterials.init();
         FirstTierMaterials.init();
         SecondTierMaterials.init();

@@ -116,5 +116,6 @@ public final class PRMetaTileEntityHandler {
         register(new MetaTileEntityMechanicalCombustionEngine(new ResourceLocation(PRConstants.modid, "mechanical_combustion_engine")));
         register(new MetaTileEntityMechanicalCompressor(new ResourceLocation(PRConstants.modid, "mechanical_compressor")));
         register(new MetaTileEntitySteamMechanicsHatch(new ResourceLocation(PRConstants.modid, "steam_mechanical_hatch")));
+        register(new MetaTileEntityMagicalGenerator(new ResourceLocation(PRConstants.modid, "magical_generator")));
     }
 }

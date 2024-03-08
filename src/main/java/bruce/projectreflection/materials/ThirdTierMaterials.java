@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.Loader;
 public class ThirdTierMaterials {
 
     public static Material SUPER_IRIDIUM_ALLOY;
+    public static Material REFINED_MAGICAL_FUEL;
 
     public static void init() {
 
@@ -25,6 +26,13 @@ public class ThirdTierMaterials {
                 .color(0xc2c1df)
                 .iconSet(MaterialIconSet.SHINY)
                 .build();
+        REFINED_MAGICAL_FUEL = MaterialHelper.dynamicBuilder("refined_magical_fuel", true, false)
+                .color(0xB0E4CE)
+                .components(SecondTierMaterials.BOOSTED_AURA, 5,
+                        FirstTierMaterials.LIQUID_DEATH, 1)
+                .flags(MaterialFlags.DISABLE_DECOMPOSITION)
+                .build();
+
     }
 
     public static void orePrefix() {

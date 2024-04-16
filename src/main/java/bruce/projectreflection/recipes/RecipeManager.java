@@ -1,17 +1,12 @@
 package bruce.projectreflection.recipes;
 
-import bruce.projectreflection.materials.PROrePrefixes;
 import bruce.projectreflection.recipes.handler.OreProcessingHandler;
 import bruce.projectreflection.recipes.handler.PRRecipeMaps;
-import bruce.projectreflection.recipes.routines.CircuitRoutine;
-import bruce.projectreflection.recipes.routines.PhenolicResinRoutine;
-import bruce.projectreflection.recipes.routines.MagicRoutine;
-import bruce.projectreflection.recipes.routines.SuperIridiumAlloyRoutine;
+import bruce.projectreflection.recipes.routines.*;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.common.items.MetaItems;
 
 public class RecipeManager {
     public static void preInit() {
@@ -31,7 +26,8 @@ public class RecipeManager {
                 .duration(3200)
                 .fluidOutputs(Materials.UUMatter.getFluid(1))
                 .buildAndRegister();
-        PRRecipeMaps.INDUSTRIAL_MOB_FARM.recipeBuilder()
+        /*
+        PRRecipeMaps.SPACE_TIME_SUPPRESSOR.recipeBuilder()
                 .circuitMeta(1)
                 .EUt(30)
                 .duration(1200)
@@ -42,7 +38,7 @@ public class RecipeManager {
                         OreDictUnifier.get(OrePrefix.gem, Materials.Coal, 3)
                 )
                 .buildAndRegister();
-        PRRecipeMaps.INDUSTRIAL_MOB_FARM.recipeBuilder()
+        PRRecipeMaps.SPACE_TIME_SUPPRESSOR.recipeBuilder()
                 .circuitMeta(2)
                 .EUt(120)
                 .duration(1200)
@@ -55,7 +51,7 @@ public class RecipeManager {
                         OreDictUnifier.get(OrePrefix.dust, Materials.Glowstone, 3)
                 )
                 .buildAndRegister();
-        PRRecipeMaps.INDUSTRIAL_MOB_FARM.recipeBuilder()
+        PRRecipeMaps.SPACE_TIME_SUPPRESSOR.recipeBuilder()
                 .circuitMeta(3)
                 .EUt(480)
                 .duration(1200)
@@ -64,5 +60,8 @@ public class RecipeManager {
                         OreDictUnifier.get(OrePrefix.gem, Materials.Emerald, 2)
                 )
                 .buildAndRegister();
+
+         */
+        MobToMineralRoutine.init();
     }
 }

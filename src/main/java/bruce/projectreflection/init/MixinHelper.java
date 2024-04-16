@@ -9,6 +9,6 @@ import java.util.List;
 public class MixinHelper implements ILateMixinLoader {
     @Override
     public List<String> getMixinConfigs() {
-        return Collections.singletonList("mixins.projectreflection.json");
+        return Collections.singletonList("mixins.projectreflection.late.json");
     }
 }

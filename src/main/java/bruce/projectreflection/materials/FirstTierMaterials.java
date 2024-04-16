@@ -23,6 +23,7 @@ import static bruce.projectreflection.materials.ElementMaterials.SCHRABIDIUM;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 
 public class FirstTierMaterials {
+    public static Material ALUMINIUM_TETRACHLOROAURATE_SILICATE;
     public static Material PYROTHEUM;
     public static Material CRYOTHEUM;
     public static Material PETROTHEUM;
@@ -212,6 +213,15 @@ public class FirstTierMaterials {
                 .components(new MaterialStack(ElementMaterials.MANA, 1))
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
+        /*
+        ALUMINIUM_TETRACHLOROAURATE_SILICATE=MaterialHelper.dynamicBuilder("aluminium_tetrachlorate_silicate")
+                .dust()
+                .color(0x7edebc)
+                .components(Materials.Aluminium,1,Materials.Gold,3,Materials.Chlorine,4,Materials.Silicon,1,Materials.Oxygen,3)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+         */
     }
 
     public static void orePrefix() {

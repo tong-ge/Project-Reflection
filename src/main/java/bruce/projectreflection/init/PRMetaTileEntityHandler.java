@@ -13,6 +13,7 @@ import bruce.projectreflection.metatileentity.multis.mysticalmechanics.generator
 import bruce.projectreflection.metatileentity.multis.mysticalmechanics.generators.MetaTileEntityMechanicalGasTurbine;
 import bruce.projectreflection.metatileentity.multis.mysticalmechanics.generators.MetaTileEntityMechanicalSteamTurbine;
 import bruce.projectreflection.metatileentity.multis.mysticalmechanics.MetaTileEntityMechanicalWiremill;
+import bruce.projectreflection.metatileentity.primitive.MetaTileEntityFirebox;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -105,17 +106,16 @@ public final class PRMetaTileEntityHandler {
             register(MECH_EXPORT_HATCHES[i]);
             register(MECH_IMPORT_HATCHES[i]);
         }
-        //register(new MetaTileEntityLargeSteamCompressor(new ResourceLocation(PRConstants.modid, "large_steam_compressor")));
         register(new MetaTileEntityCeramicOven(new ResourceLocation(PRConstants.modid, "ceramic_oven")));
-        //register(new MetaTileEntitySteamAssline(new ResourceLocation(PRConstants.modid, "steam_assline")));
         register(new MetaTileEntityMechanicalSteamTurbine(new ResourceLocation(PRConstants.modid, "mechanical_steam_turbine")));
         register(new MetaTileEntityMechanicalGasTurbine(new ResourceLocation(PRConstants.modid, "mechanical_gas_turbine")));
-        register(new MetaTileEntityIndustrialMobFarm(new ResourceLocation(PRConstants.modid, "industrial_mob_farm")));
+        register(new MetaTileEntitySpaceTimeSuppressor(new ResourceLocation(PRConstants.modid, "space_time_suppressor")));
         register(new MetaTileEntityMechanicalWiremill(new ResourceLocation(PRConstants.modid, "mechanical_wiremill")));
         register(new MetaTileEntityMechanicalBender(new ResourceLocation(PRConstants.modid, "mechanical_bender")));
         register(new MetaTileEntityMechanicalCombustionEngine(new ResourceLocation(PRConstants.modid, "mechanical_combustion_engine")));
         register(new MetaTileEntityMechanicalCompressor(new ResourceLocation(PRConstants.modid, "mechanical_compressor")));
         register(new MetaTileEntitySteamMechanicsHatch(new ResourceLocation(PRConstants.modid, "steam_mechanical_hatch")));
         register(new MetaTileEntityMagicalGenerator(new ResourceLocation(PRConstants.modid, "magical_generator")));
+        register(new MetaTileEntityFirebox(new ResourceLocation(PRConstants.modid, "firebox")));
     }
 }

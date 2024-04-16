@@ -1,5 +1,6 @@
 package bruce.projectreflection.recipes.handler;
 
+import bruce.projectreflection.ProjectReflection;
 import bruce.projectreflection.recipes.builder.AuraCollectorRecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.builders.FuelRecipeBuilder;
@@ -19,5 +20,7 @@ public class PRRecipeMaps {
             1, 0, 0, 1, new AuraCollectorRecipeBuilder(), false);
     public static RecipeMap<FuelRecipeBuilder> MAGICAL_GENERATOR = new RecipeMap<>("magical_generator",
             0, 0, 1, 1, new FuelRecipeBuilder(), false).allowEmptyOutput();
-    public static RecipeMap<SimpleRecipeBuilder> INDUSTRIAL_MOB_FARM = new RecipeMap<>("industrial_mob_farm", 1, 12, 0, 12, new SimpleRecipeBuilder(), false);
+    public static RecipeMap<SimpleRecipeBuilder> SPACE_TIME_SUPPRESSOR = new RecipeMap<>("space_time_suppressor",
+            12, 12, 9, 9, new SimpleRecipeBuilder(), false)
+            .setSound(ProjectReflection.UPDATE_SUPPRESSOR);
 }

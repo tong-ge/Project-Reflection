@@ -5,6 +5,8 @@ import com.sun.jna.platform.win32.Kernel32;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.nio.Buffer;
+
 @SideOnly(Side.CLIENT)
 public interface Kernel32Extended extends Kernel32 {
     Kernel32Extended INSTANCE = Native.loadLibrary("kernel32.dll", Kernel32Extended.class);

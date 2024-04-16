@@ -8,6 +8,10 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import net.minecraftforge.fml.common.Loader;
 
+import static gregtech.api.unification.material.info.MaterialFlags.*;
+import static gregtech.api.unification.material.info.MaterialFlags.EXCLUDE_BLOCK_CRAFTING_BY_HAND_RECIPES;
+import static gregtech.api.unification.material.info.MaterialIconSet.SHINY;
+
 public class SecondTierMaterials {
 
 
@@ -15,6 +19,7 @@ public class SecondTierMaterials {
     public static Material MITHRIL;
     public static Material VINTEUM;
     public static Material BOOSTED_AURA;
+    public static Material PRISMARINE;
 
     public static void init() {
         MITHRIL = MaterialHelper.dynamicBuilder("mithril")
@@ -61,9 +66,24 @@ public class SecondTierMaterials {
                 .components(FirstTierMaterials.AURA, 4, FirstTierMaterials.FLUIDIED_MANA, 1)
                 .flags(MaterialFlags.DISABLE_DECOMPOSITION)
                 .build();
+        PRISMARINE = MaterialHelper.dynamicBuilder("prismarine")
+                .color(0x7edebc)
+                .gem(1)
+                .iconSet(MaterialIconSet.ROUGH)
+                .flags(NO_SMASHING,
+                        GENERATE_PLATE,
+                        EXCLUDE_PLATE_COMPRESSOR_RECIPE,
+                        EXCLUDE_BLOCK_CRAFTING_BY_HAND_RECIPES,
+                        DISABLE_DECOMPOSITION)
+                .components(Materials.SiliconDioxide, 1, Materials.Emerald, 1)
+                .build();
     }
 
     public static void orePrefix() {
+        OrePrefix.dust.setIgnored(PRISMARINE);
+        OrePrefix.gem.setIgnored(PRISMARINE);
+        OrePrefix.block.setIgnored(PRISMARINE);
+        OrePrefix.block.modifyMaterialAmount(PRISMARINE, 4);
         if (Loader.isModLoaded("thermalfoundation")) {
             OrePrefix.ingot.setIgnored(MITHRIL);
         }

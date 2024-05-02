@@ -1,7 +1,7 @@
 package bruce.projectreflection.metatileentity.primitive;
 
+import bruce.projectreflection.api.IHeatCapability;
 import codechicken.lib.render.CCRenderState;
-import codechicken.lib.render.pipeline.ColourMultiplier;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
@@ -12,12 +12,10 @@ import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.metatileentity.IDataInfoProvider;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.recipes.ModHandler;
-import gregtech.api.util.GTTransferUtils;
-import gregtech.api.util.GTUtility;
+import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.util.TextFormattingUtil;
-import gregtech.client.renderer.texture.Textures;
-import net.minecraft.entity.Entity;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -34,17 +32,18 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
-import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import static gregtech.api.capability.GregtechDataCodes.IS_WORKING;
 
-public class MetaTileEntityFirebox extends MetaTileEntity implements IDataInfoProvider {
+public class MetaTileEntityFirebox extends MetaTileEntityMultiblockPart implements IDataInfoProvider, IMultiblockAbilityPart<IHeatCapability>, IHeatCapability {
+    private int timeBeforeCoolingDown;
+
     @Override
     public IItemHandlerModifiable createImportItemHandler() {
         return new ItemStackHandler(1) {
@@ -64,14 +63,14 @@ public class MetaTileEntityFirebox extends MetaTileEntity implements IDataInfoPr
     private boolean isBurning;
     private boolean wasBurningAndNeedsUpdate;
 
-    public MetaTileEntityFirebox(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId);
+    public MetaTileEntityFirebox(ResourceLocation metaTileEntityId, int tier) {
+        super(metaTileEntityId, tier);
         //this.containerInventory = new ItemStackHandler(1);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityFirebox(this.metaTileEntityId);
+        return new MetaTileEntityFirebox(this.metaTileEntityId, this.getTier());
     }
 
     @Override
@@ -109,19 +108,41 @@ public class MetaTileEntityFirebox extends MetaTileEntity implements IDataInfoPr
     private void updateCurrentTemperature() {
         if (fuelMaxBurnTime > 0) {
             if (getOffsetTimer() % 12 == 0) {
-                if (fuelBurnTimeLeft % 2 == 0)
+                if (fuelBurnTimeLeft % 2 == 0 && currentTemperature < getMaxTemperature())
                     currentTemperature++;
-                fuelBurnTimeLeft -= 2;
-                if (fuelBurnTimeLeft == 0) {
+                fuelBurnTimeLeft -= (1 + this.getTier());
+                if (fuelBurnTimeLeft <= 0) {
+                    this.fuelBurnTimeLeft = 0;
                     this.fuelMaxBurnTime = 0;
+                    this.timeBeforeCoolingDown = getCooldownInterval();
+                    //boiler has no fuel now, so queue burning state update
                     this.wasBurningAndNeedsUpdate = true;
                 }
             }
-        }
+        } else if (timeBeforeCoolingDown == 0) {
+            if (currentTemperature > 0) {
+                currentTemperature -= getCoolDownRate();
+                timeBeforeCoolingDown = getCooldownInterval();
+            }
+        } else --timeBeforeCoolingDown;
     }
 
-    private int getMaxTemperature() {
-        return 1000;
+    protected int getCoolDownRate() {
+        return 1;
+    }
+
+    protected int getCooldownInterval() {
+        return 40 + this.getTier() * 5;
+    }
+
+    @Override
+    public int getTemperature() {
+        return this.currentTemperature;
+    }
+
+    @Override
+    public int getMaxTemperature() {
+        return Math.max(500, 100 + this.getTier() * 900);
     }
 
     @Override
@@ -130,7 +151,7 @@ public class MetaTileEntityFirebox extends MetaTileEntity implements IDataInfoPr
         if (!this.getWorld().isRemote) {
             this.updateCurrentTemperature();
             if (this.getOffsetTimer() % 10L == 0L) {
-                this.generateSteam();
+                this.applyTemperatureEffects();
             }
 
             if (this.fuelMaxBurnTime <= 0) {
@@ -152,7 +173,7 @@ public class MetaTileEntityFirebox extends MetaTileEntity implements IDataInfoPr
 
     }
 
-    private void generateSteam() {
+    private void applyTemperatureEffects() {
         if (this.currentTemperature > this.getMaxTemperature()) {
             doExplosion((float) this.currentTemperature / 500f);
         } else {
@@ -214,7 +235,7 @@ public class MetaTileEntityFirebox extends MetaTileEntity implements IDataInfoPr
 
     @Override
     public boolean isActive() {
-        return super.isActive();
+        return this.isBurning;
     }
 
     public void writeInitialSyncData(PacketBuffer buf) {
@@ -238,17 +259,26 @@ public class MetaTileEntityFirebox extends MetaTileEntity implements IDataInfoPr
 
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
-        IVertexOperation[] colouredPipeline = ArrayUtils.add(pipeline, new ColourMultiplier(GTUtility.convertRGBtoOpaqueRGBA_CL(getPaintingColorForRendering())));
-        Textures.STEAM_BRICKED_CASING_STEEL.render(renderState, translation, colouredPipeline);
-        //renderer.renderOrientedState(renderState, translation, pipeline, getFrontFacing(), isBurning, true);
-    }
-
-    public double getTemperaturePercent() {
-        return currentTemperature / (getMaxTemperature() * 1.0);
+        super.renderMetaTileEntity(renderState, translation, pipeline);
     }
 
     @Override
-    public List<ITextComponent> getDataInfo() {
-        return Collections.singletonList(new TextComponentTranslation("gregtech.machine.steam_boiler.heat_amount", TextFormattingUtil.formatNumbers((int) (this.getTemperaturePercent() * 100))));
+    public @NotNull List<ITextComponent> getDataInfo() {
+        return Arrays.asList(
+                new TextComponentTranslation("projectreflection.firebox.current_heat",
+                        TextFormattingUtil.formatNumbers(this.currentTemperature)),
+                new TextComponentTranslation("projectreflection.firebox.max_heat",
+                        TextFormattingUtil.formatNumbers(this.getMaxTemperature()))
+        );
+    }
+
+    @Override
+    public MultiblockAbility<IHeatCapability> getAbility() {
+        return null;
+    }
+
+    @Override
+    public void registerAbilities(List<IHeatCapability> abilityList) {
+
     }
 }

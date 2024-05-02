@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.Nullable;
 
+@Deprecated
 public class ItemManifold extends Item {
     private static final DamageSource MANIFOLD_EXPLOSION = new DamageSource("explosion").setExplosion().setDamageIsAbsolute().setMagicDamage().setDamageBypassesArmor().setDamageAllowedInCreativeMode();
 

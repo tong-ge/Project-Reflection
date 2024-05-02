@@ -6,6 +6,7 @@ import bruce.projectreflection.network.MessageClientSpecialAttack;
 import bruce.projectreflection.network.PRNetwork;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -31,5 +32,10 @@ public class MiscEvents {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerAttack(LivingAttackEvent event) {
+        System.out.println(event.getSource().getTrueSource());
     }
 }

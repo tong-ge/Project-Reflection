@@ -37,6 +37,7 @@ public class RegistryEvents {
     @SubscribeEvent
     public static void onPrefix(PostMaterialEvent event) {
         MaterialHelper.orePrefix();
+
     }
 
     @SubscribeEvent
@@ -62,13 +63,13 @@ public class RegistryEvents {
     }
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().registerAll(new ItemManifold(),
-                new ItemCodebook());
+        event.getRegistry().registerAll(PRMetaItems.INSTANCE);
+        PRMetaItems.INSTANCE.registerSubItems();
     }
 
     @SubscribeEvent
     public static void registerComponents(GregTechAPI.RegisterEvent<CraftingComponent> event) {
-        ProjectReflection.logger.info("Overriding GTCEU Registries...");
+        //ProjectReflection.logger.info("Overriding GTCEU Registries...");
     }
 
     @SubscribeEvent

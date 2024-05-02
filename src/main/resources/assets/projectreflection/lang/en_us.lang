@@ -50,3 +50,6 @@ projectreflection.machine.muffler.uv.name=UV Muffler Hatch
 projectreflection.machine.muffler.uhv.name=UHV Muffler Hatch
 
 projectreflection.recipe.aura=Vis consumption:%s vis/run, Extended:%s
+
+projectreflection.firebox.current_heat=Current heat:%s
+projectreflection.firebox.max_heat=Max heat:%s

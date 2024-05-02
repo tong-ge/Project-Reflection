@@ -5,6 +5,5 @@
   "package": "bruce.projectreflection.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "MixinEntityRenderer"
   ]
 }

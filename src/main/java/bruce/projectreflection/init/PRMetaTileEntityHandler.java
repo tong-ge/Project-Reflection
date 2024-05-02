@@ -36,7 +36,7 @@ public final class PRMetaTileEntityHandler {
     public static final MetaTileEntityMultiblockPart[] FLUX_MUFFLERS = new MetaTileEntityMultiblockPart[9];
     public static final MetaTileEntityMultiblockPart[] MECH_EXPORT_HATCHES = new MetaTileEntityMultiblockPart[9];
     public static final MetaTileEntityMultiblockPart[] MECH_IMPORT_HATCHES = new MetaTileEntityMultiblockPart[9];
-
+    public static final MetaTileEntityMultiblockPart[] FIREBOXES = new MetaTileEntityMultiblockPart[9];
     private static int id = 1;
     private static int getAvailableMTEID()
     {
@@ -52,11 +52,13 @@ public final class PRMetaTileEntityHandler {
         throw new ArrayIndexOutOfBoundsException("no mte id available");
     }
 
-    private static void register(MetaTileEntity sample)
+    private static void register(MetaTileEntity... samples)
     {
-        int id=getAvailableMTEID();
-        MetaTileEntities.registerMetaTileEntity(id,sample);
-        ProjectReflection.logger.info("mte {} registered as {}",sample.metaTileEntityId,id);
+        for (MetaTileEntity sample : samples) {
+            int id = getAvailableMTEID();
+            MetaTileEntities.registerMetaTileEntity(id, sample);
+            ProjectReflection.logger.info("mte {} registered as {}", sample.metaTileEntityId, id);
+        }
     }
 
     public static void registerAllMetaTileEntities()
@@ -76,12 +78,10 @@ public final class PRMetaTileEntityHandler {
                     String.format("mass_fabricator.%s", PRConstants.V[i + 3])),
                     RecipeMaps.MASS_FABRICATOR_RECIPES,
                     Textures.MULTIBLOCK_WORKABLE_OVERLAY, i + 3, true);
-
-            register(SEMIFLUID_GENERATORS[i]);
-            register(AURA_COLLECTORS[i]);
-            register(MASS_FABRICATORS[i]);
-
         }
+        register(SEMIFLUID_GENERATORS);
+        register(AURA_COLLECTORS);
+        register(MASS_FABRICATORS);
         for (int i = 0; i < 9; i++) {
             if (!Loader.isModLoaded("pollution")) {
                 FLUX_MUFFLERS[i] = new MetaTileEntityFluxMuffler(
@@ -103,19 +103,25 @@ public final class PRMetaTileEntityHandler {
                     i,
                     false
             );
-            register(MECH_EXPORT_HATCHES[i]);
-            register(MECH_IMPORT_HATCHES[i]);
+            FIREBOXES[i] = new MetaTileEntityFirebox(
+                    new ResourceLocation(PRConstants.modid,
+                            String.format("firebox.%s", GTValues.VN[i])),
+                    i
+            );
         }
-        register(new MetaTileEntityCeramicOven(new ResourceLocation(PRConstants.modid, "ceramic_oven")));
-        register(new MetaTileEntityMechanicalSteamTurbine(new ResourceLocation(PRConstants.modid, "mechanical_steam_turbine")));
-        register(new MetaTileEntityMechanicalGasTurbine(new ResourceLocation(PRConstants.modid, "mechanical_gas_turbine")));
-        register(new MetaTileEntitySpaceTimeSuppressor(new ResourceLocation(PRConstants.modid, "space_time_suppressor")));
-        register(new MetaTileEntityMechanicalWiremill(new ResourceLocation(PRConstants.modid, "mechanical_wiremill")));
-        register(new MetaTileEntityMechanicalBender(new ResourceLocation(PRConstants.modid, "mechanical_bender")));
-        register(new MetaTileEntityMechanicalCombustionEngine(new ResourceLocation(PRConstants.modid, "mechanical_combustion_engine")));
-        register(new MetaTileEntityMechanicalCompressor(new ResourceLocation(PRConstants.modid, "mechanical_compressor")));
-        register(new MetaTileEntitySteamMechanicsHatch(new ResourceLocation(PRConstants.modid, "steam_mechanical_hatch")));
-        register(new MetaTileEntityMagicalGenerator(new ResourceLocation(PRConstants.modid, "magical_generator")));
-        register(new MetaTileEntityFirebox(new ResourceLocation(PRConstants.modid, "firebox")));
+        register(MECH_EXPORT_HATCHES);
+        register(MECH_IMPORT_HATCHES);
+        register(FIREBOXES);
+        register(new MetaTileEntityCeramicOven(new ResourceLocation(PRConstants.modid, "ceramic_oven")),
+                new MetaTileEntityMechanicalSteamTurbine(new ResourceLocation(PRConstants.modid, "mechanical_steam_turbine")),
+                new MetaTileEntityMechanicalGasTurbine(new ResourceLocation(PRConstants.modid, "mechanical_gas_turbine")),
+                new MetaTileEntitySpaceTimeSuppressor(new ResourceLocation(PRConstants.modid, "space_time_suppressor")),
+                new MetaTileEntityMechanicalWiremill(new ResourceLocation(PRConstants.modid, "mechanical_wiremill")),
+                new MetaTileEntityMechanicalBender(new ResourceLocation(PRConstants.modid, "mechanical_bender")),
+                new MetaTileEntityMechanicalCombustionEngine(new ResourceLocation(PRConstants.modid, "mechanical_combustion_engine")),
+                new MetaTileEntityMechanicalCompressor(new ResourceLocation(PRConstants.modid, "mechanical_compressor")),
+                new MetaTileEntitySteamMechanicsHatch(new ResourceLocation(PRConstants.modid, "steam_mechanical_hatch")),
+                new MetaTileEntityMagicalGenerator(new ResourceLocation(PRConstants.modid, "magical_generator"))
+        );
     }
 }

@@ -26,42 +26,7 @@ public class RecipeManager {
                 .duration(3200)
                 .fluidOutputs(Materials.UUMatter.getFluid(1))
                 .buildAndRegister();
-        /*
-        PRRecipeMaps.SPACE_TIME_SUPPRESSOR.recipeBuilder()
-                .circuitMeta(1)
-                .EUt(30)
-                .duration(1200)
-                .outputs(OreDictUnifier.get(OrePrefix.ingot, Materials.Iron, 2),
-                        OreDictUnifier.get(OrePrefix.ingot, Materials.Tin, 2),
-                        OreDictUnifier.get(OrePrefix.ingot, Materials.Nickel, 2),
-                        OreDictUnifier.get(OrePrefix.ingot, Materials.Copper, 2),
-                        OreDictUnifier.get(OrePrefix.gem, Materials.Coal, 3)
-                )
-                .buildAndRegister();
-        PRRecipeMaps.SPACE_TIME_SUPPRESSOR.recipeBuilder()
-                .circuitMeta(2)
-                .EUt(120)
-                .duration(1200)
-                .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.Sulfur, 3),
-                        OreDictUnifier.get(OrePrefix.ingot, Materials.Silver, 2),
-                        OreDictUnifier.get(OrePrefix.ingot, Materials.Gold, 2),
-                        OreDictUnifier.get(OrePrefix.dust, Materials.Aluminium, 2),
-                        OreDictUnifier.get(OrePrefix.ingot, Materials.Lead, 2),
-                        OreDictUnifier.get(OrePrefix.dust, Materials.Redstone, 3),
-                        OreDictUnifier.get(OrePrefix.dust, Materials.Glowstone, 3)
-                )
-                .buildAndRegister();
-        PRRecipeMaps.SPACE_TIME_SUPPRESSOR.recipeBuilder()
-                .circuitMeta(3)
-                .EUt(480)
-                .duration(1200)
-                .outputs(
-                        OreDictUnifier.get(OrePrefix.gem, Materials.Diamond, 2),
-                        OreDictUnifier.get(OrePrefix.gem, Materials.Emerald, 2)
-                )
-                .buildAndRegister();
-
-         */
         MobToMineralRoutine.init();
+        FuelCellRoutine.init();
     }
 }

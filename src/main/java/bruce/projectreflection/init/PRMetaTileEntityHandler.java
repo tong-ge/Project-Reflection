@@ -121,7 +121,8 @@ public final class PRMetaTileEntityHandler {
                 new MetaTileEntityMechanicalCombustionEngine(new ResourceLocation(PRConstants.modid, "mechanical_combustion_engine")),
                 new MetaTileEntityMechanicalCompressor(new ResourceLocation(PRConstants.modid, "mechanical_compressor")),
                 new MetaTileEntitySteamMechanicsHatch(new ResourceLocation(PRConstants.modid, "steam_mechanical_hatch")),
-                new MetaTileEntityMagicalGenerator(new ResourceLocation(PRConstants.modid, "magical_generator"))
+                new MetaTileEntityMagicalGenerator(new ResourceLocation(PRConstants.modid, "magical_generator")),
+                new MetaTileEntityStewStoolStove(new ResourceLocation(PRConstants.modid, "stew_stool_stove"))
         );
     }
 }

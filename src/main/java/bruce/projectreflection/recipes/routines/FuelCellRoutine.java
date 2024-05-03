@@ -2,10 +2,12 @@ package bruce.projectreflection.recipes.routines;
 
 import bruce.projectreflection.recipes.handler.PRRecipeMaps;
 import gregtech.api.GTValues;
+import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.builders.FuelRecipeBuilder;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
+import gregtech.api.unification.material.Materials;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -15,6 +17,31 @@ import java.util.stream.Collectors;
 
 public class FuelCellRoutine {
     public static void init() {
+        Collection<Recipe> gasRecipes = RecipeMaps.GAS_TURBINE_FUELS.getRecipeList();
+        for (Recipe recipe : gasRecipes) {
+            List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
+            int EUt = (int) GTValues.V[GTValues.LV];
+            int baseDuration = recipe.getDuration() * recipe.getEUt() / EUt;
+            PRRecipeMaps.FUEL_CELL.recipeBuilder()
+                    .fluidInputs(fluidInputs)
+                    .fluidInputs(Materials.Air.getFluid(baseDuration))
+                    .duration(baseDuration)
+                    .EUt(EUt)
+                    .buildAndRegister();
+            PRRecipeMaps.FUEL_CELL.recipeBuilder()
+                    .fluidInputs(fluidInputs)
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS, (int) Math.ceil(baseDuration * 1.5)))
+                    .duration((int) Math.floor(baseDuration * 1.5))
+                    .EUt(EUt)
+                    .buildAndRegister();
+            PRRecipeMaps.FUEL_CELL.recipeBuilder()
+                    .fluidInputs(fluidInputs)
+                    .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, baseDuration * 8))
+                    .duration(baseDuration * 2)
+                    .EUt(EUt)
+                    .buildAndRegister();
+
+        }
         Collection<Recipe> electrolyzerRecipes = RecipeMaps.ELECTROLYZER_RECIPES.getRecipeList();
         for (Recipe recipe : electrolyzerRecipes) {
             int EUt = (int) GTValues.V[GTValues.LV];

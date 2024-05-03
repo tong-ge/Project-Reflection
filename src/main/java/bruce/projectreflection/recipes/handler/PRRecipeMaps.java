@@ -26,5 +26,6 @@ public class PRRecipeMaps {
             .setSound(ProjectReflection.UPDATE_SUPPRESSOR);
 
     public static RecipeMap<FuelRecipeBuilder> FUEL_CELL = new RecipeMap<>("fuel_cell", 6,
-            2, 6, 1, new FuelRecipeBuilder(), false);
+            2, 6, 1, new FuelRecipeBuilder(), false)
+            .allowEmptyOutput();
 }

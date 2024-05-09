@@ -1,10 +1,10 @@
 package bruce.projectreflection.metatileentity.multis;
 
-import bruce.projectreflection.recipes.handler.PRRecipeMaps;
-import codechicken.lib.raytracer.CuboidRayTraceResult;
+import bruce.projectreflection.api.MaterialContainer;
 import gregtech.api.GTValues;
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.impl.*;
+import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -14,70 +14,68 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.pattern.TraceabilityPredicate;
-import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.util.GTTransferUtils;
+import gregtech.api.unification.FluidUnifier;
+import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.stack.MaterialStack;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.items.MetaItems;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.capability.IFluidTankProperties;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MetaTileEntityStewStoolStove extends MultiblockWithDisplayBase {
-    private long currentHeat = 0;
-    private long currentRecipeHeat = 0;
-    private boolean outputMode = false;
+    private final MaterialContainer materialContainer = new MaterialContainer();
     protected IItemHandlerModifiable inputInventory;
     protected IItemHandlerModifiable outputInventory;
     protected IMultipleTankHandler inputFluidInventory;
     protected IMultipleTankHandler outputFluidInventory;
-
     public MetaTileEntityStewStoolStove(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
-        this.fluidInventory = new FluidTankList(false, makeFluidTanks(25));
-        this.itemInventory = new NotifiableItemStackHandler(this, 25, this, false);
-        this.exportFluids = (FluidTankList) fluidInventory;
-        this.importFluids = (FluidTankList) fluidInventory;
-        this.exportItems = (IItemHandlerModifiable) itemInventory;
-        this.importItems = new ItemHandlerList(makeGhostCircuitList());
-
-
+        resetTileAbilities();
     }
 
     @Override
     public boolean hasMaintenanceMechanics() {
         return false;
     }
-
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        this.inputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.IMPORT_ITEMS));
-        this.inputFluidInventory = new FluidTankList(false, getAbilities(MultiblockAbility.IMPORT_FLUIDS));
-        this.outputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.EXPORT_ITEMS));
-        this.outputFluidInventory = new FluidTankList(false, getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        initializeAbilities();
     }
-
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
+        resetTileAbilities();
+    }
+
+
+    protected void initializeAbilities() {
+        this.inputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        this.inputFluidInventory = new FluidTankList(true, getAbilities(MultiblockAbility.IMPORT_FLUIDS));
+        this.outputInventory = new ItemHandlerList(getAbilities(MultiblockAbility.EXPORT_ITEMS));
+        this.outputFluidInventory = new FluidTankList(true, getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        //this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
+    }
+
+    private void resetTileAbilities() {
+        this.inputInventory = new ItemStackHandler(0);
+        this.inputFluidInventory = new FluidTankList(true);
+        this.outputInventory = new ItemStackHandler(0);
+        this.outputFluidInventory = new FluidTankList(true);
+        //this.energyContainer = new EnergyContainerList(Lists.newArrayList());
     }
 
     @Override
@@ -89,67 +87,57 @@ public class MetaTileEntityStewStoolStove extends MultiblockWithDisplayBase {
                 .or(abilities(MultiblockAbility.EXPORT_FLUIDS));
     }
 
-    private List<IItemHandler> makeGhostCircuitList() {
-        List<IItemHandler> itemHandlerList = new ArrayList<>();
-        itemHandlerList.add(this.itemInventory);
-        if (MetaItems.INTEGRATED_CIRCUIT != null)
-            for (int i = 0; i <= 32; i++) {
-                GhostCircuitItemStackHandler handler = new GhostCircuitItemStackHandler(this);
-                handler.setCircuitValue(i);
-                itemHandlerList.add(handler);
-            }
-        return itemHandlerList;
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        super.addDisplayText(textList);
+        for (MaterialStack stack : materialContainer) {
+            textList.add(new TextComponentString(stack.toString()));
+        }
     }
 
-    private List<FluidTank> makeFluidTanks(int length) {
-        List<FluidTank> fluidTankList = new ArrayList<>(length);
-        for (int i = 0; i < length; i++) {
-            fluidTankList.add(new NotifiableFluidTank(32000, this, false));
-        }
-        return fluidTankList;
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data = super.writeToNBT(data);
+        data.setTag("Stacks", materialContainer.writeToNBT());
+        return data;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        materialContainer.readFromNBT(data.getTagList("Stacks", Constants.NBT.TAG_COMPOUND));
     }
 
     @Override
     protected void updateFormedValid() {
-        boolean did = false;
-        if (!outputMode) {
-            GTTransferUtils.moveInventoryItems(this.inputInventory, this.itemInventory);
-            GTTransferUtils.transferFluids(this.inputFluidInventory, this.fluidInventory);
-            Recipe fuelCellRecipe = PRRecipeMaps.FUEL_CELL.findRecipe(GTValues.V[GTValues.MAX], this.importItems, this.importFluids);
-            if (fuelCellRecipe != null && fuelCellRecipe.matches(true, this.importItems, this.importFluids)) {
-                this.currentHeat += (long) fuelCellRecipe.getEUt() * fuelCellRecipe.getDuration();
-                GTTransferUtils.addFluidsToFluidHandler(this.exportFluids, false, fuelCellRecipe.getFluidOutputs());
-                GTTransferUtils.addItemsToItemHandler(this.importItems, false, fuelCellRecipe.getOutputs());
-                did = true;
-            }
-            Recipe chemicalReactorRecipe = RecipeMaps.LARGE_CHEMICAL_RECIPES.findRecipe(this.currentHeat, this.importItems, this.importFluids);
-            if (chemicalReactorRecipe != null && chemicalReactorRecipe.matches(false, this.importItems, this.importFluids)) {
-                currentRecipeHeat = (long) chemicalReactorRecipe.getEUt() * chemicalReactorRecipe.getDuration();
-                if (currentRecipeHeat <= this.currentHeat) {
-                    this.currentHeat -= currentRecipeHeat;
-                    this.currentRecipeHeat = 0;
-                    chemicalReactorRecipe.matches(true, this.importItems, this.importFluids);
-                    GTTransferUtils.addFluidsToFluidHandler(this.exportFluids, false, chemicalReactorRecipe.getFluidOutputs());
-                    GTTransferUtils.addItemsToItemHandler(this.importItems, false, chemicalReactorRecipe.getOutputs());
-                    did = true;
+        int slots = this.inputInventory.getSlots();
+        for (int i = 0; i < slots; i++) {
+            ItemStack stack = inputInventory.getStackInSlot(i);
+            if (stack != null && !stack.isEmpty()) {
+                MaterialStack materialStack = OreDictUnifier.getMaterial(stack);
+                if (materialStack != null && materialStack.amount > 0) {
+                    materialContainer.insertMaterial(materialStack);
+                    stack.shrink(1);
                 }
             }
+        }
+        FluidStack fluidStack = inputFluidInventory.drain(1000, false);
+        if (fluidStack != null) {
+            Material material = FluidUnifier.getMaterialFromFluid(fluidStack.getFluid());
+            if (material != null) {
+                materialContainer.insertMaterial(new MaterialStack(material, fluidStack.amount * (GTValues.M / 144)));
+                inputFluidInventory.drain(fluidStack, true);
+            }
+        }
 
-        } else {
-            GTTransferUtils.moveInventoryItems(this.itemInventory, this.outputInventory);
-            GTTransferUtils.transferFluids(this.fluidInventory, this.outputFluidInventory);
-        }
-        if (!did && this.currentHeat > 0 && this.getOffsetTimer() % 20 == 0) {
-            this.currentHeat -= Math.max(this.currentHeat / 100, 1);
-        }
     }
 
     @Override
     protected @NotNull BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXXXX", "XYYYX", "XXXXX", "XXXXX")
-                .aisleRepeatable(3, 14, "XXXXX", "Y###Y", "X###X", "X###X")
-                .aisle("XXXXX", "XY@YX", "XXXXX", "XXXXX")
+                .aisle("XXXXX", "XYYYX", "XYYYX")
+                .aisleRepeatable(3, 14, "XXXXX", "Y###Y", "Y###Y")
+                .aisle("XXXXX", "XY@YX", "XYYYX")
                 .where('X', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS)))
                 .where('Y', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.PRIMITIVE_BRICKS)).or(this.autoAbilities()))
                 .where('#', air())
@@ -165,49 +153,5 @@ public class MetaTileEntityStewStoolStove extends MultiblockWithDisplayBase {
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityStewStoolStove(this.metaTileEntityId);
-    }
-
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("Current heat:%s/%s", currentHeat, currentRecipeHeat));
-        textList.add(new TextComponentTranslation("Output mode:%s", outputMode));
-        for (int slot = 0; slot < itemInventory.getSlots(); slot++) {
-            ItemStack stack = itemInventory.getStackInSlot(slot);
-            if (!stack.isEmpty())
-                textList.add(new TextComponentTranslation("%sx%s", stack.getCount(), stack.getDisplayName()));
-        }
-        for (IFluidTankProperties properties : fluidInventory.getTankProperties()) {
-            //ItemStack stack=itemInventory.getStackInSlot(slot);
-            FluidStack stack = properties.getContents();
-            if (stack != null && stack.amount != 0) {
-                textList.add(new TextComponentTranslation("%sx%s", stack.amount, stack.getLocalizedName()));
-            }
-        }
-    }
-
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data = super.writeToNBT(data);
-        data.setLong("currentHeat", currentHeat);
-        data.setLong("currentRecipeHeat", currentRecipeHeat);
-        data.setBoolean("outputMode", outputMode);
-        return data;
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        currentHeat = data.getLong("currentHeat");
-        currentRecipeHeat = data.getLong("currentRecipeHeat");
-        outputMode = data.getBoolean("outputMode");
-    }
-
-    @Override
-    public boolean onScrewdriverClick(EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
-        if (!getWorld().isRemote) {
-            outputMode = !outputMode;
-        }
-        return true;
     }
 }

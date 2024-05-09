@@ -2,8 +2,8 @@ package bruce.projectreflection.recipes.handler;
 
 import bruce.projectreflection.ProjectReflection;
 import bruce.projectreflection.recipes.builder.AuraCollectorRecipeBuilder;
-import bruce.projectreflection.recipes.routines.FuelCellRoutine;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.builders.FuelRecipeBuilder;
 import gregtech.api.recipes.builders.PrimitiveRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
@@ -25,7 +25,10 @@ public class PRRecipeMaps {
             12, 12, 9, 9, new SimpleRecipeBuilder(), false)
             .setSound(ProjectReflection.UPDATE_SUPPRESSOR);
 
-    public static RecipeMap<FuelRecipeBuilder> FUEL_CELL = new RecipeMap<>("fuel_cell", 6,
-            2, 6, 1, new FuelRecipeBuilder(), false)
+    public static RecipeMap<FuelRecipeBuilder> EXOTHERMIC_REACTION = new RecipeMap<>("exothermic_reaction", 6,
+            6, 6, 6, new FuelRecipeBuilder(), false)
             .allowEmptyOutput();
+    public static RecipeMap<SimpleRecipeBuilder> UNIVERSAL_MIXER = new RecipeMap<>("universal_mixer",
+            6, 2, 12, 1, new SimpleRecipeBuilder(), false)
+            .setSmallRecipeMap(RecipeMaps.MIXER_RECIPES);
 }

@@ -14,9 +14,13 @@ import gregtech.common.items.MetaItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static gregtech.common.items.MetaItems.*;
 
 public class CircuitRoutine {
+
     public static void init() {
         ProjectReflection.logger.info("projectreflection init circuitroutine");
 

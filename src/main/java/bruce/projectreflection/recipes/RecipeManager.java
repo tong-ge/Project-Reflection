@@ -1,12 +1,9 @@
 package bruce.projectreflection.recipes;
 
 import bruce.projectreflection.recipes.handler.OreProcessingHandler;
-import bruce.projectreflection.recipes.handler.PRRecipeMaps;
 import bruce.projectreflection.recipes.routines.*;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.ore.OrePrefix;
 
 public class RecipeManager {
     public static void preInit() {
@@ -27,6 +24,6 @@ public class RecipeManager {
                 .fluidOutputs(Materials.UUMatter.getFluid(1))
                 .buildAndRegister();
         MobToMineralRoutine.init();
-        FuelCellRoutine.init();
+        ExothermicRoutine.init();
     }
 }

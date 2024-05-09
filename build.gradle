@@ -141,8 +141,8 @@ dependencies {
     implementation rfg.deobf("curse.maven:ae2-extended-life-570458:5147702")
     compileOnly rfg.deobf("curse.maven:ender-core-231868:4671384")
     implementation rfg.deobf("vazkii.botania:Botania:r1.10-364.5")
-    //runtimeOnly rfg.deobf("curse.maven:vintagefix-871198:5010926")
     implementation rfg.deobf("curse.maven:extrabotany-299086:3112313")
+    implementation rfg.deobf("curse.maven:ae2-fluid-crafting-rework-623955:5310089")
 
     //compileOnly("curse.maven:gregtech-ce-unofficial-557242:5121638")
     if (project.use_mixins.toBoolean()) {

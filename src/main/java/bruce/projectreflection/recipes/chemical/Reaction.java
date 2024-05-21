@@ -1,41 +1,39 @@
 package bruce.projectreflection.recipes.chemical;
 
-import bruce.projectreflection.ProjectReflection;
+import gregtech.api.unification.material.Material;
 import gregtech.api.unification.stack.MaterialStack;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Reaction {
-    public static final List<Reaction> REGISTRY = new ArrayList<>();
-    private static final double K = 1e-5;
+    public static final Set<Reaction> REGISTRY = new HashSet<>();
+    private static final double K = 1e-6;
     public List<MaterialStack> leftSide;
     public List<MaterialStack> rightSide;
     public double energy;//associated with total EU
-    public int difficulty;//associated with voltage
+    public double criticalTemperature;
 
-    public Reaction(List<MaterialStack> leftSide, List<MaterialStack> rightSide, double energy, int difficulty) {
+    public Reaction(List<MaterialStack> leftSide, List<MaterialStack> rightSide, double energy, double criticalTemperature) {
         this.leftSide = leftSide;
         this.rightSide = rightSide;
         this.energy = energy;
-        this.difficulty = difficulty;
+        this.criticalTemperature = criticalTemperature;
     }
 
-    public Reaction(MaterialStack[] leftSide, MaterialStack[] rightSide, double energy, int difficulty) {
-        this(Arrays.asList(leftSide), Arrays.asList(rightSide), energy, difficulty);
+    public Reaction(MaterialStack[] leftSide, MaterialStack[] rightSide, double energy, double criticalTemperature) {
+        this(Arrays.asList(leftSide), Arrays.asList(rightSide), energy, criticalTemperature);
     }
 
     @Override
     public int hashCode() {
-        return toString().hashCode();
+        return getReactionName().hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Reaction))
             return false;
-        return this.toString().equals(obj.toString());
+        return this.getReactionName().equals(((Reaction) obj).getReactionName());
     }
 
     private static long gcd(long a, long b) {
@@ -48,8 +46,7 @@ public class Reaction {
         return a;
     }
 
-    @Override
-    public String toString() {
+    private String toStringNoEnergy() {
         Reaction normalized = normalize();
         StringBuilder sb = new StringBuilder();
         for (MaterialStack stack : normalized.leftSide) {
@@ -59,8 +56,12 @@ public class Reaction {
         for (MaterialStack stack : normalized.rightSide) {
             sb.append(stack.material.getName() + "*" + stack.amount + "\n");
         }
-        sb.append(String.format("dH=%sEU/mol,dS=%sEU/(mol.K),%sEU/t", energy, getDs(), difficulty));
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        return toStringNoEnergy() + String.format("dH=%sEU/mol@%sK", energy, getCriticalTemperature());
     }
 
     private Reaction normalize() {
@@ -80,20 +81,25 @@ public class Reaction {
         for (MaterialStack stack : rightSide) {
             newRightSide.add(new MaterialStack(stack.material, stack.amount / normalizeFactor));
         }
-        return new Reaction(newLeftSide, newRightSide, energy / normalizeFactor, difficulty);
+        return new Reaction(newLeftSide, newRightSide, energy / normalizeFactor, getCriticalTemperature());
     }
 
+    private void registerInternal() {
+        REGISTRY.removeIf(reaction -> reaction.getReactionName().equals(this.getReactionName())
+                && Math.abs(reaction.energy) > Math.abs(this.energy));
+        REGISTRY.add(this);
+    }
     public void register() {
         Reaction normalized = this.normalize();
 
         if (normalized.canHappen()) {
-            ProjectReflection.logger.info("Registered recipe:{}", normalized);
-            REGISTRY.add(normalized);
+            //ProjectReflection.logger.info("Registered recipe:{}", normalized);
+            normalized.registerInternal();
         }
         Reaction reverseReaction = normalized.getReverseReaction();
         if (reverseReaction.canHappen()) {
-            ProjectReflection.logger.info("Registered recipe:{}", reverseReaction);
-            REGISTRY.add(reverseReaction);
+            //ProjectReflection.logger.info("Registered recipe:{}", reverseReaction);
+            reverseReaction.registerInternal();
         }
     }
 
@@ -101,31 +107,60 @@ public class Reaction {
         return energy;
     }
 
-    public double getDs() {
-        long leftAmount = 0;
-        long rightAmount = 0;
-        for (MaterialStack stack : leftSide) {
-            leftAmount += stack.amount;
-        }
-        for (MaterialStack stack : rightSide) {
-            rightAmount += stack.amount;
-        }
-        return K * (rightAmount - leftAmount);
-    }
-
     public Reaction getReverseReaction() {
-        return new Reaction(rightSide, leftSide, -energy, difficulty);
+        return new Reaction(rightSide, leftSide, -energy, criticalTemperature);
     }
 
     public boolean canHappen() {
-        return !(getDh() > 0 && getDs() < 0);
+        return energy < 0 || criticalTemperature > 0;
     }
 
     public boolean canAlwaysHappen() {
-        return getDh() < 0 && getDs() > 0;
+
+        return energy < 0 && criticalTemperature < 0;
     }
 
     public boolean canHappenAt(double temperature) {
-        return (getDh() - temperature * getDs()) < 0;
+        return getGibbsFreeEnergy(temperature) < 0;
+    }
+
+    public double getCriticalTemperature() {
+        return this.criticalTemperature;
+    }
+
+    public double getGibbsFreeEnergy(double temperature) {
+
+        return energy * (temperature - criticalTemperature);
+    }
+
+    public String getReactionEquation() {
+        Reaction normalized = normalize();
+        List<String> leftSide = new ArrayList<>();
+        for (MaterialStack stack : normalized.leftSide) {
+            leftSide.add(stack.amount + getChemicalFormulaOrName(stack.material));
+        }
+        List<String> rightSide = new ArrayList<>();
+        for (MaterialStack stack : normalized.rightSide) {
+            rightSide.add(stack.amount + getChemicalFormulaOrName(stack.material));
+        }
+        return String.join("+", leftSide) + "=" + String.join("+", rightSide);
+    }
+
+    public String getReactionName() {
+        Reaction normalized = normalize();
+        List<String> leftSide = new ArrayList<>();
+        for (MaterialStack stack : normalized.leftSide) {
+            leftSide.add(stack.amount + stack.material.getName());
+        }
+        List<String> rightSide = new ArrayList<>();
+        for (MaterialStack stack : normalized.rightSide) {
+            rightSide.add(stack.amount + stack.material.getName());
+        }
+        return String.join("+", leftSide) + "=" + String.join("+", rightSide);
+    }
+
+    public static String getChemicalFormulaOrName(Material material) {
+        String formula = material.getChemicalFormula();
+        return formula.isEmpty() ? material.getName() : formula;
     }
 }

@@ -1,10 +1,8 @@
 package bruce.projectreflection.event;
 
 import bruce.projectreflection.PRConstants;
-import bruce.projectreflection.ProjectReflection;
 import bruce.projectreflection.entity.EntityBlackhole;
-import bruce.projectreflection.items.*;
-import bruce.projectreflection.items.codebook.ItemCodebook;
+import bruce.projectreflection.items.PRMetaItems;
 import bruce.projectreflection.materials.MaterialHelper;
 import bruce.projectreflection.materials.PRStoneType;
 import bruce.projectreflection.recipes.RecipeManager;
@@ -63,8 +61,10 @@ public class RegistryEvents {
     }
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().registerAll(PRMetaItems.INSTANCE);
-        PRMetaItems.INSTANCE.registerSubItems();
+        if (!PRMetaItems.registered) {
+            event.getRegistry().registerAll(PRMetaItems.INSTANCE);
+            PRMetaItems.INSTANCE.registerSubItems();
+        }
     }
 
     @SubscribeEvent

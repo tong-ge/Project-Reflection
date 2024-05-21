@@ -143,8 +143,9 @@ dependencies {
     implementation rfg.deobf("vazkii.botania:Botania:r1.10-364.5")
     implementation rfg.deobf("curse.maven:extrabotany-299086:3112313")
     implementation rfg.deobf("curse.maven:ae2-fluid-crafting-rework-623955:5310089")
-
+    runtimeOnly(rfg.deobf("curse.maven:tickrate-changer-230233:2482684"))
     //compileOnly("curse.maven:gregtech-ce-unofficial-557242:5121638")
+    implementation rfg.deobf(files("libs/Pollution-1.0.jar"))
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:
         String mixin = modUtils.enableMixins('zone.rong:mixinbooter:8.8', "mixins.${project.archives_base_name}.refmap.json")

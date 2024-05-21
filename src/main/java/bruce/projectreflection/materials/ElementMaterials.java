@@ -6,6 +6,7 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.ore.OrePrefix;
+import keqing.pollution.api.unification.PollutionMaterials;
 import net.minecraftforge.fml.common.Loader;
 
 public class ElementMaterials {
@@ -21,11 +22,12 @@ public class ElementMaterials {
     public static Material SCHRABIDIUM;
 
     public static void init() {
-        MANA = MaterialHelper.dynamicBuilder("mana", true, false)
+        MANA = /*MaterialHelper.dynamicBuilder("mana", true, false)
                 .dust()
                 .color(0x5e48ff)
                 .element(Elements.Ma)
-                .build();
+                .build();*/
+                PollutionMaterials.mana;
         VOID_METAL = MaterialHelper.dynamicBuilder("void", true, false)
                 .ingot(4)
                 .color(0x63186f)

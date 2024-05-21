@@ -1,16 +1,12 @@
 package bruce.projectreflection.recipes.routines;
 
+import bruce.projectreflection.ProjectReflection;
 import bruce.projectreflection.recipes.chemical.Reaction;
-import bruce.projectreflection.recipes.handler.PRRecipeMaps;
 import gregtech.api.GTValues;
-import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.builders.FuelRecipeBuilder;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
-import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.FluidUnifier;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Material;
@@ -22,12 +18,10 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class ExothermicRoutine {
-    public static void init() {
-
-        Collection<Recipe> recipes = RecipeMaps.LARGE_CHEMICAL_RECIPES.getRecipeList();
+public class StewStoolStoveRoutine {
+    private static void registerRecipesFrom(RecipeMap recipeMap) {
+        Collection<Recipe> recipes = recipeMap.getRecipeList();
         for (Recipe recipe : recipes) {
             int EUt = recipe.getEUt();
             int duration = recipe.getDuration();
@@ -83,5 +77,44 @@ public class ExothermicRoutine {
                 new Reaction(leftSide, rightSide, EUt * duration, EUt).register();
             }
         }
+    }
+
+    public static void init() {
+        /*
+        registerRecipesFrom(RecipeMaps.DISTILLATION_RECIPES);
+        registerRecipesFrom(RecipeMaps.ELECTROLYZER_RECIPES);
+        registerRecipesFrom(RecipeMaps.MIXER_RECIPES);
+        registerRecipesFrom(RecipeMaps.CRACKING_RECIPES);
+        //registerRecipesFrom(RecipeMaps.ORE_WASHER_RECIPES);
+        registerRecipesFrom(RecipeMaps.CHEMICAL_BATH_RECIPES);
+        registerRecipesFrom(RecipeMaps.LARGE_CHEMICAL_RECIPES);
+        for(Reaction reaction:Reaction.REGISTRY)
+        {
+            ProjectReflection.logger.info("{}@{} dH={}",reaction.getReactionName(),reaction.getCriticalTemperature(),reaction.getDh());
+        }
+
+         */
+        new Reaction(
+                new MaterialStack[]{
+                        new MaterialStack(Materials.Methane, 1),
+                        new MaterialStack(Materials.Oxygen, 4)},
+                new MaterialStack[]{
+                        new MaterialStack(Materials.CarbonDioxide, 1),
+                        new MaterialStack(Materials.Water, 2)
+                }, -4.4e-3, 0).register();
+        new Reaction(
+                new MaterialStack[]{
+                        new MaterialStack(Materials.Methane, 1000)},
+                new MaterialStack[]{
+                        new MaterialStack(Materials.Carbon, 144),
+                        new MaterialStack(Materials.Hydrogen, 4)
+                }, 0.6, 1300).register();
+        new Reaction(
+                new MaterialStack[]{
+                        new MaterialStack(Materials.Methane, 1000)},
+                new MaterialStack[]{
+                        new MaterialStack(Materials.Carbon, 144),
+                        new MaterialStack(Materials.Hydrogen, 4)
+                }, 0.6, 1300).register();
     }
 }

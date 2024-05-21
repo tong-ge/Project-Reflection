@@ -24,6 +24,6 @@ public class RecipeManager {
                 .fluidOutputs(Materials.UUMatter.getFluid(1))
                 .buildAndRegister();
         MobToMineralRoutine.init();
-        ExothermicRoutine.init();
+        StewStoolStoveRoutine.init();
     }
 }

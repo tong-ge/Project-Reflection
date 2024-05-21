@@ -25,7 +25,8 @@ import org.apache.logging.log4j.Logger;
         "after:twilightforest;" +
         "after:draconicevolution;" +
         "after:gregtechfoodoption;" +
-        "before:thaumicperiphery", useMetadata = true)
+        "before:thaumicperiphery;" +
+        "required-before:pollution", useMetadata = true)
 public class ProjectReflection {
     public static SoundEvent UPDATE_SUPPRESSOR;
 

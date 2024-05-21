@@ -14,6 +14,7 @@ import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
+import keqing.pollution.api.unification.PollutionMaterials;
 import net.minecraftforge.fml.common.Loader;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.config.ConfigBlocks;
@@ -47,7 +48,8 @@ public class FirstTierMaterials {
     public static Material LIQUID_DEATH;
     public static Material FLUIDIED_MANA;
     public static void init() {
-        THAUMIUM = MaterialHelper.dynamicBuilder("thaumium")
+
+        THAUMIUM = /*MaterialHelper.dynamicBuilder("thaumium")
                 .ingot(3)
                 .fluid()
                 .color(0x51437c)
@@ -61,6 +63,8 @@ public class FirstTierMaterials {
                 )
                 .components(new MaterialStack(Materials.Iron, 1), new MaterialStack(ElementMaterials.MANA, 1))
                 .build();
+                */
+                PollutionMaterials.thaumium;
         PYROTHEUM = MaterialHelper.dynamicBuilder("pyrotheum",
                         true, 4000, false)
                 .dust()

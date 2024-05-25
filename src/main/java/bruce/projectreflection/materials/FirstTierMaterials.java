@@ -47,6 +47,7 @@ public class FirstTierMaterials {
     public static Material MOON;
     public static Material LIQUID_DEATH;
     public static Material FLUIDIED_MANA;
+    public static Material LATEX;
     public static void init() {
 
         THAUMIUM = /*MaterialHelper.dynamicBuilder("thaumium")
@@ -216,6 +217,10 @@ public class FirstTierMaterials {
                 .color(0x005887)
                 .components(new MaterialStack(ElementMaterials.MANA, 1))
                 .flags(DISABLE_DECOMPOSITION)
+                .build();
+        LATEX = MaterialHelper.dynamicBuilder("latex")
+                .fluid()
+                .color(0xffffee)
                 .build();
         /*
         ALUMINIUM_TETRACHLOROAURATE_SILICATE=MaterialHelper.dynamicBuilder("aluminium_tetrachlorate_silicate")

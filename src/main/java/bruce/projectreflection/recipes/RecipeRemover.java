@@ -36,6 +36,9 @@ public class RecipeRemover {
         recipeMapList.add(RecipeMaps.LARGE_CHEMICAL_RECIPES);
         recipeMapList.add(RecipeMaps.CIRCUIT_ASSEMBLER_RECIPES);
         recipeMapList.add(RecipeMaps.ASSEMBLY_LINE_RECIPES);
+        recipeMapList.add(RecipeMaps.EXTRACTOR_RECIPES);
+        recipeMapList.add(RecipeMaps.CENTRIFUGE_RECIPES);
+
         removedRecipes.add(OreDictUnifier.get(OrePrefix.dust, Materials.EnderPearl, 1));
         removedRecipes.add(OreDictUnifier.get(OrePrefix.dust, Materials.Blaze, 1));
         //同级升级的电路板
@@ -64,6 +67,13 @@ public class RecipeRemover {
         //UV->ZPM->LuV
         removedRecipes.add(MetaItems.WETWARE_PROCESSOR_ASSEMBLY_ZPM.getStackForm());
         removedRecipes.add(MetaItems.WETWARE_PROCESSOR_LUV.getStackForm());
+        //橡胶
+        removedRecipes.add(OreDictUnifier.get(OrePrefix.dust, Materials.RawRubber));
+
+    }
+
+    public static void doRemove() {
+        init();
         if (MetaTileEntities.MUFFLER_HATCH != null)
             for (MetaTileEntityMufflerHatch mte : MetaTileEntities.MUFFLER_HATCH) {
                 if (mte != null) {
@@ -74,18 +84,12 @@ public class RecipeRemover {
             }
         MaterialRegistry registry = GregTechAPI.materialManager.getRegistry(PRConstants.modid);
 
-        for(int i=0;i<OreDictionary.WILDCARD_VALUE;i++)
-        {
-            Material material=registry.getObjectById(i);
-            if(material != null && material.hasFlag(MaterialFlags.GENERATE_PLATE) && material.hasProperty(PropertyKey.WIRE))
-            {
+        for (int i = 0; i < OreDictionary.WILDCARD_VALUE; i++) {
+            Material material = registry.getObjectById(i);
+            if (material != null && material.hasFlag(MaterialFlags.GENERATE_PLATE) && material.hasProperty(PropertyKey.WIRE)) {
                 ModHandler.removeRecipeByOutput(OreDictUnifier.get(OrePrefix.wireGtSingle, material));
             }
         }
-    }
-
-    public static void doRemove() {
-        init();
         for (RecipeMap recipeMap : recipeMapList) {
             ImmutableList<Recipe> recipes = ImmutableList.copyOf(recipeMap.getRecipeList());
             for (Recipe recipe : recipes) {

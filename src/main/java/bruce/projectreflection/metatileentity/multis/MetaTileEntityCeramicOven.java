@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MetaTileEntityCeramicOven extends RecipeMapPrimitiveMultiblockController {
-    private static final ICubeRenderer renderer = new SimpleOverlayRenderer("ceramics:porcelain_bricks");
+    public static final ICubeRenderer renderer = new SimpleOverlayRenderer("ceramics:porcelain_bricks");
 
     public MetaTileEntityCeramicOven(ResourceLocation location) {
         super(location, PRRecipeMaps.CERAMIC_OVEN);

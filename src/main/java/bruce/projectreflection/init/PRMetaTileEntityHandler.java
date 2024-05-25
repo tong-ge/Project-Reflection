@@ -2,7 +2,7 @@ package bruce.projectreflection.init;
 
 import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.ProjectReflection;
-import bruce.projectreflection.metatileentity.magic.MetaTileEntityAuraCollector;
+import bruce.projectreflection.metatileentity.single.MetaTileEntityAuraCollector;
 import bruce.projectreflection.metatileentity.multis.*;
 import bruce.projectreflection.metatileentity.multis.multiblockpart.MetaTileEntityFluxMuffler;
 import bruce.projectreflection.metatileentity.multis.multiblockpart.MetaTileEntityMysticalMechanicsHatch;
@@ -122,7 +122,8 @@ public final class PRMetaTileEntityHandler {
                 new MetaTileEntityMechanicalCompressor(new ResourceLocation(PRConstants.modid, "mechanical_compressor")),
                 new MetaTileEntitySteamMechanicsHatch(new ResourceLocation(PRConstants.modid, "steam_mechanical_hatch")),
                 new MetaTileEntityMagicalGenerator(new ResourceLocation(PRConstants.modid, "magical_generator")),
-                new MetaTileEntityStewStoolStove(new ResourceLocation(PRConstants.modid, "stew_stool_stove"))
+                new MetaTileEntityStewStoolStove(new ResourceLocation(PRConstants.modid, "stew_stool_stove")),
+                new MetaTileEntityStewer(new ResourceLocation(PRConstants.modid, "stewer"))
         );
     }
 }

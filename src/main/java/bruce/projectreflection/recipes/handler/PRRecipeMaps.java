@@ -7,6 +7,7 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.builders.FuelRecipeBuilder;
 import gregtech.api.recipes.builders.PrimitiveRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
+import gregtechfoodoption.recipe.builder.MobProximityRecipeBuilder;
 
 public class PRRecipeMaps {
 
@@ -24,11 +25,18 @@ public class PRRecipeMaps {
     public static RecipeMap<SimpleRecipeBuilder> SPACE_TIME_SUPPRESSOR = new RecipeMap<>("space_time_suppressor",
             12, 12, 9, 9, new SimpleRecipeBuilder(), false)
             .setSound(ProjectReflection.UPDATE_SUPPRESSOR);
+    /*
+        public static RecipeMap<FuelRecipeBuilder> EXOTHERMIC_REACTION = new RecipeMap<>("exothermic_reaction", 6,
+                6, 6, 6, new FuelRecipeBuilder(), false)
+                .allowEmptyOutput();
+        public static RecipeMap<SimpleRecipeBuilder> UNIVERSAL_MIXER = new RecipeMap<>("universal_mixer",
+                6, 2, 12, 1, new SimpleRecipeBuilder(), false)
+                .setSmallRecipeMap(RecipeMaps.MIXER_RECIPES);
 
-    public static RecipeMap<FuelRecipeBuilder> EXOTHERMIC_REACTION = new RecipeMap<>("exothermic_reaction", 6,
-            6, 6, 6, new FuelRecipeBuilder(), false)
+     */
+    public static RecipeMap<MobProximityRecipeBuilder> MOB_DUPLICATOR = new RecipeMap<>("mob_duplicator",
+            1, 0, 0, 0, new MobProximityRecipeBuilder(), false)
             .allowEmptyOutput();
-    public static RecipeMap<SimpleRecipeBuilder> UNIVERSAL_MIXER = new RecipeMap<>("universal_mixer",
-            6, 2, 12, 1, new SimpleRecipeBuilder(), false)
-            .setSmallRecipeMap(RecipeMaps.MIXER_RECIPES);
+    public static RecipeMap<PrimitiveRecipeBuilder> STEWER = new RecipeMap<>("stewer", 3,
+            3, 3, 3, new PrimitiveRecipeBuilder(), false);
 }

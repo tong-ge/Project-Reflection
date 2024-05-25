@@ -7,7 +7,6 @@ import gregtech.api.unification.material.Materials;
 
 public class RecipeManager {
     public static void preInit() {
-
         OreProcessingHandler.init();
     }
     public static void init() {
@@ -17,6 +16,7 @@ public class RecipeManager {
         SuperIridiumAlloyRoutine.init();
         CircuitRoutine.init();
         MagicRoutine.init();
+        LatexRoutine.init();
         RecipeMaps.MASS_FABRICATOR_RECIPES.recipeBuilder()
                 .circuitMeta(1)
                 .EUt(256)

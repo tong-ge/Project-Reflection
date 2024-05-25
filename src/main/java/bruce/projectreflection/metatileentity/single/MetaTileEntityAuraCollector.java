@@ -1,8 +1,7 @@
-package bruce.projectreflection.metatileentity.magic;
+package bruce.projectreflection.metatileentity.single;
 
 import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.ProjectReflection;
-import bruce.projectreflection.materials.FirstTierMaterials;
 import bruce.projectreflection.recipes.handler.PRRecipeMaps;
 import bruce.projectreflection.recipes.properties.AuraProperty;
 import gregtech.api.capability.IEnergyContainer;
@@ -12,16 +11,12 @@ import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.client.renderer.texture.Textures;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
-import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.common.world.aura.AuraHandler;
 
-import java.util.Arrays;
 import java.util.function.Supplier;
 
 public class MetaTileEntityAuraCollector extends SimpleMachineMetaTileEntity {

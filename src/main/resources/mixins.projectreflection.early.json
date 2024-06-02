@@ -5,8 +5,6 @@
   "package": "bruce.projectreflection.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "MixinWorld",
-    "MixinEntityRenderer"
   ],
   "mixins": [
   ]

@@ -14,6 +14,7 @@ import bruce.projectreflection.metatileentity.multis.mysticalmechanics.generator
 import bruce.projectreflection.metatileentity.multis.mysticalmechanics.generators.MetaTileEntityMechanicalSteamTurbine;
 import bruce.projectreflection.metatileentity.multis.mysticalmechanics.MetaTileEntityMechanicalWiremill;
 import bruce.projectreflection.metatileentity.primitive.MetaTileEntityFirebox;
+import bruce.projectreflection.metatileentity.single.MetaTileEntityMobDuplicator;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -37,6 +38,7 @@ public final class PRMetaTileEntityHandler {
     public static final MetaTileEntityMultiblockPart[] MECH_EXPORT_HATCHES = new MetaTileEntityMultiblockPart[9];
     public static final MetaTileEntityMultiblockPart[] MECH_IMPORT_HATCHES = new MetaTileEntityMultiblockPart[9];
     public static final MetaTileEntityMultiblockPart[] FIREBOXES = new MetaTileEntityMultiblockPart[9];
+    public static final MetaTileEntity[] MOB_DUPLICATORS = new MetaTileEntity[9];
     private static int id = 1;
     private static int getAvailableMTEID()
     {
@@ -108,10 +110,16 @@ public final class PRMetaTileEntityHandler {
                             String.format("firebox.%s", GTValues.VN[i])),
                     i
             );
+            MOB_DUPLICATORS[i] = new MetaTileEntityMobDuplicator(
+                    new ResourceLocation(PRConstants.modid,
+                            String.format("mob_duplicator.%s", GTValues.VN[i])),
+                    i
+            );
         }
         register(MECH_EXPORT_HATCHES);
         register(MECH_IMPORT_HATCHES);
         register(FIREBOXES);
+        register(MOB_DUPLICATORS);
         register(new MetaTileEntityCeramicOven(new ResourceLocation(PRConstants.modid, "ceramic_oven")),
                 new MetaTileEntityMechanicalSteamTurbine(new ResourceLocation(PRConstants.modid, "mechanical_steam_turbine")),
                 new MetaTileEntityMechanicalGasTurbine(new ResourceLocation(PRConstants.modid, "mechanical_gas_turbine")),

@@ -1,15 +1,12 @@
 package bruce.projectreflection.recipes.routines;
 
-import bruce.projectreflection.materials.SecondTierMaterials;
 import bruce.projectreflection.recipes.handler.PRRecipeMaps;
-import gregtech.api.GTValues;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtechfoodoption.GTFOMaterialHandler;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.monster.EntityZombie;
+
+import static gregtech.api.GTValues.*;
 
 /*TODO
  * 4腐肉=1铁
@@ -21,8 +18,9 @@ import net.minecraft.item.ItemStack;
  * 58海晶石->2Al+3Be
  * 58海晶石->2Au
  */
-public class MobToMineralRoutine {
+public class MobDuplicatorRoutine {
     public static void init() {
+        /*
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
                 .inputs(new ItemStack(Items.ROTTEN_FLESH, 4))
                 .fluidOutputs(GTFOMaterialHandler.Blood.getFluid(40))
@@ -63,5 +61,14 @@ public class MobToMineralRoutine {
                 .EUt(GTValues.VA[GTValues.LuV])
                 .duration(1200)
                 .buildAndRegister();
+
+         */
+        PRRecipeMaps.MOB_DUPLICATOR.recipeBuilder()
+                .notConsumable(OreDictUnifier.get(OrePrefix.ingot, Materials.Iron))
+                .EUt(VA[LV])
+                .duration(20)
+                .mob(EntityZombie.class)
+                .buildAndRegister();
+
     }
 }

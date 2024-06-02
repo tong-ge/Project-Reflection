@@ -23,7 +23,7 @@ public class RecipeManager {
                 .duration(3200)
                 .fluidOutputs(Materials.UUMatter.getFluid(1))
                 .buildAndRegister();
-        MobToMineralRoutine.init();
+        MobDuplicatorRoutine.init();
         StewStoolStoveRoutine.init();
     }
 }

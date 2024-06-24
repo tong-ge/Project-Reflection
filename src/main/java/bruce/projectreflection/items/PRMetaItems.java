@@ -17,6 +17,7 @@ public class PRMetaItems extends StandardMetaItem {
     public static MetaItem.MetaValueItem CRYSTAL_NIC;
     public static MetaItem.MetaValueItem WETWARE_NIC;
     public static MetaItem.MetaValueItem ADVANCED_SMD_PACKAGE;
+    public static MetaItem.MetaValueItem QUANTUM_GRAIN;
     //public static MetaItem.MetaValueItem SOLAR_PANEL_MKI;
 
     @Override
@@ -33,6 +34,7 @@ public class PRMetaItems extends StandardMetaItem {
             CRYSTAL_NIC = addItem(5, "nic.crystal");
             WETWARE_NIC = addItem(6, "nic.wetware");
             ADVANCED_SMD_PACKAGE = addItem(10, "smd_component_package.advanced");
+            QUANTUM_GRAIN = addItem(20, "quantum_grain");
 
             //SOLAR_PANEL_MKI=addItem(90,"solar_panel_mk1");
         }

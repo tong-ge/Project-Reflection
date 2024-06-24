@@ -21,4 +21,5 @@ public class PRConstants {
         }
     };
     public static final Random rand=new Random();
+    public static final String TAG_ITEMSTACK_TO_DROP = "projectreflection:mobDuplicatorItemStackToDrop";
 }

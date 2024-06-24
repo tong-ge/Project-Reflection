@@ -24,6 +24,5 @@ public class RecipeManager {
                 .fluidOutputs(Materials.UUMatter.getFluid(1))
                 .buildAndRegister();
         MobDuplicatorRoutine.init();
-        StewStoolStoveRoutine.init();
     }
 }

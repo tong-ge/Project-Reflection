@@ -1,11 +1,13 @@
 package bruce.projectreflection.recipes.routines;
 
+import bruce.projectreflection.items.PRMetaItems;
 import bruce.projectreflection.materials.FirstTierMaterials;
 import bruce.projectreflection.materials.SecondTierMaterials;
 import bruce.projectreflection.materials.ThirdTierMaterials;
 import bruce.projectreflection.recipes.handler.PRRecipeMaps;
 import gregtech.api.GTValues;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.unification.material.Materials;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -65,6 +67,15 @@ public class MagicRoutine {
                 .fluidInputs(ThirdTierMaterials.REFINED_MAGICAL_FUEL.getFluid(1))
                 .EUt((int) GTValues.V[GTValues.LV])
                 .duration(225)
+                .buildAndRegister();
+        PRRecipeMaps.SPACE_TIME_SUPPRESSOR.recipeBuilder()
+                .inputs(new ItemStack(Items.ENDER_EYE))
+                .fluidInputs(Materials.Radon.getFluid(1000))
+                .outputs(PRMetaItems.QUANTUM_GRAIN.getStackForm(10))
+                .chancedOutput(PRMetaItems.QUANTUM_GRAIN.getStackForm(10), 5000, 0)
+                .chancedOutput(PRMetaItems.QUANTUM_GRAIN.getStackForm(10), 2500, 0)
+                .EUt(1920)
+                .duration(200)
                 .buildAndRegister();
     }
 }

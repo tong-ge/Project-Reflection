@@ -1,6 +1,7 @@
 package bruce.projectreflection.api;
 
 import bruce.projectreflection.PRAbility;
+import gregtech.api.capability.IRotorHolder;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -28,19 +29,37 @@ public abstract class MechanicalTurbineMultiblockController extends RecipeMapMul
         mechCapability = this.getAbilities(PRAbility.OUTPUT_MECH);
     }
 
+    public IRotorHolder getRotorHolder() {
+        List<IRotorHolder> abilities = this.getAbilities(PRAbility.LL_ROTOR_HOLDER);
+        return abilities.isEmpty() ? null : abilities.get(0);
+    }
+
+    public boolean isRotorFaceFree() {
+        IRotorHolder rotorHolder = this.getRotorHolder();
+        if (rotorHolder == null) {
+            return false;
+        } else {
+            return this.isStructureFormed() && rotorHolder.isFrontFaceFree();
+        }
+    }
+
+    public boolean isStructureObstructed() {
+        return super.isStructureObstructed() || !this.isRotorFaceFree();
+    }
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXX", "XYX", "XXX")
-                .aisle("XXX", "X#X", "XXX")
-                .aisle("XXX", "X#X", "XXX")
-                .aisle("XXX", "XSX", "XXX")
+                .aisle("XXXX", "XXXX", "XXXX")
+                .aisle("XXXX", "H##Y", "XXXX")
+                .aisle("XXXX", "XSXX", "XXXX")
                 .where('S', this.selfPredicate())
                 .where('X', states(getMetalCasing()).setMinGlobalLimited(14)
                         .or(this.autoAbilities(false, true, false, false, true, true, true)))
                 .where('#', states(getTurbineCasing()))
-                .where('Y', abilities(PRAbility.OUTPUT_MECH)).build();
+                .where('Y', abilities(PRAbility.OUTPUT_MECH))
+                .where('H', abilities(PRAbility.LL_ROTOR_HOLDER))
+                .build();
     }
 
     protected abstract IBlockState[] getMetalCasing();

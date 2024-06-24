@@ -2,6 +2,7 @@ package bruce.projectreflection.init;
 
 import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.ProjectReflection;
+import bruce.projectreflection.metatileentity.multis.multiblockpart.MetaTileEntityLLRotorHolder;
 import bruce.projectreflection.metatileentity.single.MetaTileEntityAuraCollector;
 import bruce.projectreflection.metatileentity.multis.*;
 import bruce.projectreflection.metatileentity.multis.multiblockpart.MetaTileEntityFluxMuffler;
@@ -39,6 +40,7 @@ public final class PRMetaTileEntityHandler {
     public static final MetaTileEntityMultiblockPart[] MECH_IMPORT_HATCHES = new MetaTileEntityMultiblockPart[9];
     public static final MetaTileEntityMultiblockPart[] FIREBOXES = new MetaTileEntityMultiblockPart[9];
     public static final MetaTileEntity[] MOB_DUPLICATORS = new MetaTileEntity[9];
+    public static final MetaTileEntity[] LL_ROTOR_HOLDERS = new MetaTileEntity[3];
     private static int id = 1;
     private static int getAvailableMTEID()
     {
@@ -80,6 +82,9 @@ public final class PRMetaTileEntityHandler {
                     String.format("mass_fabricator.%s", PRConstants.V[i + 3])),
                     RecipeMaps.MASS_FABRICATOR_RECIPES,
                     Textures.MULTIBLOCK_WORKABLE_OVERLAY, i + 3, true);
+            LL_ROTOR_HOLDERS[i] = new MetaTileEntityLLRotorHolder(new ResourceLocation(PRConstants.modid,
+                    String.format("ll_rotor_holder.%s", PRConstants.V[i])
+            ), i);
         }
         register(SEMIFLUID_GENERATORS);
         register(AURA_COLLECTORS);
@@ -120,6 +125,7 @@ public final class PRMetaTileEntityHandler {
         register(MECH_IMPORT_HATCHES);
         register(FIREBOXES);
         register(MOB_DUPLICATORS);
+        register(LL_ROTOR_HOLDERS);
         register(new MetaTileEntityCeramicOven(new ResourceLocation(PRConstants.modid, "ceramic_oven")),
                 new MetaTileEntityMechanicalSteamTurbine(new ResourceLocation(PRConstants.modid, "mechanical_steam_turbine")),
                 new MetaTileEntityMechanicalGasTurbine(new ResourceLocation(PRConstants.modid, "mechanical_gas_turbine")),
@@ -130,7 +136,7 @@ public final class PRMetaTileEntityHandler {
                 new MetaTileEntityMechanicalCompressor(new ResourceLocation(PRConstants.modid, "mechanical_compressor")),
                 new MetaTileEntitySteamMechanicsHatch(new ResourceLocation(PRConstants.modid, "steam_mechanical_hatch")),
                 new MetaTileEntityMagicalGenerator(new ResourceLocation(PRConstants.modid, "magical_generator")),
-                new MetaTileEntityStewStoolStove(new ResourceLocation(PRConstants.modid, "stew_stool_stove")),
+                //new MetaTileEntityStewStoolStove(new ResourceLocation(PRConstants.modid, "stew_stool_stove")),
                 new MetaTileEntityStewer(new ResourceLocation(PRConstants.modid, "stewer"))
         );
     }

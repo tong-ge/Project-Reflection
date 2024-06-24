@@ -48,6 +48,7 @@ public class FirstTierMaterials {
     public static Material LIQUID_DEATH;
     public static Material FLUIDIED_MANA;
     public static Material LATEX;
+    public static Material PLATINIZED_ASBESTOS;
     public static void init() {
 
         THAUMIUM = /*MaterialHelper.dynamicBuilder("thaumium")
@@ -231,6 +232,12 @@ public class FirstTierMaterials {
                 .build();
 
          */
+        PLATINIZED_ASBESTOS = MaterialHelper.dynamicBuilder("platinized_asbestos")
+                .dust()
+                .components(new MaterialStack(Materials.Asbestos, 1),
+                        new MaterialStack(Materials.Platinum, 1))
+                .build();
+
     }
 
     public static void orePrefix() {

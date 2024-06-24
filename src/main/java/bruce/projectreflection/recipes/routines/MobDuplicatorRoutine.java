@@ -20,49 +20,6 @@ import static gregtech.api.GTValues.*;
  */
 public class MobDuplicatorRoutine {
     public static void init() {
-        /*
-        RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder()
-                .inputs(new ItemStack(Items.ROTTEN_FLESH, 4))
-                .fluidOutputs(GTFOMaterialHandler.Blood.getFluid(40))
-                .duration(35)
-                .buildAndRegister();
-        RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder()
-                .fluidInputs(GTFOMaterialHandler.Blood.getFluid(160))
-                .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.BandedIron))
-                .EUt(GTValues.VA[GTValues.LV])
-                .duration(40)
-                .buildAndRegister();
-        PRRecipeMaps.SPACE_TIME_SUPPRESSOR.recipeBuilder()
-                .inputs(new ItemStack(Items.ROTTEN_FLESH, 64))
-                .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.Iron, 16))
-                .EUt(GTValues.VA[GTValues.LuV])
-                .duration(1200)
-                .buildAndRegister();
-
-        RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder()
-                .inputs(OreDictUnifier.get(OrePrefix.dust, SecondTierMaterials.PRISMARINE, 2))
-                .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.SiliconDioxide), OreDictUnifier.get(OrePrefix.dust, Materials.Emerald))
-                .chancedOutput(OrePrefix.dust, Materials.Gold, 345, 0)
-                .EUt(GTValues.VA[GTValues.LV])
-                .duration(20)
-                .buildAndRegister();
-        PRRecipeMaps.SPACE_TIME_SUPPRESSOR.recipeBuilder()
-                .inputs(OreDictUnifier.get(OrePrefix.dust, SecondTierMaterials.PRISMARINE, 64))
-                .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.Aluminium, 32),
-                        OreDictUnifier.get(OrePrefix.dust, Materials.Beryllium, 48))
-                .circuitMeta(1)
-                .EUt(GTValues.VA[GTValues.LuV])
-                .duration(1200)
-                .buildAndRegister();
-        PRRecipeMaps.SPACE_TIME_SUPPRESSOR.recipeBuilder()
-                .inputs(OreDictUnifier.get(OrePrefix.dust, SecondTierMaterials.PRISMARINE, 64))
-                .outputs(OreDictUnifier.get(OrePrefix.dust, Materials.Gold, 32))
-                .circuitMeta(2)
-                .EUt(GTValues.VA[GTValues.LuV])
-                .duration(1200)
-                .buildAndRegister();
-
-         */
         PRRecipeMaps.MOB_DUPLICATOR.recipeBuilder()
                 .notConsumable(OreDictUnifier.get(OrePrefix.ingot, Materials.Iron))
                 .EUt(VA[LV])

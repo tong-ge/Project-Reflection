@@ -1,10 +1,7 @@
 package bruce.projectreflection;
 
 import bruce.projectreflection.init.CommonProxy;
-import bruce.projectreflection.init.PRMetaTileEntityHandler;
-import bruce.projectreflection.recipes.ThaumcraftRecipes;
 import gregtech.api.GregTechAPI;
-import gregtech.api.unification.material.Materials;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -27,7 +24,7 @@ import org.apache.logging.log4j.Logger;
         "after:gregtechfoodoption;" +
         "before:thaumicperiphery;" +
         "required-before:pollution", useMetadata = true)
-public class ProjectReflection {
+public class PRLabs {
     public static SoundEvent UPDATE_SUPPRESSOR;
 
     public static Logger logger;
@@ -47,7 +44,7 @@ public class ProjectReflection {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        ThaumcraftRecipes.register();
+        //ThaumcraftRecipes.register();
     }
 
 }

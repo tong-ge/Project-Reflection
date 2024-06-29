@@ -1,10 +1,8 @@
 package bruce.projectreflection.event;
 
 import bruce.projectreflection.PRConstants;
-import bruce.projectreflection.entity.EntityBlackhole;
 import bruce.projectreflection.items.PRMetaItems;
 import bruce.projectreflection.materials.MaterialHelper;
-import bruce.projectreflection.materials.PRStoneType;
 import bruce.projectreflection.recipes.RecipeManager;
 import gregtech.api.GregTechAPI;
 import gregtech.api.event.HighTierEvent;
@@ -50,9 +48,6 @@ public class RegistryEvents {
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        if (Loader.isModLoaded("abyssalcraft")) {
-            PRStoneType.ABYSSAL_STONE.name.getBytes();
-        }
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
@@ -74,6 +69,5 @@ public class RegistryEvents {
 
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityEntry> event) {
-        event.getRegistry().register(EntityBlackhole.ENTRY);
     }
 }

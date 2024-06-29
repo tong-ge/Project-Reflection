@@ -1,7 +1,6 @@
 package bruce.projectreflection.materials;
 
 import bruce.projectreflection.PRConstants;
-import bruce.projectreflection.ProjectReflection;
 import com.meteor.extrabotany.common.block.fluid.ModFluid;
 import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.FluidBuilder;
@@ -9,7 +8,6 @@ import gregtech.api.fluids.FluidState;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.registry.MaterialRegistry;
-import gregtech.common.items.MetaItems;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -66,25 +64,11 @@ public class MaterialHelper {
     }
 
     public static void init() {
-        PROrePrefixes.crystal.toString();
         System.out.println("Registering materials");
         ModFluid.init();
-        ElementMaterials.init();
-        FirstTierMaterials.init();
-        SecondTierMaterials.init();
-        ThirdTierMaterials.init();
-        EssenceMaterials.init();
-        GTMaterials.init();
-        //orePrefix();
     }
 
 
     public static void orePrefix() {
-        ElementMaterials.orePrefix();
-        FirstTierMaterials.orePrefix();
-        SecondTierMaterials.orePrefix();
-        ThirdTierMaterials.orePrefix();
-        MetaItems.addOrePrefix(PROrePrefixes.cluster,
-                PROrePrefixes.crystal);
     }
 }

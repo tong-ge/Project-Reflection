@@ -1,7 +1,7 @@
 package bruce.projectreflection.recipes;
 
 import bruce.projectreflection.PRConstants;
-import bruce.projectreflection.ProjectReflection;
+import bruce.projectreflection.PRLabs;
 import com.google.common.collect.ImmutableList;
 import gregtech.api.GregTechAPI;
 import gregtech.api.recipes.ModHandler;
@@ -15,11 +15,9 @@ import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.registry.MaterialRegistry;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMufflerHatch;
-import knightminer.ceramics.Ceramics;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -96,7 +94,7 @@ public class RecipeRemover {
                 for (ItemStack stack : recipe.getOutputs()) {
                     for (ItemStack wanted : removedRecipes) {
                         if (OreDictionary.itemMatches(wanted, stack, false)) {
-                            ProjectReflection.logger.info("Removing {}", recipe);
+                            PRLabs.logger.info("Removing {}", recipe);
                             recipeMap.removeRecipe(recipe);
                         }
                     }

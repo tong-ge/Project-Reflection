@@ -1,13 +1,8 @@
 package bruce.projectreflection.event;
 
 import bruce.projectreflection.PRConstants;
-import bruce.projectreflection.ProjectReflection;
-import bruce.projectreflection.network.MessageClientSpecialAttack;
-import bruce.projectreflection.network.PRNetwork;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -17,13 +12,10 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-
-import java.util.Map;
-import java.util.TreeMap;
 
 @Mod.EventBusSubscriber(modid = PRConstants.modid)
 public class MiscEvents {
+    /*
     public static Map<Integer, String> torturedPlayers = new TreeMap<>();
 
     @SubscribeEvent
@@ -41,6 +33,8 @@ public class MiscEvents {
             }
         }
     }
+
+     */
 
     @SubscribeEvent
     public static void onPlayerAttack(LivingAttackEvent event) {

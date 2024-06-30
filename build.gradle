@@ -123,7 +123,6 @@ dependencies {
     compileOnly 'org.jetbrains:annotations:24.1.0'
     // Example of deobfuscating a dependency
     implementation "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.684"
-    //implementation rfg.deobf(files('libs/vintagium-mc1.12.2-0.1.jar'))
     implementation rfg.deobf('curse.maven:codechickenlib-242818:2779848')
     implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5121638")
     implementation rfg.deobf("curse.maven:gregtech-food-option-477021:5155451")
@@ -131,11 +130,7 @@ dependencies {
     implementation rfg.deobf("curse.maven:thaumcraft-223628:2629023")
     implementation rfg.deobf("curse.maven:thaumic-periphery-293505:2766866")
     implementation rfg.deobf("curse.maven:gcym-564858:4910674")
-    //implementation rfg.deobf("curse.maven:ceramics-250617:3158763")
-    //implementation rfg.deobf("curse.maven:groovyscript-687577:5120928")
-    //implementation rfg.deobf("curse.maven:abyssalcraft-53686:4856547")
-    //implementation rfg.deobf("curse.maven:acintegration-234851:3425537")
-    //implementation rfg.deobf("curse.maven:mysticalmechanics-300742:3006392")
+    //implementation rfg.deobf("curse.maven:buildcraft-61811:3204475")
     implementation rfg.deobf("curse.maven:had-enough-items-557549:4810661")
     //implementation rfg.deobf("curse.maven:embers-extended-life-936489:5124633")
     implementation rfg.deobf("curse.maven:ae2-extended-life-570458:5147702")

@@ -12,18 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 
 @Mod(modid = PRConstants.modid, dependencies = "required-after:gregtech;" +
-        "required-after:ceramics;" +
-        "required-after:gcym;" +
-        "required-after:thaumcraft;" +
-        "required-after:extrabotany;" +
-        "required-after:mysticalmechanics;" +
-        "after:thermalfoundation;" +
-        "after:abyssalcraft;" +
-        "after:twilightforest;" +
-        "after:draconicevolution;" +
-        "after:gregtechfoodoption;" +
-        "before:thaumicperiphery;" +
-        "required-before:pollution", useMetadata = true)
+        "required-after:gcym;", useMetadata = true)
 public class PRLabs {
     public static SoundEvent UPDATE_SUPPRESSOR;
 

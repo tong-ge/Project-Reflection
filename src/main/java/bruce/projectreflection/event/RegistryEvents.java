@@ -2,6 +2,7 @@ package bruce.projectreflection.event;
 
 import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.items.PRMetaItems;
+import bruce.projectreflection.items.PRTools;
 import bruce.projectreflection.materials.MaterialHelper;
 import bruce.projectreflection.recipes.RecipeManager;
 import gregtech.api.GregTechAPI;
@@ -27,7 +28,9 @@ public class RegistryEvents {
     }
     @SubscribeEvent
     public static void onMaterial(MaterialEvent event) {
+
         MaterialHelper.init();
+        PRTools.init();
     }
 
     @SubscribeEvent
@@ -56,10 +59,9 @@ public class RegistryEvents {
     }
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        if (!PRMetaItems.registered) {
-            event.getRegistry().registerAll(PRMetaItems.INSTANCE);
-            PRMetaItems.INSTANCE.registerSubItems();
-        }
+        event.getRegistry().registerAll(PRMetaItems.INSTANCE);
+        PRMetaItems.INSTANCE.registerSubItems();
+
     }
 
     @SubscribeEvent

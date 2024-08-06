@@ -53,3 +53,8 @@ projectreflection.recipe.aura=Vis consumption:%s vis/run, Extended:%s
 
 projectreflection.firebox.current_heat=Current heat:%s
 projectreflection.firebox.max_heat=Max heat:%s
+
+item.pr.armor.helmet.name=%s Helmet
+item.pr.armor.chestplate.name=%s Chestplate
+item.pr.armor.leggings.name=%s Leggings
+item.pr.armor.boots.name=%s Boots

@@ -5,10 +5,13 @@ import bruce.projectreflection.items.PRMetaItems;
 import bruce.projectreflection.items.PRTools;
 import bruce.projectreflection.materials.MaterialHelper;
 import bruce.projectreflection.recipes.RecipeManager;
+import bruce.projectreflection.recipes.handler.OreProcessingHandler;
+import bruce.projectreflection.recipes.handler.PRToolRecipeHandler;
 import gregtech.api.GregTechAPI;
 import gregtech.api.event.HighTierEvent;
 import gregtech.api.unification.material.event.MaterialEvent;
 import gregtech.api.unification.material.event.PostMaterialEvent;
+import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.loaders.recipe.CraftingComponent;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -67,6 +70,13 @@ public class RegistryEvents {
     @SubscribeEvent
     public static void registerComponents(GregTechAPI.RegisterEvent<CraftingComponent> event) {
         //ProjectReflection.logger.info("Overriding GTCEU Registries...");
+    }
+
+    @SubscribeEvent
+    public static void registerMaterialInfo(GregTechAPI.RegisterEvent<ItemMaterialInfo> event) {
+        //ProjectReflection.logger.info("Overriding GTCEU Registries...");
+        OreProcessingHandler.init();
+        PRToolRecipeHandler.init();
     }
 
     @SubscribeEvent

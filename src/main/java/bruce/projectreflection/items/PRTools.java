@@ -6,10 +6,15 @@ import gregtech.api.GTValues;
 import gregtech.api.items.toolitem.*;
 import gregtech.common.items.ToolItems;
 import gregtech.core.sound.GTSoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 
 public class PRTools {
     public static IGTTool GRINDER;
     public static IGTTool ICE_GUN;
+    public static IGTTool HELMET;
+    public static IGTTool CHESTPLATE;
+    public static IGTTool LEGGINGS;
+    public static IGTTool BOOTS;
 
     public static void init() {
         GRINDER = ToolItems.register(ItemGTSword.Builder.of(PRConstants.modid, "grinder")
@@ -34,5 +39,9 @@ public class PRTools {
                 )
                 .electric(GTValues.HV)
         );
+        HELMET = ToolItems.register(ItemMetalArmor.Builder.of(EntityEquipmentSlot.HEAD, PRConstants.modid, "helmet").toolStats(b -> b));
+        CHESTPLATE = ToolItems.register(ItemMetalArmor.Builder.of(EntityEquipmentSlot.CHEST, PRConstants.modid, "chestplate").toolStats(b -> b));
+        LEGGINGS = ToolItems.register(ItemMetalArmor.Builder.of(EntityEquipmentSlot.LEGS, PRConstants.modid, "leggings").toolStats(b -> b));
+        BOOTS = ToolItems.register(ItemMetalArmor.Builder.of(EntityEquipmentSlot.FEET, PRConstants.modid, "boots").toolStats(b -> b));
     }
 }

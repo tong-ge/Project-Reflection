@@ -62,3 +62,10 @@ item.pr.armor.helmet.name=%s头盔
 item.pr.armor.chestplate.name=%s胸甲
 item.pr.armor.leggings.name=%s护腿
 item.pr.armor.boots.name=%s靴子
+
+item.projectreflection.armor.tooltip.armor=%s 盔甲
+
+projectreflection.firebox.current_heat=Current heat:%s
+
+projectreflection.firebox.max_heat=最大热量:%s
+item.projectreflection.armor.tooltip.toughness=%s 盔甲韧性

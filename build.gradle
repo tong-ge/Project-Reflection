@@ -124,15 +124,13 @@ dependencies {
     // Example of deobfuscating a dependency
     implementation "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.684"
     implementation rfg.deobf('curse.maven:codechickenlib-242818:2779848')
-    implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5121638")
-    implementation rfg.deobf("curse.maven:gregtech-food-option-477021:5155451")
+    implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5519022")//2.8.10
+    implementation rfg.deobf("curse.maven:gregtech-food-option-477021:5778294")//1.12.1
     implementation rfg.deobf("com.azanor.baubles:Baubles:1.12-1.5.2")
     implementation rfg.deobf("curse.maven:thaumcraft-223628:2629023")
     implementation rfg.deobf("curse.maven:thaumic-periphery-293505:2766866")
-    implementation rfg.deobf("curse.maven:gcym-564858:4910674")
-    //implementation rfg.deobf("curse.maven:buildcraft-61811:3204475")
+    implementation rfg.deobf("curse.maven:gcym-564858:5619513")//1.2.11
     implementation rfg.deobf("curse.maven:had-enough-items-557549:4810661")
-    //implementation rfg.deobf("curse.maven:embers-extended-life-936489:5124633")
     implementation rfg.deobf("curse.maven:ae2-extended-life-570458:5147702")
     compileOnly rfg.deobf("curse.maven:ender-core-231868:4671384")
     implementation rfg.deobf("vazkii.botania:Botania:r1.10-364.5")
@@ -140,11 +138,10 @@ dependencies {
     implementation rfg.deobf("curse.maven:ae2-fluid-crafting-rework-623955:5310089")
     runtimeOnly(rfg.deobf("curse.maven:tickrate-changer-230233:2482684"))
     implementation rfg.deobf("curse.maven:aether-255308:5035622")
-    //compileOnly("curse.maven:gregtech-ce-unofficial-557242:5121638")
-    //implementation rfg.deobf(files("libs/Pollution-1.0.jar"))
+    implementation rfg.deobf("curse.maven:groovyscript-687577:5789690")
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:
-        String mixin = modUtils.enableMixins('zone.rong:mixinbooter:8.8', "mixins.${project.archives_base_name}.refmap.json")
+        String mixin = modUtils.enableMixins('zone.rong:mixinbooter:9.1', "mixins.${project.archives_base_name}.refmap.json")
         api (mixin) {
             transitive = false
         }

@@ -13,7 +13,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-
+/*
 public class ToolBehaviorIceBall implements IToolBehavior {
     public static IToolBehavior INSTANCE = new ToolBehaviorIceBall();
 
@@ -40,3 +40,5 @@ public class ToolBehaviorIceBall implements IToolBehavior {
         return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
     }
 }
+
+ */

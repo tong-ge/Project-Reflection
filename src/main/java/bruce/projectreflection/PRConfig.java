@@ -6,4 +6,6 @@ import net.minecraftforge.common.config.Config;
 public class PRConfig {
     public static double EU_TO_R = 4L;
     public static boolean disruptRecipes = false;
+    public static boolean debug = PRConstants.inDev;
+    public static boolean verboseDebug = false;
 }

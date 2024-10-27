@@ -10,6 +10,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+
 
 @Mod(modid = PRConstants.modid, dependencies = "required-after:gregtech;" +
         "required-after:gcym;", useMetadata = true)
@@ -19,6 +21,7 @@ public class PRLabs {
     public static Logger logger;
     @SidedProxy(modId = PRConstants.modid, clientSide = "bruce.projectreflection.client.ClientProxy", serverSide = "bruce.projectreflection.init.CommonProxy")
     public static CommonProxy proxy;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {

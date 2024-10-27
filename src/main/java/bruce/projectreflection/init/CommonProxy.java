@@ -1,5 +1,6 @@
 package bruce.projectreflection.init;
 
+import bruce.projectreflection.materials.MaterialHelper;
 import bruce.projectreflection.network.PRNetwork;
 import gregtech.common.items.MetaItems;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -8,5 +9,6 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         PRNetwork.registerPackets();
         PRMetaTileEntityHandler.registerAllMetaTileEntities();
+        MaterialHelper.initIDMap();
     }
 }

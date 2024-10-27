@@ -58,3 +58,6 @@ item.pr.armor.helmet.name=%s Helmet
 item.pr.armor.chestplate.name=%s Chestplate
 item.pr.armor.leggings.name=%s Leggings
 item.pr.armor.boots.name=%s Boots
+
+item.projectreflection.armor.tooltip.armor=%s Armor
+item.projectreflection.armor.tooltip.toughness=%s Toughness

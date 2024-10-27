@@ -1,7 +1,7 @@
 package bruce.projectreflection.items;
 
 import bruce.projectreflection.PRConstants;
-import bruce.projectreflection.items.behaviors.ToolBehaviorIceBall;
+//import bruce.projectreflection.items.behaviors.ToolBehaviorIceBall;
 import gregtech.api.GTValues;
 import gregtech.api.items.toolitem.*;
 import gregtech.common.items.ToolItems;
@@ -10,7 +10,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 
 public class PRTools {
     public static IGTTool GRINDER;
-    public static IGTTool ICE_GUN;
+    //public static IGTTool ICE_GUN;
     public static IGTTool HELMET;
     public static IGTTool CHESTPLATE;
     public static IGTTool LEGGINGS;
@@ -30,6 +30,7 @@ public class PRTools {
                 .toolClasses(ToolClasses.FILE, ToolClasses.SWORD)
                 .electric(GTValues.LV)
         );
+        /*
         ICE_GUN = ToolItems.register(ItemGTTool.Builder.of(PRConstants.modid, "ice_gun")
                 .toolStats(b -> b.attacking()
                         .attackDamage(3.0f)
@@ -39,6 +40,8 @@ public class PRTools {
                 )
                 .electric(GTValues.HV)
         );
+
+         */
         HELMET = ToolItems.register(ItemMetalArmor.Builder.of(EntityEquipmentSlot.HEAD, PRConstants.modid, "helmet").toolStats(b -> b));
         CHESTPLATE = ToolItems.register(ItemMetalArmor.Builder.of(EntityEquipmentSlot.CHEST, PRConstants.modid, "chestplate").toolStats(b -> b));
         LEGGINGS = ToolItems.register(ItemMetalArmor.Builder.of(EntityEquipmentSlot.LEGS, PRConstants.modid, "leggings").toolStats(b -> b));

@@ -9,6 +9,9 @@ import gregtech.api.items.toolitem.ToolBuilder;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.util.LocalizationUtils;
+import gregtech.api.util.TextFormattingUtil;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -19,7 +22,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,6 +36,9 @@ import java.util.function.Supplier;
 
 import static gregtech.api.items.toolitem.ToolHelper.getToolTag;
 
+/**
+ * @author tong-ge
+ */
 public class ItemMetalArmor extends ItemArmor implements IGTTool {
     private static final UUID[] ARMOR_MODIFIERS = new UUID[]{UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"),
             UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"),
@@ -230,5 +239,13 @@ public class ItemMetalArmor extends ItemArmor implements IGTTool {
                 return new ItemMetalArmor(slot, this.domain, this.id, this.tier, this.toolStats, this.markerItem);
             };
         }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        definition$addInformation(stack, worldIn, tooltip, flagIn);
+        tooltip.add(I18n.format("item.projectreflection.armor.tooltip.armor", TextFormattingUtil.formatNumbers(getArmorValue(this.armorType, stack))));
+        tooltip.add(I18n.format("item.projectreflection.armor.tooltip.toughness", TextFormattingUtil.formatNumbers(getArmorToughness(this.armorType, stack))));
     }
 }

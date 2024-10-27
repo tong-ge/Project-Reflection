@@ -1,5 +1,6 @@
 package bruce.projectreflection;
 
+import com.google.gson.Gson;
 import gregtech.api.GTValues;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -20,6 +21,7 @@ public class PRConstants {
             return new ItemStack(Blocks.COMMAND_BLOCK);
         }
     };
-    public static final Random rand=new Random();
+    public static final Random structureRandom = new Random();
     public static final String TAG_ITEMSTACK_TO_DROP = "projectreflection:mobDuplicatorItemStackToDrop";
+    public static final Gson gson = new Gson();
 }

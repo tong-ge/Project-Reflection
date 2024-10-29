@@ -4,6 +4,7 @@ import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.items.PRMetaItems;
 import bruce.projectreflection.items.PRTools;
 import bruce.projectreflection.materials.MaterialHelper;
+import bruce.projectreflection.materials.PRMaterials;
 import bruce.projectreflection.recipes.RecipeManager;
 import bruce.projectreflection.recipes.handler.OreProcessingHandler;
 import bruce.projectreflection.recipes.handler.PRToolRecipeHandler;
@@ -33,6 +34,7 @@ public class RegistryEvents {
     public static void onMaterial(MaterialEvent event) {
 
         MaterialHelper.init();
+        PRMaterials.init();
         PRTools.init();
     }
 

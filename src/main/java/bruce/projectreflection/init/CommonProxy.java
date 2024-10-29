@@ -9,6 +9,5 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         PRNetwork.registerPackets();
         PRMetaTileEntityHandler.registerAllMetaTileEntities();
-        MaterialHelper.initIDMap();
     }
 }

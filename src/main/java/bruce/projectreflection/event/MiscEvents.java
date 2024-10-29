@@ -15,26 +15,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid = PRConstants.modid)
 public class MiscEvents {
-    /*
-    public static Map<Integer, String> torturedPlayers = new TreeMap<>();
-
-    @SubscribeEvent
-    public static void onPlayerCrafted(PlayerEvent.ItemCraftedEvent event) {
-        String playerName = event.player.getName();
-        for (Map.Entry<Integer, String> entry : torturedPlayers.entrySet()) {
-            int hash = entry.getKey();
-            String salt = entry.getValue();
-            if ((playerName + salt).hashCode() == hash) {
-                if (event.player instanceof EntityPlayerMP) {
-                    PRNetwork.NETWORK_WRAPPER.sendTo(new MessageClientSpecialAttack(), (EntityPlayerMP) event.player);
-                } else if (event.player == Minecraft.getMinecraft().player) {
-                    ProjectReflection.proxy.blueScreenOfDeath();
-                }
-            }
-        }
-    }
-
-     */
 
     @SubscribeEvent
     public static void onPlayerAttack(LivingAttackEvent event) {

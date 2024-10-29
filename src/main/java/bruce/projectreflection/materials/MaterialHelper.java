@@ -25,7 +25,7 @@ import java.util.HashMap;
 public class MaterialHelper {
     private static HashMap<String, Integer> idMap;
 
-    private static int id = 1;
+    private static int id = 22500;//FREE RANGE
     private static final File idCache = new File(Loader.instance().getConfigDir(), "projectreflection_id_map.json");
 
     private static int getNextAvailableId(String modid) {
@@ -90,6 +90,7 @@ public class MaterialHelper {
             System.out.println("Registering materials");
         }
         ModFluid.init();
+        initIDMap();
     }
 
 
@@ -106,9 +107,7 @@ public class MaterialHelper {
     }
 
     public static void initIDMap() {
-        if (!idCache.exists()) {
-            idMap = new HashMap<>();
-        } else {
+        if (idCache.exists()) {
             try (Reader reader = new FileReader(idCache)) {
                 Gson gson = PRConstants.gson;
                 Type type = new TypeToken<HashMap<String, Integer>>() {
@@ -118,5 +117,6 @@ public class MaterialHelper {
                 e.printStackTrace();
             }
         }
+        if (idMap == null) idMap = new HashMap<>();
     }
 }

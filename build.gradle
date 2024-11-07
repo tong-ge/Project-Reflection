@@ -139,6 +139,7 @@ dependencies {
     runtimeOnly(rfg.deobf("curse.maven:tickrate-changer-230233:2482684"))
     implementation rfg.deobf("curse.maven:aether-255308:5035622")
     implementation rfg.deobf("curse.maven:groovyscript-687577:5789690")
+    implementation rfg.deobf("curse.maven:attributefix-280510:4427962")
     if (project.use_mixins.toBoolean()) {
         // Change your mixin refmap name here:
         String mixin = modUtils.enableMixins('zone.rong:mixinbooter:9.1', "mixins.${project.archives_base_name}.refmap.json")

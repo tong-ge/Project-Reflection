@@ -58,10 +58,10 @@ item.material.oreprefix.oreDark=黑暗之地%s矿石
 item.material.oreprefix.crystal=%s结晶体
 item.material.oreprefix.cluster=%s原矿簇
 
-item.pr.armor.helmet.name=%s头盔
-item.pr.armor.chestplate.name=%s胸甲
-item.pr.armor.leggings.name=%s护腿
-item.pr.armor.boots.name=%s靴子
+metaitem.helmet.name=%s头盔
+metaitem.chestplate.name=%s胸甲
+metaitem.leggings.name=%s护腿
+metaitem.boots.name=%s靴子
 
 item.projectreflection.armor.tooltip.armor=%s 盔甲
 

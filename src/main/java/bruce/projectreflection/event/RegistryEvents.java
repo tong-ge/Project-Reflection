@@ -1,6 +1,7 @@
 package bruce.projectreflection.event;
 
 import bruce.projectreflection.PRConstants;
+import bruce.projectreflection.items.ItemMetalArmor;
 import bruce.projectreflection.items.PRMetaItems;
 import bruce.projectreflection.items.PRTools;
 import bruce.projectreflection.materials.MaterialHelper;
@@ -65,7 +66,9 @@ public class RegistryEvents {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(PRMetaItems.INSTANCE);
+        event.getRegistry().registerAll(ItemMetalArmor.INSTANCE);
         PRMetaItems.INSTANCE.registerSubItems();
+        ItemMetalArmor.INSTANCE.registerSubItems();
 
     }
 

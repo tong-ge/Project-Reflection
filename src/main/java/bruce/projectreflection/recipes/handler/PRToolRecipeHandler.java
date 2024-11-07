@@ -1,35 +1,47 @@
 package bruce.projectreflection.recipes.handler;
 
-import bruce.projectreflection.items.PRTools;
+import bruce.projectreflection.items.ItemMetalArmor;
+import bruce.projectreflection.materials.properties.PropertyArmor;
+import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
-import gregtech.loaders.recipe.handlers.ToolRecipeHandler;
+import gregtech.common.items.behaviors.AbstractMaterialPartBehavior;
+import net.minecraft.item.ItemStack;
 
 import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_PLATE;
 
 public class PRToolRecipeHandler {
     public static void init() {
-        OrePrefix.plate.addProcessingHandler(PropertyKey.TOOL, PRToolRecipeHandler::processTool);
+        OrePrefix.plate.addProcessingHandler(PropertyArmor.KEY, PRToolRecipeHandler::processTool);
     }
 
-    private static void processTool(OrePrefix prefix, Material material, ToolProperty property) {
+    @SuppressWarnings("rawtypes")
+    private static void addShapedRecipe(Material material, MetaItem.MetaValueItem item, Object... recipe) {
+        ItemStack rotorStack = item.getStackForm();
+        AbstractMaterialPartBehavior.setPartMaterial(rotorStack, material);
+        ModHandler.addShapedRecipe(String.format("%s_%s", item.unlocalizedName, material.getName()), rotorStack, recipe);
+    }
+
+    private static void processTool(OrePrefix prefix, Material material, PropertyArmor property) {
         UnificationEntry plate = new UnificationEntry(OrePrefix.plate, material);
         if (material.hasFlag(GENERATE_PLATE)) {
-            ToolRecipeHandler.addToolRecipe(material, PRTools.HELMET, false,
+            addShapedRecipe(material, ItemMetalArmor.HELMET,
                     "PPP", "PhP",
                     'P', plate);
-            ToolRecipeHandler.addToolRecipe(material, PRTools.CHESTPLATE, false,
+            addShapedRecipe(material, ItemMetalArmor.CHESTPLATE,
                     "PhP", "PPP", "PPP",
                     'P', plate);
-            ToolRecipeHandler.addToolRecipe(material, PRTools.LEGGINGS, false,
+            addShapedRecipe(material, ItemMetalArmor.LEGGINGS,
                     "PPP", "PhP", "P P",
                     'P', plate);
-            ToolRecipeHandler.addToolRecipe(material, PRTools.BOOTS, false,
+            addShapedRecipe(material, ItemMetalArmor.BOOTS,
                     "P P", "PhP",
                     'P', plate);
+
         }
     }
 }

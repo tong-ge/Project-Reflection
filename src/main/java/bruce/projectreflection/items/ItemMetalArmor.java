@@ -1,25 +1,33 @@
 package bruce.projectreflection.items;
 
 import bruce.projectreflection.PRConstants;
+import bruce.projectreflection.items.behaviors.MetalArmorBehavior;
+import bruce.projectreflection.materials.properties.PropertyArmor;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import gregtech.api.items.armor.ArmorMetaItem;
+import gregtech.api.items.armor.IArmorLogic;
 import gregtech.api.items.toolitem.IGTTool;
 import gregtech.api.items.toolitem.IGTToolDefinition;
 import gregtech.api.items.toolitem.ToolBuilder;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.util.LocalizationUtils;
 import gregtech.api.util.TextFormattingUtil;
+import gregtech.common.items.behaviors.AbstractMaterialPartBehavior;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -39,213 +47,89 @@ import static gregtech.api.items.toolitem.ToolHelper.getToolTag;
 /**
  * @author tong-ge
  */
-public class ItemMetalArmor extends ItemArmor implements IGTTool {
-    private static final UUID[] ARMOR_MODIFIERS = new UUID[]{UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"),
-            UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"),
-            UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"),
-            UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")};
-    public static final String ARMOR_VALUE_KEY = "ArmorValue";
-    private final String domain;
-    private final String id;
-    private final int tier;
-    private final IGTToolDefinition toolStats;
-    private final Supplier<ItemStack> markerItem;
+public class ItemMetalArmor extends ArmorMetaItem<ArmorMetaItem<?>.ArmorMetaValueItem> {
+    public static ItemMetalArmor INSTANCE = new ItemMetalArmor();
 
-    public ItemMetalArmor(EntityEquipmentSlot equipmentSlotIn,
-                          String domain,
-                          String id,
-                          int tier,
-                          IGTToolDefinition toolStats,
-                          Supplier<ItemStack> markerItem) {
-        super(ArmorMaterial.IRON, 0, equipmentSlotIn);
-        this.domain = domain;
-        this.id = id;
-        this.tier = tier;
-        this.toolStats = toolStats;
-        this.markerItem = markerItem;
-        this.setMaxStackSize(1);
-        this.setCreativeTab(PRConstants.tab);
-        this.setTranslationKey("pr.armor." + id + ".name");
-        this.setRegistryName(domain, id);
+    private ItemMetalArmor() {
+        setRegistryName(PRConstants.modid, "pr_meta_armor");
+        setCreativeTab(PRConstants.tab);
     }
 
-    public boolean hasColor(ItemStack stack) {
-        ToolProperty toolProperty = this.getToolProperty(stack);
-        return toolProperty != null;
-    }
-
-    /**
-     * Return the color for the specified armor ItemStack.
-     */
-    public int getColor(ItemStack stack) {
-        if (!this.hasColor(stack)) {
-            return 16777215;
-        } else {
-            Material material = this.getToolMaterial(stack);
-            return material.getMaterialRGB();
-        }
-    }
+    public static ArmorMetaItem<?>.ArmorMetaValueItem HELMET;
+    public static ArmorMetaItem<?>.ArmorMetaValueItem CHESTPLATE;
+    public static ArmorMetaItem<?>.ArmorMetaValueItem LEGGINGS;
+    public static ArmorMetaItem<?>.ArmorMetaValueItem BOOTS;
 
     @Override
-    public String getDomain() {
-        return this.domain;
+    public void registerSubItems() {
+        HELMET = this.addItem(1, "helmet").setArmorLogic(new Logic(EntityEquipmentSlot.HEAD));
+        CHESTPLATE = this.addItem(2, "chestplate").setArmorLogic(new Logic(EntityEquipmentSlot.CHEST));
+        LEGGINGS = this.addItem(3, "leggings").setArmorLogic(new Logic(EntityEquipmentSlot.LEGS));
+        BOOTS = this.addItem(4, "boots").setArmorLogic(new Logic(EntityEquipmentSlot.FEET));
     }
 
-    @Override
-    public String getToolId() {
-        return this.id;
-    }
+    private static class Logic implements IArmorLogic {
+        private static final UUID[] ARMOR_MODIFIERS = new UUID[]{UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"),
+                UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"),
+                UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"),
+                UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")};
+        private final EntityEquipmentSlot armorType;
+        private final MetalArmorBehavior behavior;
 
-    @Override
-    public boolean isElectric() {
-        return tier > -1;
-    }
-
-    @Override
-    public int getElectricTier() {
-        return tier;
-    }
-
-    @Override
-    public IGTToolDefinition getToolStats() {
-        return toolStats;
-    }
-
-    @Override
-    public @Nullable SoundEvent getSound() {
-        return null;
-    }
-
-    @Override
-    public boolean playSoundOnBlockDestroy() {
-        return false;
-    }
-
-    @Override
-    public @Nullable String getOreDictName() {
-        return null;
-    }
-
-    @Override
-    public @NotNull List<String> getSecondaryOreDicts() {
-        return Collections.EMPTY_LIST;
-    }
-
-    @Override
-    public @Nullable Supplier<ItemStack> getMarkerItem() {
-        return markerItem;
-    }
-
-    public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
-        if (this.isInCreativeTab(tab)) {
-            this.definition$getSubItems(items);
+        public Logic(EntityEquipmentSlot slot) {
+            this.armorType = slot;
+            behavior = new MetalArmorBehavior(slot);
         }
 
-    }
-
-    public @NotNull String getItemStackDisplayName(@NotNull ItemStack stack) {
-        return LocalizationUtils.format(this.getTranslationKey(), this.getToolMaterial(stack).getLocalizedName());
-    }
-
-    @Override
-    public int getItemEnchantability(ItemStack stack) {
-        return getTotalEnchantability(stack);
-    }
-
-    @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return definition$getIsRepairable(toRepair, repair);
-    }
-
-    @Nullable
-    @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-        return String.format("%s:textures/models/armor/%s_layer_%d%s.png", domain, "metal", (slot == EntityEquipmentSlot.LEGS ? 2 : 1), type == null ? "" : String.format("_%s", type));
-    }
-
-    @Override
-    public boolean hasOverlay(ItemStack stack) {
-        return super.hasOverlay(stack);
-    }
-
-    private double getArmorValue(EntityEquipmentSlot slot, ItemStack stack) {
-        NBTTagCompound toolTag = getToolTag(stack);
-        if (toolTag.hasKey(ARMOR_VALUE_KEY, Constants.NBT.TAG_FLOAT)) {
-            return toolTag.getDouble(ARMOR_VALUE_KEY);
-        }
-        double armorValue = (double) ArmorMaterial.IRON.getDamageReductionAmount(slot)
-                * getMaterialAttackDamage(stack)
-                / ToolMaterial.IRON.getAttackDamage();
-
-        toolTag.setDouble(ARMOR_VALUE_KEY, armorValue);
-        return armorValue;
-    }
-
-    private double getArmorToughness(EntityEquipmentSlot slot, ItemStack stack) {
-        return Math.max(0.0, getTotalHarvestLevel(stack) - 1);
-    }
-
-    @Override
-    public @NotNull Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
-        Multimap<String, AttributeModifier> multimap = HashMultimap.create();
-
-        if (slot == this.armorType) {
-            multimap.put(SharedMonsterAttributes.ARMOR.getName(),
-                    new AttributeModifier(ARMOR_MODIFIERS[slot.getIndex()], "Armor modifier",
-                            getArmorValue(slot, stack), 0));
-            multimap.put(SharedMonsterAttributes.ARMOR_TOUGHNESS.getName(),
-                    new AttributeModifier(ARMOR_MODIFIERS[slot.getIndex()], "Armor toughness",
-                            getArmorToughness(slot, stack), 0));
+        @Override
+        public void addToolComponents(ArmorMetaItem.ArmorMetaValueItem metaValueItem) {
+            metaValueItem.addComponents(behavior);
         }
 
-        return multimap;
-    }
-
-    public int getDamage(@NotNull ItemStack stack) {
-        return this.definition$getDamage(stack);
-    }
-
-    public int getMaxDamage(@NotNull ItemStack stack) {
-        return this.definition$getMaxDamage(stack);
-    }
-
-    public void setDamage(@NotNull ItemStack stack, int damage) {
-        this.definition$setDamage(stack, damage);
-    }
-
-    public boolean showDurabilityBar(@NotNull ItemStack stack) {
-        return false;
-    }
-
-    public double getDurabilityForDisplay(@NotNull ItemStack stack) {
-        return this.definition$getDurabilityForDisplay(stack);
-    }
-
-    public static class Builder extends ToolBuilder<ItemMetalArmor> {
-        private final EntityEquipmentSlot slot;
-
-        @NotNull
-        public static ItemMetalArmor.Builder of(@NotNull EntityEquipmentSlot slot, @NotNull String domain, @NotNull String id) {
-            return new ItemMetalArmor.Builder(slot, domain, id);
+        @Override
+        public EntityEquipmentSlot getEquipmentSlot(ItemStack itemStack) {
+            return armorType;
         }
 
-        public Builder(@NotNull EntityEquipmentSlot slot, @NotNull String domain, @NotNull String id) {
-            super(domain, id);
-            this.slot = slot;
+        @Override
+        public boolean canBreakWithDamage(ItemStack stack) {
+            return true;
         }
 
-        public Supplier<ItemMetalArmor> supply() {
-            return () -> {
-                return new ItemMetalArmor(slot, this.domain, this.id, this.tier, this.toolStats, this.markerItem);
-            };
+        @Override
+        public void damageArmor(EntityLivingBase entity, ItemStack itemStack, DamageSource source, int damage, EntityEquipmentSlot equipmentSlot) {
+            behavior.applyArmorDamage(itemStack, damage);
         }
-    }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        definition$addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(I18n.format("item.projectreflection.armor.tooltip.armor", TextFormattingUtil.formatNumbers(getArmorValue(this.armorType, stack))));
-        tooltip.add(I18n.format("item.projectreflection.armor.tooltip.toughness", TextFormattingUtil.formatNumbers(getArmorToughness(this.armorType, stack))));
+        @Override
+        public @NotNull Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+            Multimap<String, AttributeModifier> multimap = HashMultimap.create();
+
+            if (slot == this.armorType) {
+                multimap.put(SharedMonsterAttributes.ARMOR.getName(),
+                        new AttributeModifier(ARMOR_MODIFIERS[slot.getIndex()], "Armor modifier",
+                                getArmorValue(slot, stack), 0));
+                multimap.put(SharedMonsterAttributes.ARMOR_TOUGHNESS.getName(),
+                        new AttributeModifier(ARMOR_MODIFIERS[slot.getIndex()], "Armor toughness",
+                                getArmorToughness(slot, stack), 0));
+            }
+
+            return multimap;
+        }
+
+        private double getArmorValue(EntityEquipmentSlot slot, ItemStack stack) {
+            PropertyArmor property = AbstractMaterialPartBehavior.getPartMaterial(stack).getProperty(PropertyArmor.KEY);
+            return property.getArmorValue(slot);
+        }
+
+        private double getArmorToughness(EntityEquipmentSlot slot, ItemStack stack) {
+            PropertyArmor property = AbstractMaterialPartBehavior.getPartMaterial(stack).getProperty(PropertyArmor.KEY);
+            return property.getArmorToughness(slot);
+        }
+
+        @Override
+        public String getArmorTexture(ItemStack itemStack, Entity entity, EntityEquipmentSlot entityEquipmentSlot, String s) {
+            return String.format("projectreflection:textures/models/armor/%s_layer_%d%s.png", "metal", (entityEquipmentSlot == EntityEquipmentSlot.LEGS ? 2 : 1), s == null ? "" : s);
+        }
     }
 }

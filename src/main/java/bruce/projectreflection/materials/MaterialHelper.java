@@ -3,6 +3,8 @@ package bruce.projectreflection.materials;
 import bruce.projectreflection.PRConfig;
 import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.PRLabs;
+import bruce.projectreflection.materials.properties.PropertyArmor;
+import bruce.projectreflection.misc.DynamicRegistryHandler;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.meteor.extrabotany.common.block.fluid.ModFluid;
@@ -11,6 +13,7 @@ import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.FluidState;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.registry.MaterialRegistry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
@@ -22,15 +25,14 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
-/**
- * @author tong-ge
- */
+
 public class MaterialHelper {
-    private static HashMap<String, Integer> idMap;
+    //private static HashMap<String, Integer> idMap;
+    private static DynamicRegistryHandler<String, Material> registryHandler;
 
-    private static int id = 22500;//FREE RANGE
-    private static final File idCache = new File(Loader.instance().getConfigDir(), "projectreflection_id_map.json");
-
+    //private static int id = 22500;//FREE RANGE
+    //private static final File idCache = new File(Loader.instance().getConfigDir(), "projectreflection_id_map.json");
+/*
     private static int getNextAvailableId(String modid) {
         MaterialRegistry registry = GregTechAPI.materialManager.getRegistry(modid);
         while (id < 32000) {
@@ -42,14 +44,20 @@ public class MaterialHelper {
         }
         throw new ArrayIndexOutOfBoundsException();
     }
-
+*/
     private static int retrieveIdForName(ResourceLocation name) {
+        /*
         Integer id = idMap.get(name.toString());
         if (id == null) {
             id = getNextAvailableId(name.getNamespace());
             idMap.put(name.toString(), id);
         }
         return id;
+         */
+        if (!PRConstants.modid.equals(name.getNamespace())) {
+            throw new IllegalArgumentException("only supports projectreflection materials");
+        }
+        return registryHandler.retrieveIdForName(name.toString());
     }
 
     public static Material.Builder dynamicBuilder(String modid, String name, boolean autoFluid, @Nullable FluidBuilder fallback, boolean gaseous) {
@@ -98,6 +106,7 @@ public class MaterialHelper {
 
 
     public static void orePrefix() {
+        /*
         try (Writer writer = new FileWriter(idCache)) {
             Gson gson = new Gson();
             gson.toJson(idMap, writer);
@@ -107,9 +116,17 @@ public class MaterialHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
+         */
+        registryHandler.writeRegistryToFile();
+
+        Materials.Neutronium.setProperty(PropertyArmor.KEY, new PropertyArmor(1024, 65535, 5));
+        Materials.Iron.setProperty(PropertyArmor.KEY, new PropertyArmor(new double[]{2.0, 5.0, 6.0, 2.0}, new int[]{195, 225, 240, 165}).setEnchantability(9));
+        Materials.Gold.setProperty(PropertyArmor.KEY, new PropertyArmor(new double[]{1.0, 3.0, 5.0, 2.0}, new int[]{91, 105, 112, 77}).setEnchantability(25));
+        //Materials.HSSE.setProperty(PropertyArmor.KEY,new PropertyArmor(20,3072,3).setEnchantability(20));
     }
 
     public static void initIDMap() {
+        /*
         if (idCache.exists()) {
             try (Reader reader = new FileReader(idCache)) {
                 Gson gson = PRConstants.gson;
@@ -121,5 +138,9 @@ public class MaterialHelper {
             }
         }
         if (idMap == null) idMap = new HashMap<>();
+         */
+        registryHandler = new DynamicRegistryHandler<>(GregTechAPI.materialManager.getRegistry(PRConstants.modid),
+                22050, 32000,
+                new File(Loader.instance().getConfigDir(), "projectreflection_material_id_map.json"));
     }
 }

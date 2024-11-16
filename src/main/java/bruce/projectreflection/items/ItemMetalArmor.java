@@ -2,47 +2,22 @@ package bruce.projectreflection.items;
 
 import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.items.behaviors.MetalArmorBehavior;
-import bruce.projectreflection.materials.properties.PropertyArmor;
+import bruce.projectreflection.materials.properties.ArmorProperty;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import gregtech.api.items.armor.ArmorMetaItem;
 import gregtech.api.items.armor.IArmorLogic;
-import gregtech.api.items.toolitem.IGTTool;
-import gregtech.api.items.toolitem.IGTToolDefinition;
-import gregtech.api.items.toolitem.ToolBuilder;
-import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.properties.PropertyKey;
-import gregtech.api.unification.material.properties.ToolProperty;
-import gregtech.api.util.LocalizationUtils;
-import gregtech.api.util.TextFormattingUtil;
 import gregtech.common.items.behaviors.AbstractMaterialPartBehavior;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
-import java.util.function.Supplier;
-
-import static gregtech.api.items.toolitem.ToolHelper.getToolTag;
 
 /**
  * @author tong-ge
@@ -53,6 +28,11 @@ public class ItemMetalArmor extends ArmorMetaItem<ArmorMetaItem<?>.ArmorMetaValu
     private ItemMetalArmor() {
         setRegistryName(PRConstants.modid, "pr_meta_armor");
         setCreativeTab(PRConstants.tab);
+    }
+
+    @Override
+    public int getItemEnchantability(@NotNull ItemStack stack) {
+        return AbstractMaterialPartBehavior.getPartMaterial(stack).getProperty(ArmorProperty.KEY).getEnchantability();
     }
 
     public static ArmorMetaItem<?>.ArmorMetaValueItem HELMET;
@@ -118,12 +98,12 @@ public class ItemMetalArmor extends ArmorMetaItem<ArmorMetaItem<?>.ArmorMetaValu
         }
 
         private double getArmorValue(EntityEquipmentSlot slot, ItemStack stack) {
-            PropertyArmor property = AbstractMaterialPartBehavior.getPartMaterial(stack).getProperty(PropertyArmor.KEY);
+            ArmorProperty property = AbstractMaterialPartBehavior.getPartMaterial(stack).getProperty(ArmorProperty.KEY);
             return property.getArmorValue(slot);
         }
 
         private double getArmorToughness(EntityEquipmentSlot slot, ItemStack stack) {
-            PropertyArmor property = AbstractMaterialPartBehavior.getPartMaterial(stack).getProperty(PropertyArmor.KEY);
+            ArmorProperty property = AbstractMaterialPartBehavior.getPartMaterial(stack).getProperty(ArmorProperty.KEY);
             return property.getArmorToughness(slot);
         }
 
@@ -131,5 +111,11 @@ public class ItemMetalArmor extends ArmorMetaItem<ArmorMetaItem<?>.ArmorMetaValu
         public String getArmorTexture(ItemStack itemStack, Entity entity, EntityEquipmentSlot entityEquipmentSlot, String s) {
             return String.format("projectreflection:textures/models/armor/%s_layer_%d%s.png", "metal", (entityEquipmentSlot == EntityEquipmentSlot.LEGS ? 2 : 1), s == null ? "" : s);
         }
+
+        @Override
+        public int getArmorLayerColor(ItemStack itemStack, int layerIndex) {
+            return behavior.getItemStackColor(itemStack, 0);
+        }
+
     }
 }

@@ -1,14 +1,23 @@
 package bruce.projectreflection.init;
 
+import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.PRLabs;
 import bruce.projectreflection.misc.DynamicRegistryHandler;
+import bruce.projectreflection.recipes.handler.PRRecipeMaps;
+import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.metatileentity.MetaTileEntity;
+import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
+import gregtech.api.recipes.RecipeMaps;
+import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.MetaTileEntities;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public final class PRMetaTileEntityHandler {
@@ -48,6 +57,9 @@ public final class PRMetaTileEntityHandler {
     }
     public static void registerAllMetaTileEntities()
     {
-
+        register(IntStream.range(1, 9).mapToObj(i -> new SimpleMachineMetaTileEntity(
+                new ResourceLocation(PRConstants.modid, "dehydrator." + GTValues.VN[i].toLowerCase()),
+                PRRecipeMaps.DEHYDRATOR_RECIPES,
+                Textures.MULTIBLOCK_WORKABLE_OVERLAY, i, true)).toArray(SimpleMachineMetaTileEntity[]::new));
     }
 }

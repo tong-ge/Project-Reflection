@@ -2,11 +2,8 @@ package bruce.projectreflection.materials;
 
 import bruce.projectreflection.PRConfig;
 import bruce.projectreflection.PRConstants;
-import bruce.projectreflection.PRLabs;
-import bruce.projectreflection.materials.properties.PropertyArmor;
+import bruce.projectreflection.materials.properties.ArmorProperty;
 import bruce.projectreflection.misc.DynamicRegistryHandler;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.meteor.extrabotany.common.block.fluid.ModFluid;
 import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.FluidBuilder;
@@ -14,7 +11,6 @@ import gregtech.api.fluids.FluidState;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.material.registry.MaterialRegistry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -22,8 +18,6 @@ import net.minecraftforge.fml.common.Loader;
 
 import javax.annotation.Nullable;
 import java.io.*;
-import java.lang.reflect.Type;
-import java.util.HashMap;
 
 
 public class MaterialHelper {
@@ -118,10 +112,7 @@ public class MaterialHelper {
         }
          */
         registryHandler.writeRegistryToFile();
-
-        Materials.Neutronium.setProperty(PropertyArmor.KEY, new PropertyArmor(1024, 65535, 5));
-        Materials.Iron.setProperty(PropertyArmor.KEY, new PropertyArmor(new double[]{2.0, 5.0, 6.0, 2.0}, new int[]{195, 225, 240, 165}).setEnchantability(9));
-        Materials.Gold.setProperty(PropertyArmor.KEY, new PropertyArmor(new double[]{1.0, 3.0, 5.0, 2.0}, new int[]{91, 105, 112, 77}).setEnchantability(25));
+        MaterialMutations.onOrePrefix();
         //Materials.HSSE.setProperty(PropertyArmor.KEY,new PropertyArmor(20,3072,3).setEnchantability(20));
     }
 

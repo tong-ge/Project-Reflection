@@ -2,6 +2,7 @@ package bruce.projectreflection.misc;
 
 import bruce.projectreflection.PRConfig;
 import bruce.projectreflection.PRConstants;
+import com.google.common.collect.HashBiMap;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import gregtech.api.util.GTControlledRegistry;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 public class DynamicRegistryHandler<K, V> {
     private int currentId;
     private final int endId;
-    private HashMap<K, Integer> idMap;
+    private HashBiMap<K, Integer> idMap;
     private final GTControlledRegistry<K, V> registry;
     private final File idCache;
 
@@ -29,14 +30,14 @@ public class DynamicRegistryHandler<K, V> {
         if (idCache.exists()) {
             try (Reader reader = new FileReader(idCache)) {
                 Gson gson = PRConstants.gson;
-                Type type = new TypeToken<HashMap<String, Integer>>() {
+                Type type = new TypeToken<HashMap<K, Integer>>() {
                 }.getType();
-                idMap = gson.fromJson(reader, type);  // 从文件中读取 JSON 并转换为 HashMap
+                idMap = HashBiMap.create(gson.fromJson(reader, type));  // 从文件中读取 JSON 并转换为 HashMap
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        if (idMap == null) idMap = new HashMap<>();
+        if (idMap == null) idMap = HashBiMap.create();
     }
 
     private int getNextAvailableId() {

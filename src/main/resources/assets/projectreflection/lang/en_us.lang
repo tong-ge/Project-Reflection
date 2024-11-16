@@ -61,3 +61,6 @@ metaitem.boots.name=%s Boots
 
 item.projectreflection.armor.tooltip.armor=%s Armor
 item.projectreflection.armor.tooltip.toughness=%s Toughness
+
+projectreflection.fluid.sludge=%s Sludge
+projectreflection.fluid.solution=%s Solution

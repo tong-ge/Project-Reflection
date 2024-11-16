@@ -1,12 +1,11 @@
 package bruce.projectreflection.recipes.handler;
 
 import bruce.projectreflection.items.ItemMetalArmor;
-import bruce.projectreflection.materials.properties.PropertyArmor;
+import bruce.projectreflection.items.behaviors.MetalArmorBehavior;
+import bruce.projectreflection.materials.properties.ArmorProperty;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.properties.PropertyKey;
-import gregtech.api.unification.material.properties.ToolProperty;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.behaviors.AbstractMaterialPartBehavior;
@@ -16,17 +15,17 @@ import static gregtech.api.unification.material.info.MaterialFlags.GENERATE_PLAT
 
 public class PRToolRecipeHandler {
     public static void init() {
-        OrePrefix.plate.addProcessingHandler(PropertyArmor.KEY, PRToolRecipeHandler::processTool);
+        OrePrefix.plate.addProcessingHandler(ArmorProperty.KEY, PRToolRecipeHandler::processTool);
     }
 
     @SuppressWarnings("rawtypes")
     private static void addShapedRecipe(Material material, MetaItem.MetaValueItem item, Object... recipe) {
-        ItemStack rotorStack = item.getStackForm();
-        AbstractMaterialPartBehavior.setPartMaterial(rotorStack, material);
-        ModHandler.addShapedRecipe(String.format("%s_%s", item.unlocalizedName, material.getName()), rotorStack, recipe);
+        ItemStack armorStack = item.getStackForm();
+        MetalArmorBehavior.setPartMaterial(armorStack, material);
+        ModHandler.addShapedRecipe(String.format("%s_%s", item.unlocalizedName, material.getName()), armorStack, recipe);
     }
 
-    private static void processTool(OrePrefix prefix, Material material, PropertyArmor property) {
+    private static void processTool(OrePrefix prefix, Material material, ArmorProperty property) {
         UnificationEntry plate = new UnificationEntry(OrePrefix.plate, material);
         if (material.hasFlag(GENERATE_PLATE)) {
             addShapedRecipe(material, ItemMetalArmor.HELMET,

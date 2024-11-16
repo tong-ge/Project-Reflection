@@ -69,3 +69,6 @@ projectreflection.firebox.current_heat=Current heat:%s
 
 projectreflection.firebox.max_heat=最大热量:%s
 item.projectreflection.armor.tooltip.toughness=%s 盔甲韧性
+
+projectreflection.fluid.sludge=%s 浆液
+projectreflection.fluid.solution=%s 溶液

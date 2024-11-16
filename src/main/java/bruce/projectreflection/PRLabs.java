@@ -2,6 +2,7 @@ package bruce.projectreflection;
 
 import bruce.projectreflection.init.CommonProxy;
 import gregtech.api.GregTechAPI;
+import gregtech.api.recipes.RecipeMaps;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -27,6 +28,8 @@ public class PRLabs {
     {
         logger=event.getModLog();
         proxy.preInit(event);
+        RecipeMaps.CENTRIFUGE_RECIPES.setMaxFluidInputs(2);
+        RecipeMaps.MIXER_RECIPES.setMaxOutputs(2);
     }
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)

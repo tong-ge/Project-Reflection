@@ -6,6 +6,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import gregtech.api.util.GTControlledRegistry;
+import net.minecraft.util.ResourceLocation;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 public class DynamicRegistryHandler<K, V> {
     private int currentId;
     private final int endId;
-    private HashBiMap<K, Integer> idMap;
+    private HashBiMap<String, Integer> idMap;
     private final GTControlledRegistry<K, V> registry;
     private final File idCache;
 
@@ -52,10 +53,11 @@ public class DynamicRegistryHandler<K, V> {
     }
 
     public int retrieveIdForName(K name) {
-        Integer id = idMap.get(name);
+        System.out.println("Getting id for " + name);
+        Integer id = idMap.get(name.toString());
         if (id == null) {
             id = getNextAvailableId();
-            idMap.put(name, id);
+            idMap.put(name.toString(), id);
         }
         return id;
     }

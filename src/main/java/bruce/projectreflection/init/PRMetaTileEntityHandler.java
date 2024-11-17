@@ -60,6 +60,6 @@ public final class PRMetaTileEntityHandler {
         register(IntStream.range(1, 9).mapToObj(i -> new SimpleMachineMetaTileEntity(
                 new ResourceLocation(PRConstants.modid, "dehydrator." + GTValues.VN[i].toLowerCase()),
                 PRRecipeMaps.DEHYDRATOR_RECIPES,
-                Textures.MULTIBLOCK_WORKABLE_OVERLAY, i, true)).toArray(SimpleMachineMetaTileEntity[]::new));
+                Textures.FLUID_SOLIDIFIER_OVERLAY, i, true)).toArray(SimpleMachineMetaTileEntity[]::new));
     }
 }

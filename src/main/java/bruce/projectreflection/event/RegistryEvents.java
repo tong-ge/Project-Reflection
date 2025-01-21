@@ -8,6 +8,7 @@ import bruce.projectreflection.materials.MaterialHelper;
 import bruce.projectreflection.materials.PRMaterials;
 import bruce.projectreflection.recipes.RecipeManager;
 import bruce.projectreflection.recipes.handler.OreProcessingHandler;
+import bruce.projectreflection.recipes.handler.PRRecipeMaps;
 import bruce.projectreflection.recipes.handler.PRToolRecipeHandler;
 import gregtech.api.GregTechAPI;
 import gregtech.api.event.HighTierEvent;
@@ -18,19 +19,24 @@ import gregtech.loaders.recipe.CraftingComponent;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
+import thaumcraft.common.lib.SoundsTC;
 
 @Mod.EventBusSubscriber(modid = PRConstants.modid)
 public class RegistryEvents {
+    /*
     @SubscribeEvent
     public static void enableHighTier(HighTierEvent event) {
         event.enableHighTier();
     }
+
+     */
     @SubscribeEvent
     public static void onMaterial(MaterialEvent event) {
 
@@ -86,5 +92,12 @@ public class RegistryEvents {
 
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityEntry> event) {
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
+        if (Loader.isModLoaded("thaumcraft")) {
+            PRRecipeMaps.RESEARCH_TABLE_RECIPES.setSound(SoundsTC.write);
+        }
     }
 }

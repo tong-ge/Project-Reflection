@@ -1,4 +1,4 @@
-package bruce.projectreflection.mixin;
+package bruce.projectreflection.mixin.early;
 
 import bruce.projectreflection.PRConfig;
 import bruce.projectreflection.PRConstants;

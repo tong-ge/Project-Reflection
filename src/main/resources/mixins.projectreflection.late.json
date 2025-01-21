@@ -5,6 +5,7 @@
   "package": "bruce.projectreflection.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinMTELoader"
+    "MixinMTELoader",
+    "MixinMaterial"
   ]
 }

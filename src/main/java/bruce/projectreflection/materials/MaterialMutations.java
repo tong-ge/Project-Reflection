@@ -1,6 +1,7 @@
 package bruce.projectreflection.materials;
 
 import bruce.projectreflection.materials.properties.ArmorProperty;
+import gregicality.multiblocks.api.unification.GCYMMaterialFlags;
 import gregtech.api.GregTechAPI;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.fluids.store.FluidStorageKeys;
@@ -8,6 +9,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.FluidProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.material.properties.WireProperties;
 
 public class MaterialMutations {
     private static void registerArmors() {
@@ -31,8 +33,19 @@ public class MaterialMutations {
         }
     }
 
+    private static void jamSuperconductorRecipes() {
+        for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
+            if (material.hasProperty(PropertyKey.WIRE)) {
+                WireProperties prop = material.getProperty(PropertyKey.WIRE);
+                if (prop.isSuperconductor() || prop.getLossPerBlock() == 0) {
+                    material.addFlags(GCYMMaterialFlags.NO_ALLOY_BLAST_RECIPES);
+                }
+            }
+        }
+    }
     public static void onOrePrefix() {
         registerArmors();
         registerOreFluids();
+        jamSuperconductorRecipes();
     }
 }

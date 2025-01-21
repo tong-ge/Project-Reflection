@@ -2,7 +2,7 @@
   "required": true,
   "refmap": "mixins.projectreflection.refmap.json",
   "minVersion": "0.7.11",
-  "package": "bruce.projectreflection.mixin",
+  "package": "bruce.projectreflection.mixin.early",
   "compatibilityLevel": "JAVA_8",
   "client": [
   ],

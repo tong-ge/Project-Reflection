@@ -22,6 +22,7 @@ public class PRConstants {
         }
     };
     public static final Random structureRandom = new Random();
+    public static final Random generalRandom = new Random();
     public static final String TAG_ITEMSTACK_TO_DROP = "projectreflection:mobDuplicatorItemStackToDrop";
     public static final Gson gson = new Gson();
 }

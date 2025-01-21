@@ -28,8 +28,7 @@ public class PRLabs {
     {
         logger=event.getModLog();
         proxy.preInit(event);
-        RecipeMaps.CENTRIFUGE_RECIPES.setMaxFluidInputs(2);
-        RecipeMaps.MIXER_RECIPES.setMaxOutputs(2);
+
     }
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)

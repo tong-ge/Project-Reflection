@@ -2,6 +2,7 @@ package bruce.projectreflection;
 
 import com.google.gson.Gson;
 import gregtech.api.GTValues;
+import gregtech.api.capability.impl.FluidTankList;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -25,4 +26,5 @@ public class PRConstants {
     public static final Random generalRandom = new Random();
     public static final String TAG_ITEMSTACK_TO_DROP = "projectreflection:mobDuplicatorItemStackToDrop";
     public static final Gson gson = new Gson();
+    public static final FluidTankList dummyFluidTankList = new FluidTankList(false);
 }

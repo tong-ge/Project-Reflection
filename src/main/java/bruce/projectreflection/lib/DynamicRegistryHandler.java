@@ -1,4 +1,4 @@
-package bruce.projectreflection.misc;
+package bruce.projectreflection.lib;
 
 import bruce.projectreflection.PRConfig;
 import bruce.projectreflection.PRConstants;
@@ -6,7 +6,6 @@ import com.google.common.collect.HashBiMap;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import gregtech.api.util.GTControlledRegistry;
-import net.minecraft.util.ResourceLocation;
 
 import java.io.*;
 import java.lang.reflect.Type;

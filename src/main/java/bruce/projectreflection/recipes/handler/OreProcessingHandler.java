@@ -89,60 +89,60 @@ public class OreProcessingHandler {
                 .EUt(GTValues.VA[GTValues.LV])
                 .duration(150)
                 .buildAndRegister();
-        PRRecipeMaps.DEHYDRATOR_RECIPES.recipeBuilder()
-                .fluidInputs(material.getFluid(PRFluidStorageKeys.SOLUTION, 144))
-                .output(OrePrefix.dust, material)
-                .chancedOutput(OrePrefix.dust, material, 5000, 5)
-                .chancedOutput(OrePrefix.dust, property.getOreByProduct(2, material), 2100, 1280)
-                .EUt(GTValues.VA[GTValues.LV])
-                .duration(200)
-                .buildAndRegister();
+//        PRRecipeMaps.DEHYDRATOR_RECIPES.recipeBuilder()
+//                .fluidInputs(material.getFluid(PRFluidStorageKeys.SOLUTION, 144))
+//                .output(OrePrefix.dust, material)
+//                .chancedOutput(OrePrefix.dust, material, 5000, 5)
+//                .chancedOutput(OrePrefix.dust, property.getOreByProduct(2, material), 2100, 1280)
+//                .EUt(GTValues.VA[GTValues.LV])
+//                .duration(200)
+//                .buildAndRegister();
     }
 
     private static void processWire(OrePrefix orePrefix, Material material, WireProperties wireProperties) {
-        if (wireProperties.isSuperconductor() || wireProperties.getLossPerBlock() == 0) {
-            RecipeMaps.MIXER_RECIPES.getRecipeList().stream()
-                    .filter(recipe -> recipe.getAllItemOutputs().stream()
-                            .anyMatch(itemStack -> Optional.ofNullable(OreDictUnifier.getMaterial(itemStack))
-                                    .map(materialStack -> materialStack.material == material)
-                                    .orElse(false))
-                    )
-                    .forEach(recipe -> {
-                        int totalEnergy = recipe.getDuration() * recipe.getEUt();
-                        int EUt = recipe.getEUt();
-                        int stackSize = recipe.getAllItemOutputs().stream().filter(itemStack -> Optional.ofNullable(OreDictUnifier.getMaterial(itemStack))
-                                        .map(materialStack -> materialStack.material == material)
-                                        .orElse(false))
-                                .map(ItemStack::getCount).reduce(0, Integer::sum);
-                        int blastTemp = 900;
-                        BlastProperty blastProperty = material.getProperty(PropertyKey.BLAST);
-                        if (blastProperty != null) {
-                            blastTemp = blastProperty.getBlastTemperature();
-                            int blastDuration = blastProperty.getDurationOverride();
-                            if (blastDuration <= 0) {
-                                blastDuration = Math.max(1, (int) (material.getMass() * (long) blastTemp / 50L));
-                            }
-
-                            int blastEUt = blastProperty.getEUtOverride();
-                            if (blastEUt <= 0) {
-                                blastEUt = GTValues.VA[2];
-                            }
-                            totalEnergy += Math.max(0, blastEUt * blastDuration * stackSize);
-                            EUt = Math.max(EUt, blastEUt);
-                        }
-                        ItemStack output = OreDictUnifier.get(OrePrefix.ingotHot, material, stackSize);
-                        if (output.isEmpty())
-                            output = OreDictUnifier.get(OrePrefix.ingot, material, stackSize);
-                        PRRecipeMaps.SUPERCONDUCTOR_SMELTER.recipeBuilder()
-                                .inputs(recipe.getInputs().toArray(new GTRecipeInput[0]))
-                                .fluidInputs(recipe.getFluidInputs().stream().map(GTRecipeInput::getInputFluidStack).toArray(FluidStack[]::new))
-                                .outputs(output)
-                                .blastFurnaceTemp(blastTemp)
-                                .EUt(EUt)
-                                .duration(totalEnergy / EUt)
-                                .buildAndRegister();
-                        RecipeMaps.MIXER_RECIPES.removeRecipe(recipe);
-                    });
-        }
+//        if (wireProperties.isSuperconductor() || wireProperties.getLossPerBlock() == 0) {
+//            RecipeMaps.MIXER_RECIPES.getRecipeList().stream()
+//                    .filter(recipe -> recipe.getAllItemOutputs().stream()
+//                            .anyMatch(itemStack -> Optional.ofNullable(OreDictUnifier.getMaterial(itemStack))
+//                                    .map(materialStack -> materialStack.material == material)
+//                                    .orElse(false))
+//                    )
+//                    .forEach(recipe -> {
+//                        int totalEnergy = recipe.getDuration() * recipe.getEUt();
+//                        int EUt = recipe.getEUt();
+//                        int stackSize = recipe.getAllItemOutputs().stream().filter(itemStack -> Optional.ofNullable(OreDictUnifier.getMaterial(itemStack))
+//                                        .map(materialStack -> materialStack.material == material)
+//                                        .orElse(false))
+//                                .map(ItemStack::getCount).reduce(0, Integer::sum);
+//                        int blastTemp = 900;
+//                        BlastProperty blastProperty = material.getProperty(PropertyKey.BLAST);
+//                        if (blastProperty != null) {
+//                            blastTemp = blastProperty.getBlastTemperature();
+//                            int blastDuration = blastProperty.getDurationOverride();
+//                            if (blastDuration <= 0) {
+//                                blastDuration = Math.max(1, (int) (material.getMass() * (long) blastTemp / 50L));
+//                            }
+//
+//                            int blastEUt = blastProperty.getEUtOverride();
+//                            if (blastEUt <= 0) {
+//                                blastEUt = GTValues.VA[2];
+//                            }
+//                            totalEnergy += Math.max(0, blastEUt * blastDuration * stackSize);
+//                            EUt = Math.max(EUt, blastEUt);
+//                        }
+//                        ItemStack output = OreDictUnifier.get(OrePrefix.ingotHot, material, stackSize);
+//                        if (output.isEmpty())
+//                            output = OreDictUnifier.get(OrePrefix.ingot, material, stackSize);
+//                        PRRecipeMaps.SUPERCONDUCTOR_SMELTER.recipeBuilder()
+//                                .inputs(recipe.getInputs().toArray(new GTRecipeInput[0]))
+//                                .fluidInputs(recipe.getFluidInputs().stream().map(GTRecipeInput::getInputFluidStack).toArray(FluidStack[]::new))
+//                                .outputs(output)
+//                                .blastFurnaceTemp(blastTemp)
+//                                .EUt(EUt)
+//                                .duration(totalEnergy / EUt)
+//                                .buildAndRegister();
+//                        RecipeMaps.MIXER_RECIPES.removeRecipe(recipe);
+//                    });
+//        }
     }
 }

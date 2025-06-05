@@ -1,14 +1,12 @@
 package bruce.projectreflection.capability.recipelogic;
 
-import bruce.projectreflection.PRLabs;
-import bruce.projectreflection.metatileentity.MetaTileEntityHandCrank;
+import bruce.projectreflection.metatileentity.MteHandCrank;
 import gregtech.api.GTValues;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.AbstractRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.core.sound.GTSoundEvents;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -73,7 +71,7 @@ public class RecipeLogicHandCrank extends AbstractRecipeLogic {
         if (recipe == null) {
             return false;
         }
-        MetaTileEntityHandCrank controller = (MetaTileEntityHandCrank) this.metaTileEntity;
+        MteHandCrank controller = (MteHandCrank) this.metaTileEntity;
         return controller.checkRecipe(recipe, false);
     }
 
@@ -96,7 +94,7 @@ public class RecipeLogicHandCrank extends AbstractRecipeLogic {
     }
 
     public boolean checkRecipe(@NotNull Recipe recipe) {
-        MetaTileEntityHandCrank controller = (MetaTileEntityHandCrank) this.metaTileEntity;
+        MteHandCrank controller = (MteHandCrank) this.metaTileEntity;
         if (controller.checkRecipe(recipe, false)) {
             //controller.checkRecipe(recipe, true);
             return super.checkRecipe(recipe);
@@ -125,7 +123,7 @@ public class RecipeLogicHandCrank extends AbstractRecipeLogic {
     @Override
     protected boolean setupAndConsumeRecipeInputs(@NotNull Recipe recipe, @NotNull IItemHandlerModifiable importInventory, @NotNull IMultipleTankHandler importFluids) {
         if (super.setupAndConsumeRecipeInputs(recipe, importInventory, importFluids)) {
-            MetaTileEntityHandCrank controller = (MetaTileEntityHandCrank) this.metaTileEntity;
+            MteHandCrank controller = (MteHandCrank) this.metaTileEntity;
             return controller.checkRecipe(recipe, true);
         }
         return false;

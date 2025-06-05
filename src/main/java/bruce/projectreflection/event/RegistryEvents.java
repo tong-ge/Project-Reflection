@@ -1,17 +1,13 @@
 package bruce.projectreflection.event;
 
 import bruce.projectreflection.PRConstants;
-import bruce.projectreflection.items.ItemMetalArmor;
 import bruce.projectreflection.items.PRMetaItems;
-import bruce.projectreflection.items.PRTools;
 import bruce.projectreflection.materials.MaterialHelper;
 import bruce.projectreflection.materials.PRMaterials;
 import bruce.projectreflection.recipes.RecipeManager;
 import bruce.projectreflection.recipes.handler.OreProcessingHandler;
-import bruce.projectreflection.recipes.handler.PRRecipeMaps;
 import bruce.projectreflection.recipes.handler.PRToolRecipeHandler;
 import gregtech.api.GregTechAPI;
-import gregtech.api.event.HighTierEvent;
 import gregtech.api.unification.material.event.MaterialEvent;
 import gregtech.api.unification.material.event.PostMaterialEvent;
 import gregtech.api.unification.stack.ItemMaterialInfo;
@@ -21,12 +17,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
-import thaumcraft.common.lib.SoundsTC;
 
 @Mod.EventBusSubscriber(modid = PRConstants.modid)
 public class RegistryEvents {
@@ -42,7 +36,7 @@ public class RegistryEvents {
 
         MaterialHelper.init();
         PRMaterials.init();
-        PRTools.init();
+        //PRTools.init();
     }
 
     @SubscribeEvent
@@ -72,9 +66,9 @@ public class RegistryEvents {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(PRMetaItems.INSTANCE);
-        event.getRegistry().registerAll(ItemMetalArmor.INSTANCE);
+        //event.getRegistry().registerAll(ItemMetalArmor.INSTANCE);
         PRMetaItems.INSTANCE.registerSubItems();
-        ItemMetalArmor.INSTANCE.registerSubItems();
+        //ItemMetalArmor.INSTANCE.registerSubItems();
 
     }
 
@@ -96,8 +90,6 @@ public class RegistryEvents {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
-        if (Loader.isModLoaded("thaumcraft")) {
-            PRRecipeMaps.RESEARCH_TABLE_RECIPES.setSound(SoundsTC.write);
-        }
+
     }
 }

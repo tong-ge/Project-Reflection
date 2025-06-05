@@ -26,18 +26,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Objects;
 
-public class MetaTileEntityHandCrank extends MetaTileEntity {
+public class MteHandCrank extends MetaTileEntity {
     private final RecipeLogicHandCrank workable;
     protected final ICubeRenderer renderer;
 
-    public MetaTileEntityHandCrank(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, ICubeRenderer renderer) {
+    public MteHandCrank(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, ICubeRenderer renderer) {
         super(metaTileEntityId);
         this.renderer = renderer;
         this.workable = new RecipeLogicHandCrank(this, recipeMap);
@@ -56,7 +55,7 @@ public class MetaTileEntityHandCrank extends MetaTileEntity {
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityHandCrank(this.metaTileEntityId, this.getRecipeMap(), this.renderer);
+        return new MteHandCrank(this.metaTileEntityId, this.getRecipeMap(), this.renderer);
     }
 
     protected ModularUI.Builder createGuiTemplate(EntityPlayer player) {

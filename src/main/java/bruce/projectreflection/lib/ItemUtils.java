@@ -1,4 +1,4 @@
-package bruce.projectreflection.misc;
+package bruce.projectreflection.lib;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

@@ -5,7 +5,6 @@ import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.items.itemhandlers.GTItemStackHandler;
-import gregtech.api.items.toolitem.ToolHelper;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.recipes.Recipe;
@@ -21,12 +20,12 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class MetaTileEntityHandCrankTool extends MetaTileEntityHandCrank {
+public class MteHandCrankTool extends MteHandCrank {
     private final GTItemStackHandler toolInventory;
     private final Predicate<ItemStack> isTool;
     private final Consumer<ItemStack> damageTool;
 
-    public MetaTileEntityHandCrankTool(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, Predicate<ItemStack> isTool, Consumer<ItemStack> damageTool, ICubeRenderer overlay) {
+    public MteHandCrankTool(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, Predicate<ItemStack> isTool, Consumer<ItemStack> damageTool, ICubeRenderer overlay) {
         super(metaTileEntityId, recipeMap, overlay);
         toolInventory = new GTItemStackHandler(this, 1);
         this.isTool = isTool;
@@ -35,7 +34,7 @@ public class MetaTileEntityHandCrankTool extends MetaTileEntityHandCrank {
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityHandCrankTool(this.metaTileEntityId, getRecipeMap(), isTool, damageTool, renderer);
+        return new MteHandCrankTool(this.metaTileEntityId, getRecipeMap(), isTool, damageTool, renderer);
     }
 
     @Override

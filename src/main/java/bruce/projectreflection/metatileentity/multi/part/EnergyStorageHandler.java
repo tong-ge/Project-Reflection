@@ -1,5 +1,6 @@
 package bruce.projectreflection.metatileentity.multi.part;
 
+import bruce.projectreflection.capability.energy.IExtendedEnergyStorage;
 import gregtech.api.metatileentity.MTETrait;
 import gregtech.api.metatileentity.MetaTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,13 +9,13 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 
-public class EnergyStorageHandler extends MTETrait implements IEnergyStorage {
-    protected int energy;
-    protected int capacity;
+public class EnergyStorageHandler extends MTETrait implements IExtendedEnergyStorage {
+    protected long energy;
+    protected long capacity;
     private final int maxReceive;
     private final int maxExtract;
 
-    public EnergyStorageHandler(@NotNull MetaTileEntity metaTileEntity, int capacity, int maxReceive, int maxExtract) {
+    public EnergyStorageHandler(@NotNull MetaTileEntity metaTileEntity, long capacity, int maxReceive, int maxExtract) {
         super(metaTileEntity);
         this.capacity = capacity;
         this.maxReceive = maxReceive;
@@ -34,25 +35,21 @@ public class EnergyStorageHandler extends MTETrait implements IEnergyStorage {
     @Override
     public @NotNull NBTTagCompound serializeNBT() {
         NBTTagCompound compound = super.serializeNBT();
-        compound.setInteger("EnergyStored", this.energy);
+        compound.setLong("EnergyStored", this.energy);
         return compound;
     }
 
     @Override
     public void deserializeNBT(@NotNull NBTTagCompound compound) {
         super.deserializeNBT(compound);
-        this.energy = compound.getInteger("EnergyStored");
+        this.energy = compound.getLong("EnergyStored");
     }
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
         if (!canReceive())
             return 0;
-
-        int energyReceived = Math.min(capacity - energy, Math.min(this.maxReceive, maxReceive));
-        if (!simulate)
-            energy += energyReceived;
-        return energyReceived;
+        return (int) receiveEnergyInternal(Math.min(this.maxReceive, maxReceive), simulate);
     }
 
     @Override
@@ -60,20 +57,17 @@ public class EnergyStorageHandler extends MTETrait implements IEnergyStorage {
         if (!canExtract())
             return 0;
 
-        int energyExtracted = Math.min(energy, Math.min(this.maxExtract, maxExtract));
-        if (!simulate)
-            energy -= energyExtracted;
-        return energyExtracted;
+        return (int) extractEnergyInternal(Math.min(this.maxExtract, maxExtract), simulate);
     }
 
     @Override
     public int getEnergyStored() {
-        return energy;
+        return energy > (long) Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) energy;
     }
 
     @Override
     public int getMaxEnergyStored() {
-        return capacity;
+        return capacity > (long) Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) capacity;
     }
 
     @Override
@@ -84,5 +78,31 @@ public class EnergyStorageHandler extends MTETrait implements IEnergyStorage {
     @Override
     public boolean canReceive() {
         return this.maxReceive > 0;
+    }
+
+    @Override
+    public long receiveEnergyInternal(long maxReceive, boolean simulate) {
+        long energyReceived = Math.min(capacity - energy, maxReceive);
+        if (!simulate)
+            energy += energyReceived;
+        return energyReceived;
+    }
+
+    @Override
+    public long extractEnergyInternal(long maxExtract, boolean simulate) {
+        long energyExtracted = Math.min(energy, maxExtract);
+        if (!simulate)
+            energy -= energyExtracted;
+        return energyExtracted;
+    }
+
+    @Override
+    public long getEnergyStoredLong() {
+        return energy;
+    }
+
+    @Override
+    public long getMaxEnergyStoredLong() {
+        return capacity;
     }
 }

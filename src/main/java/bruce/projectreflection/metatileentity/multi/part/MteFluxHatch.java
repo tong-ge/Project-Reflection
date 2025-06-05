@@ -1,11 +1,13 @@
 package bruce.projectreflection.metatileentity.multi.part;
 
 import bruce.projectreflection.PRAbility;
+import bruce.projectreflection.capability.energy.IExtendedEnergyStorage;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.gui.ModularUI;
+import gregtech.api.metatileentity.IDataInfoProvider;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
@@ -14,8 +16,13 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.energy.IEnergyStorage;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,13 +30,13 @@ import java.util.List;
  *
  * @author tong-ge
  */
-public class MteFluxHatch extends MetaTileEntityMultiblockNotifiablePart implements IMultiblockAbilityPart<IEnergyStorage> {
+public class MteFluxHatch extends MetaTileEntityMultiblockNotifiablePart implements IMultiblockAbilityPart<IExtendedEnergyStorage>, IDataInfoProvider {
     public MteFluxHatch(ResourceLocation metaTileEntityId, int tier, boolean isExportHatch) {
         super(metaTileEntityId, tier, isExportHatch);
-        energyStorage = new EnergyStorageHandler(this, (int) GTValues.V[tier] * 512, isExportHatch ? 0 : (int) GTValues.V[tier] * 8, isExportHatch ? (int) GTValues.V[tier] * 8 : 0);
+        energyStorage = new EnergyStorageHandler(this, (int) GTValues.V[tier] * 512L, isExportHatch ? 0 : (int) GTValues.V[tier] * 8, isExportHatch ? (int) GTValues.V[tier] * 8 : 0);
     }
 
-    private final IEnergyStorage energyStorage;
+    private final IExtendedEnergyStorage energyStorage;
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
@@ -42,12 +49,12 @@ public class MteFluxHatch extends MetaTileEntityMultiblockNotifiablePart impleme
     }
 
     @Override
-    public MultiblockAbility<IEnergyStorage> getAbility() {
+    public MultiblockAbility<IExtendedEnergyStorage> getAbility() {
         return isExportHatch ? PRAbility.OUTPUT_RF : PRAbility.INPUT_RF;
     }
 
     @Override
-    public void registerAbilities(List<IEnergyStorage> list) {
+    public void registerAbilities(List<IExtendedEnergyStorage> list) {
         list.add(energyStorage);
     }
 
@@ -63,4 +70,8 @@ public class MteFluxHatch extends MetaTileEntityMultiblockNotifiablePart impleme
 
     }
 
+    @Override
+    public @NotNull List<ITextComponent> getDataInfo() {
+        return Collections.singletonList(new TextComponentString(String.format("%d / %d RF", this.energyStorage.getEnergyStored(), this.energyStorage.getMaxEnergyStored())));
+    }
 }

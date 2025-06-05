@@ -1,4 +1,4 @@
-package bruce.projectreflection.misc;
+package bruce.projectreflection.lib;
 
 public final class StringUtils {
     public static boolean isNumeric(String str) {

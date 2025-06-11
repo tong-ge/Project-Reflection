@@ -3,16 +3,15 @@ package bruce.projectreflection.init;
 import bruce.projectreflection.PRConstants;
 import bruce.projectreflection.PRLabs;
 import bruce.projectreflection.metatileentity.MteEnervationGenerator;
-import bruce.projectreflection.metatileentity.MteHandCrank;
 import bruce.projectreflection.metatileentity.multi.part.MteFluxHatch;
 import bruce.projectreflection.lib.DynamicRegistryHandler;
 import bruce.projectreflection.metatileentity.multi.steam.MteBiogasDigester;
 import bruce.projectreflection.metatileentity.steam.RecipeMapBoiler;
+import bruce.projectreflection.metatileentity.steam.SteamDiffuser;
 import bruce.projectreflection.recipes.handler.PRRecipeMaps;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.MetaTileEntities;
 import net.minecraft.util.ResourceLocation;
@@ -49,11 +48,11 @@ public final class PRMetaTileEntityHandler {
     public static void registerAllMetaTileEntities()
     {
         SOLID_FUEL_BOILER = new RecipeMapBoiler(new ResourceLocation(PRConstants.modid, "solid_fuel_boiler"),
-                false, Textures.COAL_BOILER_OVERLAY, PRRecipeMaps.SOLID_BOILER_FUELS, 120, 45, 1);
+                false, Textures.COAL_BOILER_OVERLAY, PRRecipeMaps.SOLID_BOILER_FUELS, 120, 45, 1, false);
         SOLID_FUEL_BOILER_HP = new RecipeMapBoiler(new ResourceLocation(PRConstants.modid, "solid_fuel_boiler_hp"),
                 true, Textures.COAL_BOILER_OVERLAY, PRRecipeMaps.SOLID_BOILER_FUELS, 300, 40, 1);
         FLUID_FUEL_BOILER = new RecipeMapBoiler(new ResourceLocation(PRConstants.modid, "fluid_fuel_boiler"),
-                false, Textures.LAVA_BOILER_OVERLAY, PRRecipeMaps.FLUID_BOILER_FUELS, 240, 45, 1);
+                false, Textures.LAVA_BOILER_OVERLAY, PRRecipeMaps.FLUID_BOILER_FUELS, 240, 45, 1, false);
         FLUID_FUEL_BOILER_HP = new RecipeMapBoiler(new ResourceLocation(PRConstants.modid, "fluid_fuel_boiler_hp"),
                 true, Textures.LAVA_BOILER_OVERLAY, PRRecipeMaps.FLUID_BOILER_FUELS, 600, 45, 1);
 
@@ -70,5 +69,6 @@ public final class PRMetaTileEntityHandler {
         register(SOLID_FUEL_BOILER_HP);
         register(FLUID_FUEL_BOILER);
         register(FLUID_FUEL_BOILER_HP);
+        register(SteamDiffuser.SAMPLE);
     }
 }

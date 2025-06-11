@@ -9,14 +9,8 @@ public final class PRFluidStorageKeys {
     private PRFluidStorageKeys() {
     }
 
-    public static final FluidStorageKey SLUDGE = new FluidStorageKey(GTUtility.gregtechId("sludge"), MaterialIconType.liquid, (m) -> {
-        return "sludge." + m.getName();
-    }, (m) -> {
-        return "projectreflection.fluid.sludge";
-    }, FluidState.LIQUID, -1);
-    public static final FluidStorageKey SOLUTION = new FluidStorageKey(GTUtility.gregtechId("solution"), MaterialIconType.liquid, (m) -> {
-        return "solution." + m.getName();
-    }, (m) -> {
-        return "projectreflection.fluid.solution";
-    }, FluidState.LIQUID, -1);
+    public static final FluidStorageKey SLUDGE = new FluidStorageKey(GTUtility.gregtechId("sludge"), MaterialIconType.liquid,
+            (m) -> "sludge." + m.getName(), (m) -> "projectreflection.fluid.sludge", FluidState.LIQUID, -1);
+    public static final FluidStorageKey SOLUTION = new FluidStorageKey(GTUtility.gregtechId("solution"), MaterialIconType.liquid,
+            (m) -> "solution." + m.getName(), (m) -> "projectreflection.fluid.solution", FluidState.LIQUID, -1);
 }

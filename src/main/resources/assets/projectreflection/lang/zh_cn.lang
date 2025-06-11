@@ -1,76 +1,37 @@
-recipemap.petrotheum_macerator.name=板块矿质引发
-projectreflection.machine.semifluid.lv.name=基础半流质发电机
-projectreflection.machine.semifluid.mv.name=进阶半流质发电机
-projectreflection.machine.semifluid.hv.name=涡轮半流质发电机
-projectreflection.machine.vis.lv.name=基础灵气发电机
-projectreflection.machine.vis.mv.name=进阶灵气发电机
-projectreflection.machine.vis.hv.name=涡轮灵气发电机
+projectreflection.machine.flux_input.ulv.name=通量输入仓(ULV)
+projectreflection.machine.flux_input.lv.name=通量输入仓(LV)
+projectreflection.machine.flux_input.mv.name=通量输入仓(MV)
+projectreflection.machine.flux_input.hv.name=通量输入仓(HV)
+projectreflection.machine.flux_input.ev.name=通量输入仓(EV)
+projectreflection.machine.flux_input.iv.name=通量输入仓(IV)
+projectreflection.machine.flux_input.luv.name=通量输入仓(LuV)
+projectreflection.machine.flux_input.zpm.name=通量输入仓(ZPM)
+projectreflection.machine.flux_input.uv.name=通量输入仓(UV)
 
-projectreflection.material.pyrotheum=炽焱
-projectreflection.material.cryotheum=凛冰
-projectreflection.material.petrotheum=地岩
-projectreflection.material.aerotheum=清风
-projectreflection.material.mana=魔力
-projectreflection.material.void=虚空金属
-projectreflection.material.alloy_advanced=高级合金
-projectreflection.material.alloy_iridium=强化铱
-projectreflection.material.super_iridium_alloy=超级铱合金
-projectreflection.material.coralium=珊瑚
-projectreflection.material.thaumium=神秘
-projectreflection.material.mithril=秘银
+projectreflection.machine.flux_output.ulv.name=通量输出仓(ULV)
+projectreflection.machine.flux_output.lv.name=通量输出仓(LV)
+projectreflection.machine.flux_output.mv.name=通量输出仓(MV)
+projectreflection.machine.flux_output.hv.name=通量输出仓(HV)
+projectreflection.machine.flux_output.ev.name=通量输出仓(EV)
+projectreflection.machine.flux_output.iv.name=通量输出仓(IV)
+projectreflection.machine.flux_output.luv.name=通量输出仓(LuV)
+projectreflection.machine.flux_output.zpm.name=通量输出仓(ZPM)
+projectreflection.machine.flux_output.uv.name=通量输出仓(UV)
 
+projectreflection.machine.enervation_generator.ulv.name=放电器(ULV)
+projectreflection.machine.enervation_generator.lv.name=放电器(LV)
+projectreflection.machine.enervation_generator.mv.name=放电器(MV)
+projectreflection.machine.enervation_generator.hv.name=放电器(HV)
+projectreflection.machine.enervation_generator.ev.name=放电器(EV)
+projectreflection.machine.enervation_generator.iv.name=放电器(IV)
+projectreflection.machine.enervation_generator.luv.name=放电器(LuV)
+projectreflection.machine.enervation_generator.zpm.name=放电器(ZPM)
+projectreflection.machine.enervation_generator.uv.name=放电器(UV)
 
-projectreflection.material.dreadium=惧质
-projectreflection.material.abyssalnium=渊素
-projectreflection.material.ethaxium=伊塞斯
-projectreflection.material.phenolic_resin=酚醛树脂
-projectreflection.material.abyssalnite=氧化亚渊素
-projectreflection.material.abyssalnate=氧化渊素
-projectreflection.material.liquified_coralium=精炼珊瑚
-projectreflection.material.dark_stone=黑暗石
-projectreflection.material.abyssal_stone=深渊石
-projectreflection.material.dread_stone=恐惧石
-projectreflection.material.abyssalnite_stone=渊素石
-projectreflection.material.omothol_stone=奥穆索之石
+projectreflection.machine.solid_fuel_boiler.name=简易固体燃料锅炉
+projectreflection.machine.solid_fuel_boiler_hp.name=高压固体燃料锅炉
+projectreflection.machine.fluid_fuel_boiler.name=简易流体燃料锅炉
+projectreflection.machine.fluid_fuel_boiler_hp.name=高压流体燃料锅炉
 
-projectreflection.machine.large_steam_compressor.name=大型蒸汽压缩机
-projectreflection.material.sodium_abyssalnite=亚渊酸钠
-projectreflection.material.calcium_abyssalnite=亚渊酸钙
-projectreflection.machine.muffler_hatch.tooltip1=允许机器排出污染
-projectreflection.muffler.pollution_tooltip=污染：%d%%
-projectreflection.machine.muffler.lv.name=LV 排污仓
-projectreflection.machine.muffler.mv.name=MV 排污仓
-projectreflection.machine.muffler.hv.name=HV 排污仓
-projectreflection.machine.muffler.ev.name=EV 排污仓
-projectreflection.machine.muffler.iv.name=IV 排污仓
-projectreflection.machine.muffler.luv.name=LuV 排污仓
-projectreflection.machine.muffler.zpm.name=ZPM 排污仓
-projectreflection.machine.muffler.uv.name=UV 排污仓
-projectreflection.machine.muffler.uhv.name=UHV 排污仓
-
-projectreflection.recipe.aura=灵气消耗:%s vis/运行，扩展：%s
-
-item.material.oreprefix.oreAbyssal=深渊%s矿石
-item.material.oreprefix.oreDread=恐惧之地%s矿石
-item.material.oreprefix.orePurifiedDread=渊素石%s矿石
-item.material.oreprefix.oreOmothol=奥穆索%s矿石
-item.material.oreprefix.oreDark=黑暗之地%s矿石
-item.material.oreprefix.crystal=%s结晶体
-item.material.oreprefix.cluster=%s原矿簇
-
-metaitem.helmet.name=%s头盔
-metaitem.chestplate.name=%s胸甲
-metaitem.leggings.name=%s护腿
-metaitem.boots.name=%s靴子
-
-item.projectreflection.armor.tooltip.armor=%s 盔甲
-
-projectreflection.firebox.current_heat=Current heat:%s
-
-projectreflection.firebox.max_heat=最大热量:%s
-item.projectreflection.armor.tooltip.toughness=%s 盔甲韧性
-
-projectreflection.fluid.sludge=%s 浆液
-projectreflection.fluid.solution=%s 溶液
-
-death.attack.mahoutsukai=%s流血不止而死。
+recipemap.solid_boiler_fuel=固体锅炉燃料
+recipemap.fluid_boiler_fuel=流体锅炉燃料

@@ -8,8 +8,12 @@ import bruce.projectreflection.recipes.RecipeManager;
 import bruce.projectreflection.recipes.handler.OreProcessingHandler;
 import bruce.projectreflection.recipes.handler.PRToolRecipeHandler;
 import gregtech.api.GregTechAPI;
+import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.store.FluidStorageKeys;
+import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.event.MaterialEvent;
 import gregtech.api.unification.material.event.PostMaterialEvent;
+import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.loaders.recipe.CraftingComponent;
 import net.minecraft.block.Block;
@@ -42,7 +46,6 @@ public class RegistryEvents {
     @SubscribeEvent
     public static void onPrefix(PostMaterialEvent event) {
         MaterialHelper.orePrefix();
-
     }
 
     @SubscribeEvent

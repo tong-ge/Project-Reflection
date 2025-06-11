@@ -13,12 +13,12 @@ import net.minecraft.item.ItemStack;
 public class PRMetaItems extends StandardMetaItem {
     //public static boolean registered = false;
     public static PRMetaItems INSTANCE = new PRMetaItems();
-    public static MetaItem<?>.MetaValueItem[] BATTERIES = new MetaItem<?>.MetaValueItem[GTValues.UV];
+    public static MetaItem<?>.MetaValueItem[] BATTERIES = new MetaItem<?>.MetaValueItem[GTValues.UHV + 1];
     @Override
     public void registerSubItems() {
-        for (int id = 1; id < GTValues.UHV; id++) {
-            BATTERIES[id - 1] = this.addItem(id, String.format("energy.module.%s", GTValues.VN[id].toLowerCase()))
-                    .addComponents(ElectricStats.createBattery(GTValues.V[GTValues.LV] * 72000 * id, id, false), (IItemColorProvider) (
+        for (int id = 0; id <= GTValues.UHV; id++) {
+            BATTERIES[id] = this.addItem(id, String.format("energy.module.%s", GTValues.VN[id].toLowerCase()))
+                    .addComponents(ElectricStats.createBattery(GTValues.V[GTValues.UHV] * (id + 1) * 2, id, false), (IItemColorProvider) (
                             (stack, tintIndex) -> {
                                 ItemStack copy = stack.copy();
                                 IElectricItem electricItem = copy.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);

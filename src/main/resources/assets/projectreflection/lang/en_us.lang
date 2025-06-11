@@ -1,68 +1,37 @@
-recipemap.petrotheum_macerator.name=Petrotheum Macerator
-projectreflection.machine.large_steam_compressor.name=Large Steam Compressor
-projectreflection.machine.semifluid.lv.name=Basic Semifluid Generator
-projectreflection.machine.semifluid.mv.name=Advanced Semifluid Generator
-projectreflection.machine.semifluid.hv.name=Turbo Semifluid Generator
-projectreflection.machine.vis.lv.name=Basic Aura Generator
-projectreflection.machine.vis.mv.name=Advanced Aura Generator
-projectreflection.machine.vis.hv.name=Turbo Aura Generator
+projectreflection.machine.flux_input.ulv.name=Flux Input Hatch(ULV)
+projectreflection.machine.flux_input.lv.name=Flux Input Hatch(LV)
+projectreflection.machine.flux_input.mv.name=Flux Input Hatch(MV)
+projectreflection.machine.flux_input.hv.name=Flux Input Hatch(HV)
+projectreflection.machine.flux_input.ev.name=Flux Input Hatch(EV)
+projectreflection.machine.flux_input.iv.name=Flux Input Hatch(IV)
+projectreflection.machine.flux_input.luv.name=Flux Input Hatch(LuV)
+projectreflection.machine.flux_input.zpm.name=Flux Input Hatch(ZPM)
+projectreflection.machine.flux_input.uv.name=Flux Input Hatch(UV)
 
-projectreflection.material.pyrotheum=Pyrotheum
-projectreflection.material.cryotheum=Cryotheum
-projectreflection.material.petrotheum=Petrotheum
-projectreflection.material.aerotheum=Aerotheum
-projectreflection.material.mana=Mana
-projectreflection.material.void=Void Metal
-projectreflection.material.alloy_advanced=Advanced Alloy
-projectreflection.material.alloy_iridium=Iridium Alloy
-projectreflection.material.super_iridium_alloy=Super Iridium Alloy
+projectreflection.machine.flux_output.ulv.name=Flux Output Hatch(ULV)
+projectreflection.machine.flux_output.lv.name=Flux Output Hatch(LV)
+projectreflection.machine.flux_output.mv.name=Flux Output Hatch(MV)
+projectreflection.machine.flux_output.hv.name=Flux Output Hatch(HV)
+projectreflection.machine.flux_output.ev.name=Flux Output Hatch(EV)
+projectreflection.machine.flux_output.iv.name=Flux Output Hatch(IV)
+projectreflection.machine.flux_output.luv.name=Flux Output Hatch(LuV)
+projectreflection.machine.flux_output.zpm.name=Flux Output Hatch(ZPM)
+projectreflection.machine.flux_output.uv.name=Flux Output Hatch(UV)
 
-projectreflection.material.coralium=Coralium
-projectreflection.material.thaumium=Thaumium
-projectreflection.material.mithril=Mithril
+projectreflection.machine.enervation_generator.ulv.name=Discharger(ULV)
+projectreflection.machine.enervation_generator.lv.name=Discharger(LV)
+projectreflection.machine.enervation_generator.mv.name=Discharger(MV)
+projectreflection.machine.enervation_generator.hv.name=Discharger(HV)
+projectreflection.machine.enervation_generator.ev.name=Discharger(EV)
+projectreflection.machine.enervation_generator.iv.name=Discharger(IV)
+projectreflection.machine.enervation_generator.luv.name=Discharger(LuV)
+projectreflection.machine.enervation_generator.zpm.name=Discharger(ZPM)
+projectreflection.machine.enervation_generator.uv.name=Discharger(UV)
 
-projectreflection.material.dreadium=Dreadium
-projectreflection.material.abyssalnium=Abyssalnium
-projectreflection.material.ethaxium=Ethaxium
-projectreflection.material.phenolic_resin=Phenolic Resin
-projectreflection.material.abyssalnite=Abyssalnite
-projectreflection.material.sodium_abyssalnite=Sodium Abyssalnite
-projectreflection.material.calcium_abyssalnite=Calcium Abyssalnite
-projectreflection.material.abyssalnate=Abyssalnate
-projectreflection.material.liquified_coralium=Liquified Coralium
-projectreflection.material.dark_stone=Dark Stone
-projectreflection.material.abyssal_stone=Abyssal Stone
-projectreflection.material.dread_stone=Dread Stone
-projectreflection.material.abyssalnite_stone=Abyssalnite Stone
-projectreflection.material.omothol_stone=Omothol Stone
+projectreflection.machine.solid_fuel_boiler.name=Simple Solid Fuel Boiler
+projectreflection.machine.solid_fuel_boiler_hp.name=High Pressure Solid Fuel Boiler
+projectreflection.machine.fluid_fuel_boiler.name=Simple Fluid Fuel Boiler
+projectreflection.machine.fluid_fuel_boiler_hp.name=High Pressure Fluid Fuel Boiler
 
-projectreflection.machine.muffler_hatch.tooltip1=Allows machine to release pollution
-projectreflection.muffler.pollution_tooltip=Pollution:%d%%
-
-projectreflection.machine.muffler.lv.name=LV Muffler Hatch
-projectreflection.machine.muffler.mv.name=MV Muffler Hatch
-projectreflection.machine.muffler.hv.name=HV Muffler Hatch
-projectreflection.machine.muffler.ev.name=EV Muffler Hatch
-projectreflection.machine.muffler.iv.name=IV Muffler Hatch
-projectreflection.machine.muffler.luv.name=LuV Muffler Hatch
-projectreflection.machine.muffler.zpm.name=ZPM Muffler Hatch
-projectreflection.machine.muffler.uv.name=UV Muffler Hatch
-projectreflection.machine.muffler.uhv.name=UHV Muffler Hatch
-
-projectreflection.recipe.aura=Vis consumption:%s vis/run, Extended:%s
-
-projectreflection.firebox.current_heat=Current heat:%s
-projectreflection.firebox.max_heat=Max heat:%s
-
-metaitem.helmet.name=%s Helmet
-metaitem.chestplate.name=%s Chestplate
-metaitem.leggings.name=%s Leggings
-metaitem.boots.name=%s Boots
-
-item.projectreflection.armor.tooltip.armor=%s Armor
-item.projectreflection.armor.tooltip.toughness=%s Toughness
-
-projectreflection.fluid.sludge=%s Sludge
-projectreflection.fluid.solution=%s Solution
-
-death.attack.mahoutsukai=%s is bleeding to death.
+recipemap.solid_boiler_fuel=Solid Boiler Fuels
+recipemap.fluid_boiler_fuel=Fluid Boiler Fuels

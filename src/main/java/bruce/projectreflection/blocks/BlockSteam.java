@@ -5,6 +5,8 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fluids.Fluid;
 
@@ -22,5 +24,10 @@ public class BlockSteam extends BlockFluidFinite {
         this.setTemperature(fluid.getTemperature());
         this.setMaxScaledLight(fluid.getLuminosity());
         this.setTickRate(Math.max(20, fluid.getViscosity() / 200));
+    }
+
+    @Override
+    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+        return false;
     }
 }

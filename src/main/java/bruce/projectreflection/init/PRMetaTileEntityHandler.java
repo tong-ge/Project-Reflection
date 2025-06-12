@@ -8,6 +8,8 @@ import bruce.projectreflection.lib.DynamicRegistryHandler;
 import bruce.projectreflection.metatileentity.multi.steam.MteBiogasDigester;
 import bruce.projectreflection.metatileentity.steam.RecipeMapBoiler;
 import bruce.projectreflection.metatileentity.steam.SteamDiffuser;
+import bruce.projectreflection.metatileentity.steam.ThermalBoiler;
+import bruce.projectreflection.metatileentity.thermal.RecipeMapBurner;
 import bruce.projectreflection.recipes.handler.PRRecipeMaps;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
@@ -70,5 +72,7 @@ public final class PRMetaTileEntityHandler {
         register(FLUID_FUEL_BOILER);
         register(FLUID_FUEL_BOILER_HP);
         register(SteamDiffuser.SAMPLE);
+        register(RecipeMapBurner.SEMIFLUID_BURNER);
+        register(ThermalBoiler.DEBUG_BOILER);
     }
 }

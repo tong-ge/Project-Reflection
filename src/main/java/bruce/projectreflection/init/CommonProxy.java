@@ -1,6 +1,7 @@
 package bruce.projectreflection.init;
 
 import bruce.projectreflection.blocks.BlockSteam;
+import bruce.projectreflection.capability.PRCapabilities;
 import bruce.projectreflection.materials.MaterialHelper;
 import bruce.projectreflection.network.PRNetwork;
 import gregtech.api.fluids.GTFluidRegistration;
@@ -26,5 +27,6 @@ public class CommonProxy {
             GTFluidRegistration.INSTANCE.registerFluidBlock(BlockSteam.INSTANCE);
             fluid.setBlock(BlockSteam.INSTANCE);
         }
+        PRCapabilities.init();
     }
 }

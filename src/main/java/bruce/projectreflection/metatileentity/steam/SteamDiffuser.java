@@ -79,18 +79,17 @@ public class SteamDiffuser extends MetaTileEntity {
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         Textures.VOLTAGE_CASINGS[GTValues.ULV].render(renderState, translation, pipeline);
+        Textures.FLUID_OUTPUT_OVERLAY.renderSided(EnumFacing.UP, renderState, translation, pipeline);
     }
 
     private boolean absorbNearbyFluids() {
         for (EnumFacing facing : EnumFacing.VALUES) {
             BlockPos blockPos = this.getPos().offset(facing);
-            //PRLabs.logger.info("Try absorbing fluid at {}",blockPos);
             IBlockState blockState = getWorld().getBlockState(blockPos);
             if (blockState.getBlock() instanceof BlockLiquid || blockState.getBlock() instanceof IFluidBlock) {
                 IFluidHandler fluidHandler = FluidUtil.getFluidHandler(this.getWorld(), blockPos, facing.getOpposite());
                 if (fluidHandler != null) {
-                    int transferred = GTTransferUtils.transferFluids(fluidHandler, fluidTank);
-                    //PRLabs.logger.info("{} mb transferred",transferred);
+                    GTTransferUtils.transferFluids(fluidHandler, fluidTank);
                     return true;
                 }
             }
@@ -102,7 +101,7 @@ public class SteamDiffuser extends MetaTileEntity {
     public void update() {
         super.update();
         if (cooldown <= 0) {
-            this.pushFluidsIntoNearbyHandlers(EnumFacing.values());
+            this.pushFluidsIntoNearbyHandlers(EnumFacing.UP);
             if (this.fluidTank.getCapacity() - this.fluidTank.getFluidAmount() >= 1000) {
                 if (!absorbNearbyFluids())
                     cooldown = 20;

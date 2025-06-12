@@ -214,9 +214,4 @@ public class RecipeMapBoiler extends SteamBoiler {
             }
         }
     }
-
-    @Override
-    public void update() {
-        super.update();
-    }
 }
